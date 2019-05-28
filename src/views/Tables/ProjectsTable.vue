@@ -9,100 +9,82 @@
             {{title}}
           </h3>
         </div>
-        <div class="col text-right">
-          <base-button type="primary" size="sm">See all</base-button>
-        </div>
       </div>
     </div>
 
     <div class="table-responsive">
+
+      <div class="pl-lg-4">
+          <div class="row">
+              <div class="col-lg-4">
+                  <base-input alternative=""
+                              placeholder="Aerolínea"
+                              input-classes="form-control-alternative"
+                  />
+              </div>
+              <div class="col-lg-4">
+                  <base-input alternative=""
+                              placeholder="# de vuelo"
+                              input-classes="form-control-alternative"
+                  />
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-primary">Buscar</button>
+              </div>
+          </div>
+      </div>      
       <base-table class="table align-items-center table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
                   tbody-classes="list"
                   :data="tableData">
+
         <template slot="columns">
-          <th>Project</th>
-          <th>Budget</th>
-          <th>Status</th>
-          <th>Users</th>
-          <th>Completion</th>
+          <th>Aerolinea</th>
+          <th>Vuelo</th>
+          <th>Procedencia</th>
+          <th>Hora Programada</th>
+          <th>Hora Real</th>
+          <th>Estado</th>
+          <th>Puerta</th>
           <th></th>
         </template>
 
         <template slot-scope="{row}">
           <th scope="row">
             <div class="media align-items-center">
-              <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" :src="row.img">
-              </a>
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{row.title}}</span>
+                <span class="name mb-0 text-sm">{{row.aerolinea}}</span>
               </div>
             </div>
           </th>
           <td class="budget">
-            {{row.budget}}
+            {{row.vuelo}}
           </td>
           <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
+            <badge class="badge-dot mr-4">
+              <span class="status">{{row.procedencia}}</span>
             </badge>
           </td>
-          <td>
-            <div class="avatar-group">
-              <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg">
-              </a>
-              <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                <img alt="Image placeholder" src="img/theme/team-2-800x800.jpg">
-              </a>
-              <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                <img alt="Image placeholder" src="img/theme/team-3-800x800.jpg">
-              </a>
-              <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
-              </a>
-            </div>
+          <td class="budget">
+            {{row.horaProgramada}}
+          </td>
+          <td class="budget">
+            {{row.horaReal}}
+          </td>
+          <td class="budget">
+            {{row.estado}}
+          </td>                              
+          <td class="budget">
+            {{row.puerta}}
           </td>
 
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="completion mr-2">{{row.completion}}%</span>
-              <div>
-                <base-progress :type="row.statusType"
-                               :show-percentage="false"
-                               class="pt-0"
-                               :value="row.completion"/>
-              </div>
-            </div>
-          </td>
-
-          <td class="text-right">
-            <base-dropdown class="dropdown"
-                           position="right">
-              <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-              </a>
-
-              <template>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </template>
-            </base-dropdown>
-          </td>
 
         </template>
 
       </base-table>
     </div>
 
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
-    </div>
 
   </div>
 </template>
@@ -119,44 +101,49 @@
       return {
         tableData: [
           {
-            img: 'img/theme/bootstrap.jpg',
-            title: 'Argon Design System',
-            budget: '$2500 USD',
-            status: 'pending',
-            statusType: 'warning',
-            completion: 60
+            aerolinea: 'Latam',
+            vuelo: 'AIR250',
+            procedencia: 'Rio',
+            horaProgramada: '04:50',
+            horaReal: '04:50',
+            estado: 'Aterrizado',
+            puerta: '5'
           },
           {
-            img: 'img/theme/angular.jpg',
-            title: 'Angular Now UI Kit PRO',
-            budget: '$1800 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100
+            aerolinea: 'Air America',
+            vuelo: 'MIR100',
+            procedencia: 'Nueva York',
+            horaProgramada: '18:00',
+            horaReal: '19:00',
+            estado: 'Aterrizado',
+            puerta: '10'
           },
           {
-            img: 'img/theme/sketch.jpg',
-            title: 'Black Dashboard',
-            budget: '$3150 USD',
-            status: 'delayed',
-            statusType: 'danger',
-            completion: 72
+            aerolinea: 'Qatar Airways',
+            vuelo: 'QAT212',
+            procedencia: 'Riad',
+            horaProgramada: '20:00',
+            horaReal: '20:00',
+            estado: 'Aterrizado',
+            puerta: '12'
           },
           {
-            img: 'img/theme/react.jpg',
-            title: 'React Material Dashboard',
-            budget: '$4400 USD',
-            status: 'on schedule',
-            statusType: 'info',
-            completion: 90
+            aerolinea: 'RyanAir',
+            vuelo: 'RAN001',
+            procedencia: 'Madrid',
+            horaProgramada: '22:00',
+            horaReal: '23:00',
+            estado: 'Cancelado',
+            puerta: '15'
           },
           {
-            img: 'img/theme/vue.jpg',
-            title: 'Vue Paper UI Kit PRO',
-            budget: '$2200 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100
+            aerolinea: 'Vue Plane',
+            vuelo: 'VUE333',
+            procedencia: 'Framework City',
+            horaProgramada: '04:50',
+            horaReal: '05:00',
+            estado: 'Atrasado',
+            puerta: '23'
           }
         ]
       }
