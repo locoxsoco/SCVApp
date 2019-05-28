@@ -20,7 +20,7 @@
             path: '/admin/menu'
           }"
         />
-        <sidebar-item
+        <sidebar-item 
           :link="{
             name: 'Administración de usuario',
             icon: 'ni ni-tv-2 text-primary',

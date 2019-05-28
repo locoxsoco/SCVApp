@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "d136a071cf09ba5ab8dc2ada1ab04015",
-    "url": "/vue-argon-dashboard/img/theme/bootstrap.jpg"
+    "revision": "1f533d2fdc40493ee834dd8e4288220c",
+    "url": "/vue-argon-dashboard/img/theme/angular.jpg"
   },
   {
     "revision": "cee60cfd101f9b3d2aae0e819ec8b267",
@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/vue-argon-dashboard/js/chunk-vendors.5b542a54.js"
   },
   {
-    "revision": "3f5756cb420c433897a8",
-    "url": "/vue-argon-dashboard/js/demo.ff9326ac.js"
+    "revision": "9a871d4f5a7cc9156e7a",
+    "url": "/vue-argon-dashboard/js/demo.a08fc6c5.js"
   },
   {
     "revision": "be997d5226b992ffad34816870c6b7aa",
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/vue-argon-dashboard/robots.txt"
   },
   {
-    "revision": "cc2fe8d0da02dbfcf3608f76b3bc4788",
+    "revision": "01ddf2f85f6982d5c62f534305a7daf2",
     "url": "/vue-argon-dashboard/index.html"
   },
   {
@@ -44,20 +44,20 @@ self.__precacheManifest = [
     "url": "/vue-argon-dashboard/img/theme/vue.jpg"
   },
   {
-    "revision": "50dd5fdc839dfc16739b15370650485c",
-    "url": "/vue-argon-dashboard/img/theme/react.jpg"
-  },
-  {
-    "revision": "a3acaac4d2bc9b24ee6c",
-    "url": "/vue-argon-dashboard/js/app.ab3b41dd.js"
-  },
-  {
     "revision": "3b8c576082e5ca27bae21a839f1290f6",
     "url": "/vue-argon-dashboard/img/theme/sketch.jpg"
   },
   {
-    "revision": "1f533d2fdc40493ee834dd8e4288220c",
-    "url": "/vue-argon-dashboard/img/theme/angular.jpg"
+    "revision": "a108475b37b745eae9a3",
+    "url": "/vue-argon-dashboard/js/app.be7879fb.js"
+  },
+  {
+    "revision": "50dd5fdc839dfc16739b15370650485c",
+    "url": "/vue-argon-dashboard/img/theme/react.jpg"
+  },
+  {
+    "revision": "d136a071cf09ba5ab8dc2ada1ab04015",
+    "url": "/vue-argon-dashboard/img/theme/bootstrap.jpg"
   },
   {
     "revision": "46abbc4a676739dbd61f8a305cb63fd8",
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "url": "/vue-argon-dashboard/fonts/nucleo-icons.2569aaea.woff"
   },
   {
-    "revision": "a3acaac4d2bc9b24ee6c",
+    "revision": "a108475b37b745eae9a3",
     "url": "/vue-argon-dashboard/css/app.7c6b1ed1.css"
   }
 ];
