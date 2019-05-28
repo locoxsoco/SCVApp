@@ -8,11 +8,110 @@
       <template slot="links">
         <sidebar-item
           :link="{
-            name: 'Dashboard',
+            name: 'SCV',
             icon: 'ni ni-tv-2 text-primary',
-            path: '/dashboard'
+            path: '/inicio'
           }"
         />
+        <sidebar-item
+          :link="{
+            name: 'SCV',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/menu'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Administración de usuario',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/usuario/agregar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Agregar Usuarios',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/usuario/agregar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Modificar Usuarios',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/usuario/modificar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Eliminar Usuarios',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/usuario/eliminar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Administración de aviones y sus tipos',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/agregar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Agregar Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/agregar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Agregar Tipo de Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/agregarTipo'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Modificar Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/modificar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Modificar Tipo de Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/modificarTipo'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Eliminar Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/eliminar'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Eliminar Tipo de Aviones',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/aviones/eliminarTipo'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Administración de zonas y puertas',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/puertasYZonas'
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Visualizar el mapa',
+            icon: 'ni ni-tv-2 text-primary',
+            path: '/admin/visualizarMapa'
+          }"
+        />
+        
 
         <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}"/>
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
