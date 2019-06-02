@@ -7,7 +7,8 @@
                 <span class="navbar-toggler-icon"></span>
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
-                <img :src="logo" class="navbar-brand-img" alt="...">
+                <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
+                <h1>LAB 7</h1>
             </router-link>
 
             <slot name="mobile-right">
@@ -79,6 +80,8 @@
                     <slot name="links">
                     </slot>
                 </ul>
+
+                
                 <!--Divider-->
                 <hr class="my-3">
                 <!--Heading-->

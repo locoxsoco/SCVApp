@@ -40,7 +40,7 @@
                     </form>
                 </div>
                 <div class="col-lg-3">
-                    <base-button type="primary"> + </base-button>
+                    <base-button type="primary" @click="agregarTipoAvion()"> + </base-button>
                 </div>   
             </div>
             <div class="row pb-4 pb-4 pt-4 pt-md-4" >
@@ -60,15 +60,13 @@
 <script>
   // Charts
   import * as chartConfigs from '@/components/Charts/config';
-  import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
-
-
+  /* import LineChart from '@/components/Charts/LineChart';
+  import BarChart from '@/components/Charts/BarChart'; */
 
   export default {
     components: {
-      LineChart,
-      BarChart,
+      /*LineChart,
+      BarChart */
     },
     data() {
       return {
@@ -96,6 +94,9 @@
       };
     },
     methods: {
+      agregarTipoAvion(){
+        this.$router.push('/admin/aviones/agregarTipo');
+      },
       initBigChart(index) {
         let chartData = {
           datasets: [
