@@ -18,7 +18,7 @@
                 </div> 
                 <div class="col-lg-3">
                     <form>
-                          <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                          <base-input v-model="idCodAvion" alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
                           </base-input>
                     </form>
                 </div>
@@ -29,14 +29,14 @@
                 </div> 
                 <div class="col-lg-3">
                     <form>
-                        <base-dropdown>
-                            <base-button slot="title" type="primary" class="dropdown-toggle">
-                                Regular
-                            </base-button>
-                            <a class="dropdown-item" href="#">Grande</a>
-                            <a class="dropdown-item" href="#">Regular</a>
-                            <a class="dropdown-item" href="#">Bajo costo</a>
-                        </base-dropdown>
+                      <b-select placeholder="Select a name" v-model="tipoAvion">
+                            <option
+                              v-for="option in data"
+                              :value="option.id"
+                              :key="option.id">
+                              {{ option.tipo }}
+                            </option>
+                      </b-select>
                     </form>
                 </div>
                 <div class="col-lg-3">
@@ -49,7 +49,7 @@
                     <base-button size = "lg" type="default">  Borrar  </base-button>
                 </div>     
                 <div class="col-lg-1 ">
-                    <base-button  size = "lg" type="default">Guardar</base-button>
+                    <base-button  size = "lg" type="default" v-on:click="guardarAvion">Guardar</base-button>
                 </div>
             </div>   
 
@@ -59,7 +59,7 @@
 </template>
 <script>
   // Charts
-  import * as chartConfigs from '@/components/Charts/config';
+
   /* import LineChart from '@/components/Charts/LineChart';
   import BarChart from '@/components/Charts/BarChart'; */
 
@@ -70,27 +70,12 @@
     },
     data() {
       return {
-        bigLineChart: {
-          allData: [
-            [0, 20, 10, 30, 15, 40, 20, 60, 60],
-            [0, 20, 5, 25, 10, 30, 15, 40, 40]
-          ],
-          activeIndex: 0,
-          chartData: {
-            datasets: [],
-            labels: [],
-          },
-          extraOptions: chartConfigs.blueChartOptions,
-        },
-        redBarChart: {
-          chartData: {
-            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-              label: 'Sales',
-              data: [25, 20, 30, 22, 17, 29]
-            }]
-          }
-        }
+        data: [{"id":1, "tipo": "Grande"},
+                {"id":2, "tipo": "Regular"},
+                {"id":3, "tipo": "Bajo Costo"}
+        ],
+        idCodAvion: "", 
+        tipoAvion: null,
       };
     },
     methods: {
@@ -109,11 +94,19 @@
         };
         this.bigLineChart.chartData = chartData;
         this.bigLineChart.activeIndex = index;
+      },
+      guardarAvion(){
+        var obj = {}
+
+        obj.idavion = this.idCodAvion;
+        obj.tipoavion = this.tipoAvion;
+
+        
       }
     },
     mounted() {
       this.initBigChart(0);
-    }
+    },
   };
 </script>
 <style></style>
