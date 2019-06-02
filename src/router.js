@@ -12,6 +12,7 @@ import AgregarAviones from '@/views/AgregarAviones.vue'
 import AgregarTipoAviones from '@/views/AgregarTipoAviones.vue'
 import ModificarAviones from '@/views/ModificarAviones.vue'
 import ModificarTipoAviones from '@/views/ModificarTipoAviones.vue'
+import ModificarTipoAvionesPrincipal from '@/views/ModificarTipoAvionesPrincipal.vue'
 import EliminarAviones from '@/views/EliminarAviones.vue'
 import EliminarTipoAviones from '@/views/EliminarTipoAviones.vue'
 import VisualizarMapa from '@/views/VisualizarMapa.vue'
@@ -97,6 +98,11 @@ export default new Router({
         },
         {
           path: '/admin/aviones/modificarTipo',
+          name: 'modificarTipoAvionesPrincipal',
+          component: ModificarTipoAvionesPrincipal
+        },
+        {
+          path: '/admin/aviones/modificarTipo2',
           name: 'modificarTipoAviones',
           component: ModificarTipoAviones
         },

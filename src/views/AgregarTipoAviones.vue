@@ -66,7 +66,7 @@
                 <div class=" col-lg-4"> </div>
                 <div class=" col-lg-1">
                     <base-button size = "lg" type="default">  Borrar  </base-button>
-                </div>     
+                </div>
                 <div class="col-lg-1 ">
                     <base-button  size = "lg" type="default">Guardar</base-button>
                 </div>
