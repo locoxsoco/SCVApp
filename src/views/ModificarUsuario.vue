@@ -57,18 +57,28 @@
 <script>
     
     export default {
-        data() {
-             const data = [
-                { 'id': 1, 'nombre': 'Jesse', 'rol': 'Administrador'},
-                { 'id': 2, 'nombre': 'John', 'rol': 'Operador técnico'},
-                { 'id': 3, 'nombre': 'Tina', 'rol': 'Administrador'},
-                { 'id': 4, 'nombre': 'Clarence', 'rol': 'Operador técnico'},
-                { 'id': 5, 'nombre': 'Anne', 'rol': 'Operador técnico'}
-            ]
 
+        // getListaTablero (){
+        //     this.tableData = []
+        //     fetch("localhost:8000/scv/api/usuario/obtenerTodos", {
+        //     })
+        //     .then((data) => {
+        //         alert(data)
+        //         this.tableData = data; 
+        //     })
+        // },
+        data() {
+            this.tableData = []
+            fetch("http://127.0.0.1:8000/scv/api/usuario/obtenerTodos", { mode:'cors'
+            })
+            .then((data) => {
+                alert(data)
+                this.tableData = data; 
+            })            
+            const data = this.tableData;
 
             return {
-                selected: data[1],
+                selected: data[0],
                 data,
                 columns: [
                     {
