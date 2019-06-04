@@ -27,7 +27,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'inicio',
+      redirect: '/admin/menu',
       component: DashboardLayout,
       children: [
         {
