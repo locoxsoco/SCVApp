@@ -25,6 +25,17 @@
 
                             <div class="form-group row">
                                 <div class="col-md-2">
+                                </div>
+                                <div class="col-md-4" >
+                                    <h3>Id del tipo de avión:</h3>
+                                </div>
+                                <div class="col-md-4" > 
+                                    <h3> {{idDelTipoDeAvion}} </h3>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
                                     <h3>Código de registro: </h3>
@@ -175,7 +186,11 @@
 </template>
 <script>
 export default {
-
+    data() {
+      return {
+        idDelTipoDeAvion: 1
+      }
+    },
 };
 </script>
 <style>

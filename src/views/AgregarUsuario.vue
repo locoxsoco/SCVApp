@@ -38,7 +38,7 @@
                                     <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
+                                    <base-input id="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
                                     </base-input>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                 </div>                                
                                 <div class="col-md-5" >
                                     <!-- <input type="text" class="form-control form-control-lg"> -->
-                                    <base-input alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
+                                    <base-input id="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
                                     </base-input>
                                 </div>
                             </div>
@@ -127,6 +127,13 @@ export default {
         idDelUsuario: 1
       }
     },
+
+    methods: {
+        borrar: function(){
+            document.getElementById('inputNombre').nodeValue = '';   
+            document.getElementById('inputContraseña').nodeValue = '';
+        }
+    }
 }
 </script>
 <style>
