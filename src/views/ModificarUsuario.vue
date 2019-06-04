@@ -32,7 +32,7 @@
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="tableData"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -55,38 +55,47 @@
 </template>
 
 <script>
-    
+    import axios from "axios";
+//     export default axios.create({
+//   baseURL: "http://localhost:8080/api",
+//   headers: {
+//     "Content-type": "application/json",
+//   }
+// });
     export default {
         data() {
-             const data = [
-                { 'id': 1, 'nombre': 'Jesse', 'rol': 'Administrador'},
-                { 'id': 2, 'nombre': 'John', 'rol': 'Operador técnico'},
-                { 'id': 3, 'nombre': 'Tina', 'rol': 'Administrador'},
-                { 'id': 4, 'nombre': 'Clarence', 'rol': 'Operador técnico'},
-                { 'id': 5, 'nombre': 'Anne', 'rol': 'Operador técnico'}
-            ]
-
-
+            const tableData =[]
             return {
-                selected: data[1],
-                data,
+                tableData,
+                selected:tableData[0],
+                // data,
                 columns: [
                     {
-                        field: 'id',
+                        field: 'idUsuario',
                         label: 'Código de usuario',
                         width: '40',
                         numeric: true
                     },
                     {
-                        field: 'nombre',
-                        label: 'Nombre de usuario',
+                        field: 'usuario',
+                        label: 'Nombre de usuario'
                     },
                     {
                         field: 'rol',
-                        label: 'Rol',
+                        label: 'Rol'
+                    },
+                    {
+                        field: 'estado',
+                        label: 'Estado'
                     }
                 ]
             }
+        },
+        mounted(){            
+            axios.get("http://127.0.0.1:8000/scv/api/usuario/obtenerTodos")
+            .then((response) => {
+                this.tableData = response.data; 
+            })     
         },
         methods: {
             confirmar: function(){
