@@ -1,5 +1,86 @@
 <template>
+
     <div>
+        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+            <!-- Card stats -->
+
+        </base-header>
+
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    
+                    <card shadow type="secondary">
+                        <div slot="header" class="bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <h3 class="mb-0">Ingresar aviones</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <template>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-4" >
+                                    <h3>Id del avion:</h3>
+                                </div>
+                                <div class="col-md-4" > 
+                                    <h3> {{ idDelAvion }} </h3>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Código de registro: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                    </base-input>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Tipo de avion: </h3>
+                                </div> 
+                                <div class="col-md-4" >                                 
+                                    <div class="form-group">
+                                        <select class="form-control" id="sel1">
+                                            <option>Grande</option>
+                                            <option>Mediano</option>
+                                            <option>Pequeño</option>
+                                        </select>
+                                    </div>                       
+                                </div>
+                                <div class="col-md-2">
+                                  <base-button type="primary" @click="agregarTipoAvion()"> + </base-button>
+                                </div>
+                            </div>
+                            <div class="form-group row" >
+                                <div class="col-md-3"> </div>
+                                <div class="col-md-3">
+                                    <base-button size = "lg" type="default">Borrar</base-button>
+                                </div>
+                                <div class="col-md-3">
+                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                </div>
+                            </div>  
+                        </template>
+                    </card>
+                </div>
+            </div>
+        </div> 
+
+    </div>
+
+    <!-- <div>
         <base-header type="gradient-success" class="pb-1 pb-2 pt-2 pt-md-1">
             <div class="row">
                 <h2> Agregar aviones </h2>
@@ -55,46 +136,21 @@
 
         </div>
 
-    </div>
+    </div> -->
 </template>
 <script>
-  // Charts
-
-  /* import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart'; */
 
   export default {
-    components: {
-      /*LineChart,
-      BarChart */
-    },
     data() {
       return {
-        data: [{"id":1, "tipo": "Grande"},
-                {"id":2, "tipo": "Regular"},
-                {"id":3, "tipo": "Bajo Costo"}
-        ],
-        idCodAvion: "", 
-        tipoAvion: null,
-      };
+        idDelAvion: 1
+      }
     },
     methods: {
       agregarTipoAvion(){
         this.$router.push('/admin/aviones/agregarTipo');
       },
-      initBigChart(index) {
-        let chartData = {
-          datasets: [
-            {
-              label: 'Performance',
-              data: this.bigLineChart.allData[index]
-            }
-          ],
-          labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        };
-        this.bigLineChart.chartData = chartData;
-        this.bigLineChart.activeIndex = index;
-      },
+
       guardarAvion(){
         var obj = {}
 
@@ -103,10 +159,8 @@
 
         
       }
-    },
-    mounted() {
-      this.initBigChart(0);
-    },
+    }
   };
 </script>
-<style></style>
+<style>
+</style>

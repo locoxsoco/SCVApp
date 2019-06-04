@@ -24,10 +24,10 @@
                                 <div class="col-md-2">
                                 </div>
                                 <div class="col-md-4" >
-                                    <h6 class="heading-small mb-4">Codigo del usuario:</h6>
+                                    <h3>Codigo del usuario:</h3>
                                 </div>
                                 <div class="col-md-4" > 
-                                    <h6 class="heading-small mb-4"> {{idDelUsuario}} </h6>
+                                    <h3> {{idDelUsuario}} </h3>
                                 </div>
                             </div>
 
@@ -35,10 +35,11 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h6 class="heading-small mb-4">Nombre del usuario: </h6>
+                                    <h3>Nombre del usuario: </h3>
                                 </div>                                
-                                <div class="col-md-4" >
-                                    <input type="text" class="form-control form-control-lg">
+                                <div class="col-md-5" >
+                                    <base-input alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
+                                    </base-input>
                                 </div>
                             </div>
 
@@ -46,9 +47,9 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h6 class="heading-small mb-4">Rol: </h6>
+                                    <h3>Rol: </h3>
                                 </div> 
-                                <div class="col-md-4" >                                 
+                                <div class="col-md-5" >                                 
                                     <div class="form-group">
                                         <select class="form-control" id="sel1">
                                             <option>Administrador</option>
@@ -62,13 +63,23 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h6 class="heading-small mb-4">Contraseña: </h6>
+                                    <h3>Contraseña: </h3>
                                 </div>                                
-                                <div class="col-md-4" >
-                                    <input type="text" class="form-control form-control-lg">
+                                <div class="col-md-5" >
+                                    <!-- <input type="text" class="form-control form-control-lg"> -->
+                                    <base-input alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
+                                    </base-input>
                                 </div>
                             </div>
-
+                            <div class="form-group row" >
+                                <div class="col-md-3"> </div>
+                                <div class="col-md-3">
+                                    <base-button size = "lg" type="default">Borrar</base-button>
+                                </div>
+                                <div class="col-md-3">
+                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                </div>
+                            </div>  
                         </template>
                     </card>
                 </div>
@@ -119,9 +130,5 @@ export default {
 }
 </script>
 <style>
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
+
 </style>

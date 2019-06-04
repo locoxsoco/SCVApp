@@ -15,7 +15,7 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Modificar avion</h3>
+                                    <h3 class="mb-0">Modificar usuario</h3>
                                 </div>
                             </div>
                         </div>
@@ -24,10 +24,10 @@
                                 <div class="col-md-2">
                                 </div>
                                 <div class="col-md-4" >
-                                    <h3>Id del avion:</h3>
+                                    <h3>Codigo del usuario:</h3>
                                 </div>
                                 <div class="col-md-4" > 
-                                    <h3> {{idDelAvion}} </h3>
+                                    <h3> {{idDelUsuario}} </h3>
                                 </div>
                             </div>
 
@@ -35,10 +35,10 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Codigo de registro:</h3>
+                                    <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" :placeholder="codigoDeRegistro" input-classes="form-control-alternative">
+                                    <base-input alternative="" :placeholder="nombreDelUsuario" input-classes="form-control-alternative">
                                     </base-input>
                                 </div>
                             </div>
@@ -47,14 +47,13 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Tipo de avion </h3>
+                                    <h3>Rol: </h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
                                     <div class="form-group">
                                         <select class="form-control" id="sel1">
-                                            <option>Grande</option>
-                                            <option>Mediano</option>
-                                            <option>Pequeño</option>
+                                            <option>Administrador</option>
+                                            <option>Operador técnico</option>
                                         </select>
                                     </div>                       
                                 </div>
@@ -111,7 +110,7 @@
 
 
 export default {
-    props: ['idDelAvion', 'codigoDeRegistro'],
+    props: ['idDelUsuario', 'nombreDelUsuario'],
 
     data() {
       return {

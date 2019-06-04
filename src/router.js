@@ -11,12 +11,14 @@ import EliminarUsuario from '@/views/EliminarUsuario.vue'
 import AgregarAviones from '@/views/AgregarAviones.vue'
 import AgregarTipoAviones from '@/views/AgregarTipoAviones.vue'
 import ModificarAviones from '@/views/ModificarAviones.vue'
+import ModificarAviones2 from '@/views/ModificarAviones2.vue'
 import ModificarTipoAviones from '@/views/ModificarTipoAviones.vue'
 import ModificarTipoAvionesPrincipal from '@/views/ModificarTipoAvionesPrincipal.vue'
 import EliminarAviones from '@/views/EliminarAviones.vue'
 import EliminarTipoAviones from '@/views/EliminarTipoAviones.vue'
 import VisualizarMapa from '@/views/VisualizarMapa.vue'
 import PuertasYZonas from '@/views/PuertasYZonas.vue'
+import ModificarUsuario2 from '@/views/ModificarUsuario2.vue'
 
 Vue.use(Router)
 
@@ -70,11 +72,17 @@ export default new Router({
           path: '/admin/usuario/agregar',
           name: 'agregarUsuario',
           component: AgregarUsuario
-        },
+        },     
         {
           path: '/admin/usuario/modificar',
           name: 'modificarUsuario',
           component: ModificarUsuario
+        },
+        {
+          path: '/admin/usuario/modificar2',
+          name: 'modificarUsuario2',
+          component: ModificarUsuario2,
+          props: true
         },
         {
           path: '/admin/usuario/eliminar',
@@ -95,6 +103,12 @@ export default new Router({
           path: '/admin/aviones/modificar',
           name: 'modificarAviones',
           component: ModificarAviones
+        },
+        {
+          path: '/admin/aviones/modificar2',
+          name: 'modificarAviones2',
+          component: ModificarAviones2,
+          props: true
         },
         {
           path: '/admin/aviones/modificarTipo',
