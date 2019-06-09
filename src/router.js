@@ -118,7 +118,8 @@ export default new Router({
         {
           path: '/admin/aviones/modificarTipo2',
           name: 'modificarTipoAviones',
-          component: ModificarTipoAviones
+          component: ModificarTipoAviones,
+          props: true
         },
         {
           path: '/admin/aviones/eliminar',

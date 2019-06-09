@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <template>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>
                                 <div class="col-md-4" >
@@ -29,7 +29,7 @@
                                 <div class="col-md-4" > 
                                     <h3> {{idDelUsuario}} </h3>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="form-group row">
                                 <div class="col-md-2">
@@ -38,8 +38,7 @@
                                     <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
                                 </div>
                             </div>
 
@@ -51,7 +50,7 @@
                                 </div> 
                                 <div class="col-md-5" >                                 
                                     <div class="form-group">
-                                        <select class="form-control" id="sel1">
+                                        <select class="form-control" id="formRol">
                                             <option>Administrador</option>
                                             <option>Operador técnico</option>
                                         </select>
@@ -67,17 +66,16 @@
                                 </div>                                
                                 <div class="col-md-5" >
                                     <!-- <input type="text" class="form-control form-control-lg"> -->
-                                    <base-input alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input v-model="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
                                 </div>
                             </div>
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
                                 <div class="col-md-3">
-                                    <base-button size = "lg" type="default">Borrar</base-button>
+                                    <base-button size = "lg" type="default" @click="borrar">Borrar</base-button>
                                 </div>
                                 <div class="col-md-3">
-                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                    <base-button  size = "lg" type="default" @click="guardar">Guardar</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -120,13 +118,38 @@
 
 <script>
 
+import axios from 'axios'
 
 export default {
     data() {
       return {
-        idDelUsuario: 1
+        idDelUsuario: '',
+        salida: '',
+        inputNombre: '',
+        inputContraseña: ''
       }
     },
+
+    methods: {
+        borrar: function(){
+            document.getElementById('inputNombre').nodeValue = '';   
+            document.getElementById('inputContraseña').nodeValue = '';
+        },
+        guardar: function(){
+            let aux = this;
+            axios.post('http://127.0.0.1:8000/scv/api/usuario/crear', {
+                usuario: this.inputNombre,
+                contrasena: this.inputContraseña,
+                rol: 1,
+                estado: 'ACTIVO',
+                taeropuertoIdAeropuerto: 1
+            })
+            .then(function (response) {
+                aux.salida = response.data;
+                //console.log(this.salida);
+            })
+        }
+    }
 }
 </script>
 <style>

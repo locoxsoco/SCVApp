@@ -62,7 +62,7 @@
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
                                 <div class="col-md-3">
-                                    <base-button size = "lg" type="default">Atras</base-button>
+                                    <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
                                 <div class="col-md-3">
                                     <base-button  size = "lg" type="default">Confirmar cambios</base-button>
@@ -117,7 +117,12 @@ export default {
         
       }
     },
-
+    methods: {
+        confirmar: function(){
+                    
+            this.$router.push({name:'modificarUsuario'})
+        }
+    }
 
 }
 </script>

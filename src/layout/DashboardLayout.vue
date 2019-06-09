@@ -27,7 +27,7 @@
           :link="{
             name: 'Administración de vuelos',
             icon: 'fas fa-calendar text-primary',
-            path: '/admin/vuelos/agregar'
+            path: '/admin/usuario/agregar'
           }"
         />
         <!-- Administrar de vuelos - Agregar vuelos -->
@@ -35,7 +35,7 @@
           :link="{
             name: 'Agregar vuelos',
             icon: 'fas fa-calendar-plus text-primary',
-            path: '/admin/vuelos/agregar'
+            path: '/admin/usuario/agregar'
           }"
         />
         <!-- Administrar de vuelos - Eliminar vuelos -->
@@ -43,7 +43,7 @@
           :link="{
             name: 'Eliminar vuelos',
             icon: 'fas fa-calendar-minus text-primary',
-            path: '/admin/vuelos/eliminar'
+            path: '/admin/usuario/agregar'
           }"
         />
         <!-- Administrar usuarios -->
