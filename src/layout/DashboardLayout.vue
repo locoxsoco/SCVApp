@@ -15,7 +15,7 @@
           }"
         />
         <!-- Menu -->
-        <sidebar-item v-if="['menu','agregarVuelo','eliminarVuelo','agregarUsuario','modificarUsuario','eliminarUsuario','agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
           :link="{
             name: 'SCV',
             icon: 'fas fa-plane-arrival text-primary',
@@ -27,23 +27,23 @@
           :link="{
             name: 'Administración de vuelos',
             icon: 'fas fa-calendar text-primary',
-            path: '/admin/usuario/agregar'
+            path: '/admin/vuelo/ingresar'
           }"
         />
-        <!-- Administrar de vuelos - Agregar vuelos -->
-        <sidebar-item v-if="['agregarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
+        <!-- Administrar de vuelos - Ingresar vuelos -->
+        <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
           :link="{
-            name: 'Agregar vuelos',
+            name: 'Ingresar vuelo',
             icon: 'fas fa-calendar-plus text-primary',
-            path: '/admin/usuario/agregar'
+            path: '/admin/vuelo/ingresar'
           }"
         />
         <!-- Administrar de vuelos - Eliminar vuelos -->
-        <sidebar-item v-if="['agregarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
           :link="{
-            name: 'Eliminar vuelos',
+            name: 'Eliminar vuelo',
             icon: 'fas fa-calendar-minus text-primary',
-            path: '/admin/usuario/agregar'
+            path: '/admin/vuelo/eliminar'
           }"
         />
         <!-- Administrar usuarios -->
@@ -51,19 +51,19 @@
           :link="{
             name: 'Administración de usuario',
             icon: 'fa fa-users text-primary',
-            path: '/admin/usuario/agregar'
+            path: '/admin/usuario/ingresar'
           }"
         />
-        <!-- Administrar usuarios - Agregar usuarios -->
-        <sidebar-item v-if="['agregarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <!-- Administrar usuarios - Ingresar usuarios -->
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
-            name: 'Agregar Usuarios',
+            name: 'Ingresar Usuarios',
             icon: 'fa fa-user-plus text-primary',
-            path: '/admin/usuario/agregar'
+            path: '/admin/usuario/ingresar'
           }"
         />
         <!-- Administrar usuarios - Modificar usuarios -->
-        <sidebar-item v-if="['agregarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Usuarios',
             icon: 'fa fa-user text-primary',
@@ -71,7 +71,7 @@
           }"
         />
         <!-- Administrar usuarios - Eliminar usuarios -->
-        <sidebar-item v-if="['agregarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Usuarios',
             icon: 'fa fa-user-times text-primary',
@@ -83,27 +83,27 @@
           :link="{
             name: 'Administración de aviones y sus tipos',
             icon: 'fas fa-plane text-primary',
-            path: '/admin/aviones/agregar'
+            path: '/admin/aviones/ingresar'
           }"
         />
-        <!-- Administrar aviones y tipos de aviones - Agregar aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <!-- Administrar aviones y tipos de aviones - Ingresar aviones -->
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
-            name: 'Agregar Aviones',
+            name: 'Ingresar Aviones',
             icon: 'fas fa-plus text-primary',
-            path: '/admin/aviones/agregar'
+            path: '/admin/aviones/ingresar'
           }"
         />
-        <!-- Administrar aviones y tipos de aviones - Agregar Tipo aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <!-- Administrar aviones y tipos de aviones - Ingresar Tipo aviones -->
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
-            name: 'Agregar Tipo de Aviones',
+            name: 'Ingresar Tipo de Aviones',
             icon: 'fas fa-plus text-primary',
-            path: '/admin/aviones/agregarTipo'
+            path: '/admin/aviones/ingresarTipo'
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Modificar aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Aviones',
             icon: 'fas fa-edit text-primary',
@@ -111,7 +111,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Modificar Tipo aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Tipo de Aviones',
             icon: 'fas fa-edit text-primary',
@@ -119,7 +119,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Eliminar aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Aviones',
             icon: 'fas fa-eraser text-primary',
@@ -127,7 +127,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Eliminar Tipo aviones -->
-        <sidebar-item v-if="['agregarAviones','agregarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Tipo de Aviones',
             icon: 'fas fa-eraser text-primary',

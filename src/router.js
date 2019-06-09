@@ -5,11 +5,13 @@ import AuthLayout from '@/layout/AuthLayout'
 
 import Inicio from '@/views/Inicio.vue'
 import Menu from '@/views/Menu.vue'
-import AgregarUsuario from '@/views/AgregarUsuario.vue'
+import IngresarVuelo from '@/views/IngresarVuelo.vue'
+import EliminarVuelo from '@/views/EliminarVuelo.vue'
+import IngresarUsuario from '@/views/IngresarUsuario.vue'
 import ModificarUsuario from '@/views/ModificarUsuario.vue'
 import EliminarUsuario from '@/views/EliminarUsuario.vue'
-import AgregarAviones from '@/views/AgregarAviones.vue'
-import AgregarTipoAviones from '@/views/AgregarTipoAviones.vue'
+import IngresarAviones from '@/views/IngresarAviones.vue'
+import IngresarTipoAviones from '@/views/IngresarTipoAviones.vue'
 import ModificarAviones from '@/views/ModificarAviones.vue'
 import ModificarAviones2 from '@/views/ModificarAviones2.vue'
 import ModificarTipoAviones from '@/views/ModificarTipoAviones.vue'
@@ -69,9 +71,19 @@ export default new Router({
           component: Menu
         },
         {
-          path: '/admin/usuario/agregar',
-          name: 'agregarUsuario',
-          component: AgregarUsuario
+          path: '/admin/vuelo/ingresar',
+          name: 'ingresarVuelo',
+          component: IngresarVuelo
+        },     
+        {
+          path: '/admin/vuelo/eliminar',
+          name: 'eliminarVuelo',
+          component: EliminarVuelo
+        },
+        {
+          path: '/admin/usuario/ingresar',
+          name: 'ingresarUsuario',
+          component: IngresarUsuario
         },     
         {
           path: '/admin/usuario/modificar',
@@ -90,14 +102,14 @@ export default new Router({
           component: EliminarUsuario
         },
         {
-          path: '/admin/aviones/agregar',
-          name: 'agregarAviones',
-          component: AgregarAviones
+          path: '/admin/aviones/ingresar',
+          name: 'ingresarAviones',
+          component: IngresarAviones
         },
         {
-          path: '/admin/aviones/agregarTipo',
-          name: 'agregarTipoAviones',
-          component: AgregarTipoAviones
+          path: '/admin/aviones/ingresarTipo',
+          name: 'ingresarTipoAviones',
+          component: IngresarTipoAviones
         },
         {
           path: '/admin/aviones/modificar',
