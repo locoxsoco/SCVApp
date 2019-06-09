@@ -38,11 +38,26 @@
                                     <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative">
+                                    <input v-model="inputNombre" type="text" class="form-control" placeholder="Ingresar el usuario">                                   
+                                    <!-- <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative"> -->
                                 </div>
                             </div>
 
                             <div class="form-group row">
+                                <div class="col-md-2">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Contraseña: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input v-model="inputContraseña" type="password" class="form-control" placeholder="Ingresar la contraseña">                                                                       
+                                    <!-- <input v-model="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative"> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
@@ -56,18 +71,7 @@
                                         </select>
                                     </div>                       
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <h3>Contraseña: </h3>
-                                </div>                                
-                                <div class="col-md-5" >
-                                    <!-- <input type="text" class="form-control form-control-lg"> -->
-                                    <input v-model="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative">
-                                </div>
                             </div>
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
@@ -132,22 +136,22 @@ export default {
 
     methods: {
         borrar: function(){
-            document.getElementById('inputNombre').nodeValue = '';   
-            document.getElementById('inputContraseña').nodeValue = '';
+            this.inputNombre = '' 
+            this.inputContraseña = ''
         },
         guardar: function(){
-            let aux = this;
-            axios.post('http://127.0.0.1:8000/scv/api/usuario/crear', {
-                usuario: this.inputNombre,
-                contrasena: this.inputContraseña,
-                rol: 1,
-                estado: 'ACTIVO',
-                taeropuertoIdAeropuerto: 1
-            })
-            .then(function (response) {
-                aux.salida = response.data;
-                //console.log(this.salida);
-            })
+            // let aux = this;
+            // axios.post('http://127.0.0.1:8000/scv/api/usuario/crear', {
+            //     usuario: this.inputNombre,
+            //     contrasena: this.inputContraseña,
+            //     rol: 1,
+            //     estado: 'ACTIVO',
+            //     taeropuertoIdAeropuerto: 1
+            // })
+            // .then(function (response) {
+            //     aux.salida = response.data;
+            //     //console.log(this.salida);
+            // })
         }
     }
 }

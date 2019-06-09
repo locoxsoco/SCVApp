@@ -20,16 +20,6 @@
                             </div>
                         </div>
                         <template>
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-4" >
-                                    <h3>Codigo del usuario:</h3>
-                                </div>
-                                <div class="col-md-4" > 
-                                    <h3> {{idDelUsuario}} </h3>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <div class="col-md-2">
@@ -38,8 +28,9 @@
                                     <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" :placeholder="nombreDelUsuario" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <!-- <base-input alternative="" :placeholder="nombreDelUsuario" input-classes="form-control-alternative">
+                                    </base-input> -->
+                                    <input :value="nombreDelUsuario" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
 
@@ -64,7 +55,7 @@
                                 <div class="col-md-3">
                                     <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <base-button  size = "lg" type="default">Confirmar cambios</base-button>
                                 </div>
                             </div>  

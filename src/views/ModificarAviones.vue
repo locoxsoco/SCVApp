@@ -60,11 +60,11 @@
     export default {
         data() {
              const data = [
-                { 'id':1, 'codigoDeRegistro': 'AIR200', 'tipoDeAvion': 'Grande'},
-                { 'id':2, 'codigoDeRegistro': 'QAT100', 'tipoDeAvion': 'Mediano'},
-                { 'id':3, 'codigoDeRegistro': 'RET150', 'tipoDeAvion': 'Mediano'},
-                { 'id':4, 'codigoDeRegistro': 'POR200', 'tipoDeAvion': 'Pequeño'},
-                { 'id':5, 'codigoDeRegistro': 'QAT500', 'tipoDeAvion': 'Grande'}
+                { 'id':1, 'codigoDeRegistro': 'AIR200', 'modelo': 'BOEING707', 'iata': 'AI', 'icao': 'OEI'},
+                { 'id':2, 'codigoDeRegistro': 'QAT100', 'modelo': 'BOEING100', 'iata': 'OE', 'icao': 'A3I'},
+                { 'id':3, 'codigoDeRegistro': 'RET150', 'modelo': 'BOEING101', 'iata': 'PL', 'icao': 'OP2'},
+                { 'id':4, 'codigoDeRegistro': 'POR200', 'modelo': 'BOEING100', 'iata': 'IT', 'icao': 'IN1'},
+                { 'id':5, 'codigoDeRegistro': 'QAT500', 'modelo': 'BOEING333', 'iata': 'BN', 'icao': 'OP6'}
             ]
 
 
@@ -83,8 +83,16 @@
                         label: 'Codigo de registro',
                     },
                     {
-                        field: 'tipoDeAvion',
-                        label: 'Tipo de avion',
+                        field: 'modelo',
+                        label: 'Modelo',
+                    },
+                    {
+                        field: 'iata',
+                        label: 'Código IATA',
+                    },
+                    {
+                        field: 'icao',
+                        label: 'Código ICAO',
                     }
                 ]
             }
@@ -92,7 +100,7 @@
         methods: {
             confirmar: function(){
                         
-                this.$router.push({name:'modificarAviones2', params: {idDelAvion: this.selected.id, codigoDeRegistro: this.selected.codigoDeRegistro}})
+                this.$router.push({name:'modificarAviones2', params: {codigoDeRegistro: this.selected.codigoDeRegistro, modelo: this.selected.modelo, iata: this.selected.iata, icao: this.selected.icao}})
             }
         }
     }

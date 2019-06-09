@@ -60,11 +60,11 @@
     export default {
         data() {
              const data = [
-                { 'id':1, 'codigoDeRegistro': 'BOE200', 'codigoIcao': 'Grande'},
-                { 'id':2, 'codigoDeRegistro': 'BOE300', 'codigoIcao': 'Mediano'},
-                { 'id':3, 'codigoDeRegistro': 'AIA150', 'codigoIcao': 'Mediano'},
-                { 'id':4, 'codigoDeRegistro': 'EEE200', 'codigoIcao': 'Pequeño'},
-                { 'id':5, 'codigoDeRegistro': 'AIA500', 'codigoIcao': 'Grande'}
+                { 'id':1, 'modelo': 'BOE200', 'codigoIATA': 'AA', 'tamaño': 'Grande'},
+                { 'id':2, 'modelo': 'BOE300', 'codigoIATA': 'A3', 'tamaño': 'Mediano'},
+                { 'id':3, 'modelo': 'AIA150', 'codigoIATA': 'C2', 'tamaño': 'Mediano'},
+                { 'id':4, 'modelo': 'EEE200', 'codigoIATA': 'M5', 'tamaño': 'Grande'},
+                { 'id':5, 'modelo': 'AIA500', 'codigoIATA': 'DD', 'tamaño': 'Pequeño'}
             ]
 
 
@@ -79,12 +79,16 @@
                         numeric: true
                     },                   
                     {
-                        field: 'codigoDeRegistro',
-                        label: 'Codigo de registro',
+                        field: 'modelo',
+                        label: 'Modelo',
                     },
                     {
-                        field: 'codigoIcao',
-                        label: 'Código Icao',
+                        field: 'codigoIATA',
+                        label: 'Código IATA',
+                    },
+                    {
+                        field: 'tamaño',
+                        label: 'Tamaño',
                     }
                 ]
             }
@@ -92,7 +96,7 @@
         methods: {
             confirmar: function(){
                         
-                this.$router.push({name:'modificarTipoAviones', params: {idDelTipoDeAvion: this.selected.id, codigoDeRegistro: this.selected.codigoDeRegistro}})
+                this.$router.push({name:'modificarTipoAviones', params: {modelo: this.selected.modelo, codigoIATA: this.selected.codigoIATA, tamaño: this.selected.tamaño}})
             }
         }
     }

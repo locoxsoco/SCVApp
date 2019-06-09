@@ -22,27 +22,16 @@
                             </div>
                         </div>
                         <template>
-
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-4" >
-                                    <h3>Id del tipo de avión:</h3>
-                                </div>
-                                <div class="col-md-4" > 
-                                    <h3> {{idDelTipoDeAvion}} </h3>
-                                </div>
-                            </div>                            
+                           
 
                             <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Código de registro: </h3>
+                                    <h3>Modelo:</h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" :placeholder="codigoDeRegistro" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input :value="modelo" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
                                 </div>
                             </div>
 
@@ -50,49 +39,29 @@
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Capacidad (personas): </h3>
+                                    <h3>Código IATA:: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar capacidad" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input :value="codigoIATA" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form group row">
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Codigo ICAO: </h3>
-                                </div>                                
-                                <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar código ICAO" input-classes="form-control-alternative">
-                                    </base-input>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <h3>Largo(mt.)</h3>
-                                </div>                                
-                                <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar largo" input-classes="form-control-alternative">
-                                    </base-input>
-                                </div>
-                            </div>                                                         
-
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <h3>Ancho(mt.)</h3>
-                                </div>                                
-                                <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar ancho" input-classes="form-control-alternative">
-                                    </base-input>
-                                </div>
-                            </div>  
+                                    <h3>Tamaño:</h3>
+                                </div>   
+                                <div class="col-md-4" >                                 
+                                    <div class="form-group">
+                                        <select v-model="tipoAvion" class="form-control" id="sel1">
+                                            <option>Grande</option>
+                                            <option>Mediano</option>
+                                            <option>Pequeño</option>
+                                        </select>
+                                    </div>                       
+                                </div>                                                    
+                            </div> 
 
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
@@ -186,7 +155,7 @@
 </template>
 <script>
 export default {
-    props: ['idDelTipoDeAvion', 'codigoDeRegistro'],
+    props: ['modelo', 'codigoIATA', 'tamaño'],
 
     data() {
       return {

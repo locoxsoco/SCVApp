@@ -8,9 +8,9 @@
 
         <div class="container-fluid mt--7">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     
                     <card shadow type="secondary">
                         <div slot="header" class="bg-white border-0">
@@ -23,40 +23,56 @@
                         <template>
 
                             <div class="form-group row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
                                     <h3>Código de registro: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input v-model="codigoRegistro" alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input v-model="codigoRegistro" type="text" class="form-control" placeholder="Ingresar el código de registro">                                   
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Tipo de avion: </h3>
+                                    <h3>Código IATA: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input v-model="codigoIATA" type="text" class="form-control" placeholder="Ingresar el código IATA">                                   
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-1">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Código ICAO:</h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input v-model="codigoICAO" type="text" class="form-control" placeholder="Ingresar el código ICAO">                                   
+                                </div>
+                            </div>                                                        
+
+                            <div class="form-group row">
+                                <div class="col-md-1">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Tipo de avion:</h3>
                                 </div> 
                                 <div class="col-md-4" >                                 
-                                    <div class="form-group">
-                                        <select v-model="tipoAvion" class="form-control" id="sel1">
-                                            <option>Grande</option>
-                                            <option>Mediano</option>
-                                            <option>Pequeño</option>
-                                        </select>
-                                    </div>                       
+                                    <input v-model="tipoAvion" type="text" class="form-control" placeholder="">                                   
+                     
                                 </div>
-                                <div class="col-md-2">
-                                  <base-button type="primary" @click="agregarTipoAvion()"> + </base-button>
+                                <div class="col-md-3">
+                                  <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>
                                 </div>
                             </div>
                             <div class="form-group row" >
-                                <div class="col-md-3"> </div>
+                                <div class="col-md-4"> </div>
                                 <div class="col-md-3">
-                                    <base-button size = "lg" type="default">Borrar</base-button>
+                                    <base-button size = "lg" type="default" @click="borrar">Borrar</base-button>
                                 </div>
                                 <div class="col-md-3">
                                     <base-button  size = "lg" type="default" @click="guardar">Guardar</base-button>
@@ -136,15 +152,23 @@ import axios from 'axios'
     data() {
       return {
         codigoRegistro: '',
-        tipoAvion: ''
+        tipoAvion: '',
+        codigoICAO: '',
+        codigoIATA: ''
       }
     },
     methods: {
-      agregarTipoAvion(){
+    agregarTipoAvion(){
         this.$router.push('/admin/aviones/agregarTipo');
-      },
+    },
 
-    
+    borrar: function(){
+        this.codigoRegistro = ''
+        this.tipoAvion = ''
+        this.codigoICAO = ''
+        this.codigoIATA = ''
+    },
+
     guardar: function(){
         let aux = this;
         axios.post('http://127.0.0.1:8000/scv/api/avion/crear', {
