@@ -97,7 +97,7 @@
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
                                 <div class="col-md-3">
-                                    <base-button size = "lg" type="default">Borrar</base-button>
+                                    <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
                                 <div class="col-md-3">
                                     <base-button  size = "lg" type="default">Guardar</base-button>
@@ -193,7 +193,12 @@ export default {
         
       }
     },
-
+    methods: {
+        atras: function(){
+                    
+            this.$router.push({name:'modificarTipoAvionesPrincipal'})
+        }
+    }
 };
 </script>
 <style>

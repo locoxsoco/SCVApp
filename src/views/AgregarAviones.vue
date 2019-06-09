@@ -21,16 +21,6 @@
                             </div>
                         </div>
                         <template>
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-4" >
-                                    <h3>Id del avion:</h3>
-                                </div>
-                                <div class="col-md-4" > 
-                                    <h3> {{ idDelAvion }} </h3>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <div class="col-md-2">
@@ -39,7 +29,7 @@
                                     <h3>Código de registro: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                    <base-input v-model="codigoRegistro" alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
                                     </base-input>
                                 </div>
                             </div>
@@ -52,7 +42,7 @@
                                 </div> 
                                 <div class="col-md-4" >                                 
                                     <div class="form-group">
-                                        <select class="form-control" id="sel1">
+                                        <select v-model="tipoAvion" class="form-control" id="sel1">
                                             <option>Grande</option>
                                             <option>Mediano</option>
                                             <option>Pequeño</option>
@@ -69,7 +59,7 @@
                                     <base-button size = "lg" type="default">Borrar</base-button>
                                 </div>
                                 <div class="col-md-3">
-                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                    <base-button  size = "lg" type="default" @click="guardar">Guardar</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -140,10 +130,13 @@
 </template>
 <script>
 
+import axios from 'axios'
+
   export default {
     data() {
       return {
-        idDelAvion: 1
+        codigoRegistro: '',
+        tipoAvion: ''
       }
     },
     methods: {
@@ -151,14 +144,22 @@
         this.$router.push('/admin/aviones/agregarTipo');
       },
 
-      guardarAvion(){
-        var obj = {}
-
-        obj.idavion = this.idCodAvion;
-        obj.tipoavion = this.tipoAvion;
-
+    
+    guardar: function(){
+        let aux = this;
+        axios.post('http://127.0.0.1:8000/scv/api/avion/crear', {
+            regNumber: this.codigoRegistro,
+            estado: 'ACTIVO',
+            taerolineaIdAerolinea: 1,
+            ttipoAvionIdTipoAvion: 1
+        })
+        .then(function (response) {
+            aux.salida = response.data;
+            //console.log(this.salida);
+        })
+        }
         
-      }
+      
     }
   };
 </script>
