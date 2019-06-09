@@ -20,45 +20,54 @@
                             </div>
                         </div>
                         <template>
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-4" >
-                                    <h3>Id del avion:</h3>
-                                </div>
-                                <div class="col-md-4" > 
-                                    <h3> {{idDelAvion}} </h3>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
                                     <h3>Codigo de registro:</h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <base-input alternative="" :placeholder="codigoDeRegistro" input-classes="form-control-alternative">
-                                    </base-input>
+                                    <input :value="codigoDeRegistro" type="text" class="form-control" placeholder=""> 
+                                </div>
+                            </div>                          
+
+                            <div class="form-group row">
+                                <div class="col-md-1">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Código IATA: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input :value="iata" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Tipo de avion </h3>
-                                </div> 
-                                <div class="col-md-5" >                                 
-                                    <div class="form-group">
-                                        <select class="form-control" id="sel1">
-                                            <option>Grande</option>
-                                            <option>Mediano</option>
-                                            <option>Pequeño</option>
-                                        </select>
-                                    </div>                       
+                                    <h3>Código ICAO: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input :value="icao" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-1">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Tipo de avion:</h3>
+                                </div> 
+                                <div class="col-md-4" >                                 
+                                    <input v-model="tipoAvion" type="text" class="form-control" placeholder="">                                   
+                     
+                                </div>
+                                <div class="col-md-3">
+                                  <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>
+                                </div>
+                            </div>                            
 
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
@@ -111,7 +120,7 @@
 
 
 export default {
-    props: ['idDelAvion', 'codigoDeRegistro'],
+    props: ['codigoDeRegistro', 'modelo', 'iata', 'icao'],
 
     data() {
       return {
