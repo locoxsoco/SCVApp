@@ -83,10 +83,6 @@
                     {
                         field: 'rol',
                         label: 'Rol'
-                    },
-                    {
-                        field: 'estado',
-                        label: 'Estado'
                     }
                 ]
             }
@@ -94,7 +90,9 @@
         mounted(){            
             axios.get("http://127.0.0.1:8000/scv/api/usuario/obtenerTodos")
             .then((response) => {
-                this.tableData = response.data; 
+                console.log(response.data)
+                this.tableData = response.data;
+                
             })     
         },
         methods: {

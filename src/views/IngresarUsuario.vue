@@ -38,7 +38,7 @@
                                     <h3>Nombre del usuario: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input v-model="inputNombre" type="text" class="form-control" placeholder="Ingresar el usuario">                                   
+                                    <input v-model="usuario" type="text" class="form-control" placeholder="Ingresar el usuario">                                   
                                     <!-- <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative"> -->
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                     <h3>Contraseña: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input v-model="inputContraseña" type="password" class="form-control" placeholder="Ingresar la contraseña">                                                                       
+                                    <input v-model="contrasena" type="password" class="form-control" placeholder="Ingresar la contraseña">                                                                       
                                     <!-- <input v-model="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative"> -->
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                 </div> 
                                 <div class="col-md-5" >                                 
                                     <div class="form-group">
-                                        <select class="form-control" id="formRol">
+                                        <select v-model="rol" class="form-control" id="formRol">
                                             <option>Administrador</option>
                                             <option>Operador técnico</option>
                                         </select>
@@ -127,31 +127,36 @@ import axios from 'axios'
 export default {
     data() {
       return {
+        objeto:{usuario:"",contrasena:"",rol:"",esEliminado:false},
         idDelUsuario: '',
         salida: '',
-        inputNombre: '',
-        inputContraseña: ''
+        usuario: '',
+        contrasena: '',
+        rol: ''
       }
     },
-
+    
     methods: {
         borrar: function(){
-            this.inputNombre = '' 
-            this.inputContraseña = ''
+            this.usuario = '' 
+            this.contrasena = ''
+            this.rol = ''
         },
         guardar: function(){
-            // let aux = this;
-            // axios.post('http://127.0.0.1:8000/scv/api/usuario/crear', {
-            //     usuario: this.inputNombre,
-            //     contrasena: this.inputContraseña,
-            //     rol: 1,
-            //     estado: 'ACTIVO',
-            //     taeropuertoIdAeropuerto: 1
-            // })
-            // .then(function (response) {
-            //     aux.salida = response.data;
-            //     //console.log(this.salida);
-            // })
+            
+            let aux = this;
+            let usuario = {
+                usuario: this.usuario,
+                contrasena: this.contrasena,
+                rol: this.rol,
+                esEliminado: false,
+            };
+
+            axios.post('http://localhost:8000/scv/api/usuario/crear', usuario)
+            .then(function (response) {
+                //console.log(response);
+                aux.salida = response.data;
+            })
         }
     }
 }

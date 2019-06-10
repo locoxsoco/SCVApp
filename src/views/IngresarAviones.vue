@@ -62,8 +62,9 @@
                                     <h3>Tipo de avion:</h3>
                                 </div> 
                                 <div class="col-md-4" >                                 
-                                    <input v-model="tipoAvion" type="text" class="form-control" placeholder="">                                   
-                     
+                                    <select v-model="tipoAvion" class="form-control" id="sel1">
+                          
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                   <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>

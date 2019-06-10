@@ -67,7 +67,7 @@
                                     <base-button size = "lg" type="default" @click="borrar">Borrar</base-button>
                                 </div>
                                 <div class="col-md-3">
-                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                    <base-button  size = "lg" type="default" @click="guardar">Guardar</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -152,11 +152,17 @@
     </div>
 </template>
 <script>
+
+import axios from 'axios'
+
+
 export default {
     data() {
       return {
         modelo: '',
-        codigoIATA: ''
+        codigoIATA: '',
+        tipoAvion: '',
+        salida: ''
       }
     },
 
@@ -165,6 +171,24 @@ export default {
             this.modelo = ''
             this.codigoIATA = ''
         },        
+        guardar: function(){
+            
+            let aux = this;
+            //let tipoAvionFinal = this.tipoAvion
+            //tipoAvionFinal = tipoAvionFinal.toUpperCase()
+            //console.log(tipoAvionFinal.toUpperCase())
+            let tipoAvion = {
+                modelo: this.modelo,
+                iata: this.codigoIATA,
+                tamano: this.tipoAvion,
+                esEliminado: false
+            };
+            axios.post('http://localhost:8000/scv/api/tipoAvion/crear', tipoAvion)
+            .then(function (response){
+                aux.salida = response.data;
+            })
+
+        }
     }
 };
 </script>
