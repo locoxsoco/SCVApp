@@ -59,12 +59,10 @@
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Tipo de avion:</h3>
+                                    <h3>Modelo de avion:</h3>
                                 </div> 
                                 <div class="col-md-4" >                                 
-                                    <select v-model="tipoAvion" class="form-control" id="sel1">
-                          
-                                    </select>
+                                    <autocompletar :items="tiposDeAvion" filterBy="iata"/>
                                 </div>
                                 <div class="col-md-3">
                                   <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>
@@ -148,16 +146,28 @@
 <script>
 
 import axios from 'axios'
-
+import autocompletar from './Autocompletar.vue'
   export default {
     data() {
       return {
         codigoRegistro: '',
         tipoAvion: '',
         codigoICAO: '',
-        codigoIATA: ''
+        codigoIATA: '',
+        tiposDeAvion: []
       }
     },
+    components: {
+        autocompletar
+    },
+
+    mounted(){            
+        axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+        .then((response) => {
+            this.tiposDeAvion = response.data;
+        })     
+    },
+    
     methods: {
     agregarTipoAvion(){
         this.$router.push('/admin/aviones/agregarTipo');

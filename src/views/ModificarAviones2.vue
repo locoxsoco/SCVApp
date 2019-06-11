@@ -28,7 +28,7 @@
                                     <h3>Codigo de registro:</h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input :value="codigoDeRegistro" type="text" class="form-control" placeholder=""> 
+                                    <input v-model="codigoDeRegistro" type="text" class="form-control" placeholder=""> 
                                 </div>
                             </div>                          
 
@@ -39,7 +39,7 @@
                                     <h3>Código IATA: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input :value="iata" type="text" class="form-control" placeholder="">                                   
+                                    <input v-model="iata" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
 
@@ -50,7 +50,7 @@
                                     <h3>Código ICAO: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input :value="icao" type="text" class="form-control" placeholder="">                                   
+                                    <input v-model="icao" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@
                                     <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
                                 <div class="col-md-3">
-                                    <base-button  size = "lg" type="default">Confirmar cambios</base-button>
+                                    <base-button  size = "lg" type="default" @click="confirmar">Confirmar cambios</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -118,9 +118,10 @@
 
 <script>
 
+import axios from 'axios'
 
 export default {
-    props: ['codigoDeRegistro', 'modelo', 'iata', 'icao'],
+    props: ['idAvion', 'codigoDeRegistro', 'iata', 'icao'],
 
     data() {
       return {
@@ -132,6 +133,17 @@ export default {
         atras: function(){
                     
             this.$router.push({name:'modificarAviones'})
+        },
+        confirmar: function(){
+
+            let aux = this;
+            let avion = {
+                idAvion: this.idAvion,
+                regNro: this.codigoDeRegistro,
+                iata: this.iata,
+                icao: this.icao
+            }
+
         }
     }
 }
