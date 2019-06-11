@@ -33,7 +33,7 @@
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="tableData"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,24 +56,16 @@
 </template>
 
 <script>
-    
+    import axios from "axios";
     export default {
         data() {
-             const data = [
-                { 'id':1, 'modelo': 'BOE200', 'codigoIATA': 'AA', 'tamaño': 'Grande'},
-                { 'id':2, 'modelo': 'BOE300', 'codigoIATA': 'A3', 'tamaño': 'Mediano'},
-                { 'id':3, 'modelo': 'AIA150', 'codigoIATA': 'C2', 'tamaño': 'Mediano'},
-                { 'id':4, 'modelo': 'EEE200', 'codigoIATA': 'M5', 'tamaño': 'Grande'},
-                { 'id':5, 'modelo': 'AIA500', 'codigoIATA': 'DD', 'tamaño': 'Pequeño'}
-            ]
-
-
+            const tableData = []
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
                     {
-                        field: 'id',
+                        field: 'idTipoAvion',
                         label: 'ID',
                         width: '40',
                         numeric: true
@@ -83,20 +75,28 @@
                         label: 'Modelo',
                     },
                     {
-                        field: 'codigoIATA',
+                        field: 'iata',
                         label: 'Código IATA',
                     },
                     {
-                        field: 'tamaño',
+                        field: 'tamano',
                         label: 'Tamaño',
                     }
                 ]
             }
         },
+        mounted(){            
+            axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+            .then((response) => {
+                
+                this.tableData = response.data;
+                
+            })     
+        },
         methods: {
             confirmar: function(){
                         
-                this.$router.push({name:'modificarTipoAviones', params: {modelo: this.selected.modelo, codigoIATA: this.selected.codigoIATA, tamaño: this.selected.tamaño}})
+                this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})
             }
         }
     }

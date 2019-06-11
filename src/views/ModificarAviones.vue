@@ -91,20 +91,20 @@ export default {
     mounted(){            
         axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
         .then((response) => {
-            
+            this.selected = null
             this.tableData = response.data;
             
         })     
     },
     methods: {
         confirmar: function(){
-            if(this.selected.idAvion == undefined){
+            if(this.selected == null){
                 swal.fire({
-                        type: 'success',
-                        title: 'Éxito!',
-                        text: 'Creación de usuario confirmada!'
-                });  
-            }                  
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No hay avion seleccionado'
+                });
+            }                
             this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
         }
     }
