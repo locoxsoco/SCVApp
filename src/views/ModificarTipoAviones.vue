@@ -31,7 +31,7 @@
                                     <h3>Modelo:</h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input :value="modelo" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
+                                    <input v-model="modelo" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
                                 </div>
                             </div>
 
@@ -42,7 +42,7 @@
                                     <h3>Código IATA:: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input :value="codigoIATA" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
+                                    <input v-model="codigoIATA" type="text" class="form-control" placeholder="Ingresar el modelo">                                   
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@
                                 </div>   
                                 <div class="col-md-4" >                                 
                                     <div class="form-group">
-                                        <select v-model="tipoAvion" class="form-control" id="sel1">
+                                        <select v-model="tamaño" class="form-control" id="sel1">
                                             <option>Grande</option>
                                             <option>Mediano</option>
                                             <option>Pequeño</option>
@@ -69,7 +69,7 @@
                                     <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
                                 <div class="col-md-3">
-                                    <base-button  size = "lg" type="default">Guardar</base-button>
+                                    <base-button  size = "lg" type="default" @click="confirmar">Guardar</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -154,8 +154,10 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-    props: ['modelo', 'codigoIATA', 'tamaño'],
+    
+    props: ['idTipoAvion', 'modelo', 'codigoIATA', 'tamaño'],
 
     data() {
       return {
@@ -163,9 +165,24 @@ export default {
       }
     },
     methods: {
-        atras: function(){
-                    
+        atras: function(){        
             this.$router.push({name:'modificarTipoAvionesPrincipal'})
+        },
+        confirmar: function(){
+            let aux = this;
+            let tipoAvion = {
+                idTipoAvion: this.idTipoAvion,
+                modelo: this.modelo,
+                iata: this.codigoIATA,
+                tamano: this.tamaño,
+                esEliminado: false
+            }
+
+            axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
+            .then((response) =>
+                aux.salida = response.data
+            )
+
         }
     }
 };

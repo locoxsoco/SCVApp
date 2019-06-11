@@ -98,7 +98,7 @@
         methods: {
             confirmar: function(){
                         
-                this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
+                this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao, aerolinea: this.selected.taerolineaIdAerolinea, tipoAvion: this.selected.ttipoAvionIdTipoAvion}})
             }
         }
     }

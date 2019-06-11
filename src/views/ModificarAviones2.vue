@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
@@ -67,7 +67,7 @@
                                 <div class="col-md-3">
                                   <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>
                                 </div>
-                            </div>                            
+                            </div>                             -->
 
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
@@ -121,7 +121,7 @@
 import axios from 'axios'
 
 export default {
-    props: ['idAvion', 'codigoDeRegistro', 'iata', 'icao'],
+    props: ['idAvion', 'codigoDeRegistro', 'iata', 'icao', 'aerolinea', 'tipoAvion'],
 
     data() {
       return {
@@ -141,8 +141,17 @@ export default {
                 idAvion: this.idAvion,
                 regNro: this.codigoDeRegistro,
                 iata: this.iata,
-                icao: this.icao
+                icao: this.icao,
+                taerolineaIdAerolinea: this.aerolinea,
+                ttipoAvionIdTipoAvion: this.tipoAvion,
+                esEliminado: false
             }
+
+            axios.put("http://localhost:8000/scv/api/avion/actualizar", avion)
+            .then((response) =>
+                aux.salida = response.data
+            )
+
 
         }
     }
