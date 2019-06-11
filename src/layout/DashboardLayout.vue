@@ -15,7 +15,7 @@
           }"
         />
         <!-- Menu -->
-        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
           :link="{
             name: 'SCV',
             icon: 'fas fa-plane-arrival text-primary',
@@ -55,7 +55,7 @@
           }"
         />
         <!-- Administrar usuarios - Ingresar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
             name: 'Ingresar Usuarios',
             icon: 'fa fa-user-plus text-primary',
@@ -63,7 +63,7 @@
           }"
         />
         <!-- Administrar usuarios - Modificar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Usuarios',
             icon: 'fa fa-user text-primary',
@@ -71,7 +71,7 @@
           }"
         />
         <!-- Administrar usuarios - Eliminar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Usuarios',
             icon: 'fa fa-user-times text-primary',

@@ -55,53 +55,63 @@
 </template>
 
 <script>
-    import axios from "axios";
+import axios from "axios";
+import swal from'sweetalert2';
 //     export default axios.create({
 //   baseURL: "http://localhost:8080/api",
 //   headers: {
 //     "Content-type": "application/json",
 //   }
 // });
-    export default {
-        data() {
-            const tableData =[]
-            return {
-                tableData,
-                selected:tableData[0],
-                // data,
-                columns: [
-                    {
-                        field: 'idUsuario',
-                        label: 'Código de usuario',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'usuario',
-                        label: 'Nombre de usuario'
-                    },
-                    {
-                        field: 'rol',
-                        label: 'Rol'
-                    }
-                ]
+export default {
+    data() {
+        const tableData =[]
+        return {
+            tableData,
+            selected:tableData[0],
+            // data,
+            columns: [
+                {
+                    field: 'idUsuario',
+                    label: 'Código de usuario',
+                    width: '40',
+                    numeric: true
+                },
+                {
+                    field: 'usuario',
+                    label: 'Nombre de usuario'
+                },
+                {
+                    field: 'rol',
+                    label: 'Rol'
+                }
+            ]
+        }
+    },
+    mounted(){            
+        axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
+        .then((response) => {
+            
+            this.tableData = response.data;
+            this.selected=null;
+            
+        })     
+    },
+    methods: {
+        confirmar: function(){
+            if(this.selected == null){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No hay usuario seleccionado'
+                });
             }
-        },
-        mounted(){            
-            axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
-            .then((response) => {
-                
-                this.tableData = response.data;
-                
-            })     
-        },
-        methods: {
-            confirmar: function(){
-                        
-                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.id, nombreDelUsuario: this.selected.nombre}})
-            }
+            else{
+                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.id, nombreDelUsuario: this.selected.nombre}});   
+            }            
         }
     }
+}
 </script>
 
 <style>

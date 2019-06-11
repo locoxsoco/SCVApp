@@ -121,7 +121,7 @@
 </template>
 
 <script>
-
+import swal from'sweetalert2';
 import axios from 'axios'
 
 export default {
@@ -143,20 +143,75 @@ export default {
             this.rol = ''
         },
         guardar: function(){
-            
-            let aux = this;
-            let usuario = {
-                usuario: this.usuario,
-                contrasena: this.contrasena,
-                rol: this.rol,
-                esEliminado: false,
-            };
+            if(this.usuario.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario está vacío'
+                });
+            }
+            else if(this.usuario.length<=8){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres'
+                });
+            }
+            else if(this.usuario.length>80){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario debe ser de máximo 80 caracteres'
+                });
+            }
+            else if(this.contrasena.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La constraseña está vacía'
+                });
+            }
+            else if(this.contrasena.length<8){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La contraseña debe ser de mínimo 8 caracteres'
+                });
+            }
+            else if(this.contrasena.length>80){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La contraseña debe ser de máximo 80 caracteres'
+                });
+            }
+            else if(this.rol.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'Elegir un rol'
+                });
+            }
+            else {
+                let aux = this;
+                let usuario = {
+                    usuario: this.usuario,
+                    contrasena: this.contrasena,
+                    rol: this.rol,
+                    esEliminado: false,
+                };
 
-            axios.post('http://localhost:8000/scv/api/usuario/crear', usuario)
-            .then(function (response) {
-                //console.log(response);
-                aux.salida = response.data;
-            })
+                axios.post('http://localhost:8000/scv/api/usuario/crear', usuario)
+                .then(function (response) {
+                    //console.log(response);
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de usuario confirmada!'
+                    });
+                    aux.salida = response.data;
+                })
+            }
         }
     }
 }

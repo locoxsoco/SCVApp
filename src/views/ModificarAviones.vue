@@ -56,52 +56,59 @@
 </template>
 
 <script>
-    import axios from "axios";
-    export default {
-        data() {
-             const tableData = []
+import swal from'sweetalert2';
+import axios from "axios";
+export default {
+    data() {
+            const tableData = []
 
 
-            return {
-                selected: tableData[0],
-                tableData,
-                columns: [
-                    {
-                        field: 'idAvion',
-                        label: 'ID',
-                        width: '40',
-                        numeric: true
-                    },                   
-                    {
-                        field: 'regNro',
-                        label: 'Codigo de registro',
-                    },
-                    {
-                        field: 'iata',
-                        label: 'Código IATA',
-                    },
-                    {
-                        field: 'icao',
-                        label: 'Código ICAO',
-                    }
-                ]
-            }
-        },
-        mounted(){            
-            axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
-            .then((response) => {
-                
-                this.tableData = response.data;
-                
-            })     
-        },
-        methods: {
-            confirmar: function(){
-                        
-                this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
-            }
+        return {
+            selected: tableData[0],
+            tableData,
+            columns: [
+                {
+                    field: 'idAvion',
+                    label: 'ID',
+                    width: '40',
+                    numeric: true
+                },                   
+                {
+                    field: 'regNro',
+                    label: 'Codigo de registro',
+                },
+                {
+                    field: 'iata',
+                    label: 'Código IATA',
+                },
+                {
+                    field: 'icao',
+                    label: 'Código ICAO',
+                }
+            ]
+        }
+    },
+    mounted(){            
+        axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
+        .then((response) => {
+            
+            this.tableData = response.data;
+            
+        })     
+    },
+    methods: {
+        confirmar: function(){
+            if(this.selected.idAvion == undefined){
+                swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de usuario confirmada!'
+                });  
+            }                  
+            this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
         }
     }
+}
 </script>
 
 <style>

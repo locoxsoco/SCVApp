@@ -152,7 +152,7 @@
     </div>
 </template>
 <script>
-
+import swal from'sweetalert2';
 import axios from 'axios'
 
 
@@ -172,22 +172,62 @@ export default {
             this.codigoIATA = ''
         },        
         guardar: function(){
-            
-            let aux = this;
-            //let tipoAvionFinal = this.tipoAvion
-            //tipoAvionFinal = tipoAvionFinal.toUpperCase()
-            //console.log(tipoAvionFinal.toUpperCase())
-            let tipoAvion = {
-                modelo: this.modelo,
-                iata: this.codigoIATA,
-                tamano: this.tipoAvion,
-                esEliminado: false
-            };
-            axios.post('http://localhost:8000/scv/api/tipoAvion/crear', tipoAvion)
-            .then(function (response){
-                aux.salida = response.data;
-            })
-
+            if(this.modelo.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre del modelo está vacío'
+                });
+            }
+            else if(this.modelo.length>100){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre del modelo debe ser de máximo 100 caracteres'
+                });
+            }
+            else if(this.codigoIATA.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código IATA está vacío'
+                });
+            }
+            else if(this.codigoIATA.length!=3){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La código IATA debe ser de 3 caracteres'
+                });
+            }
+            else if(this.tipoAvion.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'Elegir un rol'
+                });
+            }
+            else {
+                let aux = this;
+                //let tipoAvionFinal = this.tipoAvion
+                //tipoAvionFinal = tipoAvionFinal.toUpperCase()
+                //console.log(tipoAvionFinal.toUpperCase())
+                let tipoAvion = {
+                    modelo: this.modelo,
+                    iata: this.codigoIATA,
+                    tamano: this.tipoAvion,
+                    esEliminado: false
+                };
+                axios.post('http://localhost:8000/scv/api/tipoAvion/crear', tipoAvion)
+                .then(function (response){
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de tipo de avión confirmada!'
+                    });
+                    aux.salida = response.data;
+                })
+            }            
         }
     }
 };
