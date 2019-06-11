@@ -109,8 +109,7 @@ export default {
       }
     },
     methods: {
-        confirmar: function(){
-                    
+        confirmar: function(){                    
             this.$router.push({name:'modificarUsuario'})
         }
     }
