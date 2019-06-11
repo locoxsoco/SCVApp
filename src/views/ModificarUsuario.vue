@@ -98,7 +98,7 @@
         methods: {
             confirmar: function(){
                         
-                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.id, nombreDelUsuario: this.selected.nombre}})
+                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.idUsuario, nombreDelUsuario: this.selected.usuario, rol: this.selected.rol}})
             }
         }
     }

@@ -101,7 +101,7 @@
 
 
 export default {
-    props: ['idDelUsuario', 'nombreDelUsuario'],
+    props: ['idDelUsuario', 'nombreDelUsuario', 'rol'],
 
     data() {
       return {
