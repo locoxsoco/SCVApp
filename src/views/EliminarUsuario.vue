@@ -55,43 +55,69 @@
 </template>
 
 <script>
-    
+import axios from "axios";
+import swal from'sweetalert2';  
     export default {
         data() {
-             const tableData = [
-                { 'id': 1, 'usuario': 'Jesse', 'rol': 'Administrador'},
-                { 'id': 2, 'usuario': 'John', 'rol': 'Operador técnico'},
-                { 'id': 3, 'usuario': 'Tina', 'rol': 'Administrador'},
-                { 'id': 4, 'usuario': 'Clarence', 'rol': 'Operador técnico'},
-                { 'id': 5, 'usuario': 'Anne', 'rol': 'Operador técnico'}
-            ]
+            const tableData =[]
 
 
             return {
                 selected: tableData[0],
                 tableData,
                 columns: [
-                    {
-                        field: 'id',
-                        label: 'Código de usuario',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'usuario',
-                        label: 'Nombre de usuario',
-                    },
-                    {
-                        field: 'rol',
-                        label: 'Rol',
-                    }
+                {
+                    field: 'idUsuario',
+                    label: 'Código de usuario',
+                    width: '40',
+                    numeric: true
+                },
+                {
+                    field: 'usuario',
+                    label: 'Nombre de usuario'
+                },
+                {
+                    field: 'rol',
+                    label: 'Rol'
+                }
                 ],
                 buscarUsuario: ''
             }
         },
+        mounted(){            
+            axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
+            .then((response) => {
+                
+                this.tableData = response.data.filter(item => !item.esEliminado);
+                this.selected = null;
+
+                
+            })     
+        },        
         methods: {
             confirmar: function(){
-                        
+                let aux = this;
+
+                if(this.selected == null){
+                    swal.fire({
+                        type: 'warning',
+                        title: 'Alerta de validación',
+                        text: 'No hay usuario seleccionado'
+                    });
+                } else {
+                    let usuario = {
+                        idUsuario: this.selected.idUsuario,
+                        usuario: this.selected.usuario,
+                        contrasena: this.selected.contrasena,
+                        rol: this.selected.rol,
+                        esEliminado: true
+                    }                    
+                    axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
+                    .then((response) =>
+                        aux.salida = response.data
+                    )                        
+                }
+                       
             }
         },
     computed: {

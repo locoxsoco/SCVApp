@@ -11,7 +11,7 @@
     <div class="autocompletar">
         <input type="text" class="form-control" v-model="query" @input="onChange"/>
         <ul class="autocomplete-results" v-show="visible">
-            <li v-for="result in results" :key="result[filterBy]" @click="setResult(result)" class="autocomplete-result"> {{result}} </li>
+            <li v-for="result in results" :key="result[filterBy]" @click="setResult(result)" v-text="result[filterBy]" class="autocomplete-result"> {{result}} </li>
         </ul>
     </div>
 </template>
@@ -30,14 +30,17 @@ export default {
         onChange(){
             this.visible = true; 
             this.filterResults();
+            this.$emit('hijoEnvia', this.query);
         },
         filterResults(){
-            this.results = this.items.filter((item) => item[this.filterBy].toLowerCase().includes(this.query.toLowerCase()));
+            //this.results = this.items.filter((item) => item[this.filterBy].toLowerCase().includes(this.query.toLowerCase()));
         },
         setResult(result){
-            this.query = result;
+            this.query = result[this.filterBy] + ' - ' + result['iata'];
             this.visible = false;
-        }
+            this.$emit('hijoEnvia', this.query);
+        },
+
     },
     computed: {
         results(){

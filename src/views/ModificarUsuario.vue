@@ -93,8 +93,8 @@ export default {
         axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
         .then((response) => {
             
-            this.tableData = response.data;
-            this.selected=null;
+            this.tableData = response.data.filter(item => !item.esEliminado);
+            this.selected = null;
             
         })     
     },
@@ -108,7 +108,7 @@ export default {
                 });
             }
             else{
-                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.id, nombreDelUsuario: this.selected.nombre}});   
+                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.idUsuario, nombreDelUsuario: this.selected.usuario, rol: this.selected.rol, contrasena: this.selected.contrasena}});   
             }            
         }
     },

@@ -33,7 +33,7 @@
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="tableData"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,24 +56,21 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import swal from'sweetalert2';
+=======
+import axios from "axios";    
+import swal from'sweetalert2';    
+>>>>>>> cd727391cf8631d078796a023bb707a08ea63704
     export default {
         data() {
-             const data = [
-                { 'id':1, 'modelo': 'BOE200', 'codigoIATA': 'AA', 'tamaño': 'Grande'},
-                { 'id':2, 'modelo': 'BOE300', 'codigoIATA': 'A3', 'tamaño': 'Mediano'},
-                { 'id':3, 'modelo': 'AIA150', 'codigoIATA': 'C2', 'tamaño': 'Mediano'},
-                { 'id':4, 'modelo': 'EEE200', 'codigoIATA': 'M5', 'tamaño': 'Grande'},
-                { 'id':5, 'modelo': 'AIA500', 'codigoIATA': 'DD', 'tamaño': 'Pequeño'}
-            ]
-
-
+            const tableData = []
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
                     {
-                        field: 'id',
+                        field: 'idTipoAvion',
                         label: 'ID',
                         width: '40',
                         numeric: true
@@ -83,20 +80,48 @@ import swal from'sweetalert2';
                         label: 'Modelo',
                     },
                     {
-                        field: 'codigoIATA',
+                        field: 'iata',
                         label: 'Código IATA',
                     },
                     {
-                        field: 'tamaño',
+                        field: 'tamano',
                         label: 'Tamaño',
                     }
                 ]
             }
         },
+        mounted(){            
+            axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+            .then((response) => {
+                
+                this.selected = null
+                this.tableData = response.data.filter(item => !item.esEliminado);
+                
+            })     
+        },
         methods: {
             confirmar: function(){
-                        
-                //this.$router.push({name:'modificarTipoAviones', params: {modelo: this.selected.modelo, codigoIATA: this.selected.codigoIATA, tamaño: this.selected.tamaño}})
+                let aux = this;
+                if(this.selected == null){
+                    swal.fire({
+                        type: 'warning',
+                        title: 'Alerta de validación',
+                        text: 'No hay un tipo de avión seleccionado'
+                    });
+                } else {
+                    let tipoAvion = {
+                        idTipoAvion: this.selected.idTipoAvion,
+                        modelo: this.selected.modelo,
+                        iata: this.selected.iata,
+                        tamano: this.selected.tamano,
+                        esEliminado: true
+                    }                    
+                    axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
+                    .then((response) =>
+                        aux.salida = response.data
+                    )                        
+                }                        
+
             }
         }
     }
