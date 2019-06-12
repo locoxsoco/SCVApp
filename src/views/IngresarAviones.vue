@@ -61,11 +61,8 @@
                                 <div class="col-md-4" >
                                     <h3>Modelo de avion:</h3>
                                 </div> 
-                                <div class="col-md-4" >                                 
-                                    <autocompletar :items="tiposDeAvion" filterBy="iata"/>
-                                </div>
-                                <div class="col-md-3">
-                                  <base-button type="primary" @click="agregarTipoAvion()"> Seleccionar tipo </base-button>
+                                <div class="col-md-5" >                                 
+                                    <autocompletar :items="tiposDeAvion" filterBy="modelo" v-on:hijoEnvia="onChildClick"/>
                                 </div>
                             </div>
                             <div class="form-group row" >
@@ -169,9 +166,6 @@ import autocompletar from './Autocompletar.vue'
     },
     
     methods: {
-    agregarTipoAvion(){
-        this.$router.push('/admin/aviones/agregarTipo');
-    },
 
     borrar: function(){
         this.codigoRegistro = ''
@@ -181,20 +175,26 @@ import autocompletar from './Autocompletar.vue'
     },
 
     guardar: function(){
+        console.log(this.tipoAvion)
         let aux = this;
-        axios.post('http://127.0.0.1:8000/scv/api/avion/crear', {
-            regNumber: this.codigoRegistro,
-            estado: 'ACTIVO',
+        let avion = {
+            regNro: this.codigoRegistro,
+            iata: this.codigoIATA,
+            icao: this.codigoICAO,
             taerolineaIdAerolinea: 1,
-            ttipoAvionIdTipoAvion: 1
-        })
+            ttipoAvionIdTipoAvion: 1,
+            esEliminado: false
+        }
+        axios.post('http://127.0.0.1:8000/scv/api/avion/crear', avion)
         .then(function (response) {
             aux.salida = response.data;
             //console.log(this.salida);
         })
         }
-        
-      
+    },
+    onChildClick(value) {
+        this.tipoAvion = value;
+        console.log(this.tipoAvion);
     }
   };
 </script>

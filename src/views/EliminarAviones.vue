@@ -33,7 +33,7 @@
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="tableData"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,53 +56,71 @@
 </template>
 
 <script>
-    
+import axios from "axios";    
+import swal from'sweetalert2';
     export default {
         data() {
-             const data = [
-                { 'id':1, 'codigoDeRegistro': 'AIR200', 'modelo': 'BOEING707', 'iata': 'AI', 'icao': 'OEI'},
-                { 'id':2, 'codigoDeRegistro': 'QAT100', 'modelo': 'BOEING100', 'iata': 'OE', 'icao': 'A3I'},
-                { 'id':3, 'codigoDeRegistro': 'RET150', 'modelo': 'BOEING101', 'iata': 'PL', 'icao': 'OP2'},
-                { 'id':4, 'codigoDeRegistro': 'POR200', 'modelo': 'BOEING100', 'iata': 'IT', 'icao': 'IN1'},
-                { 'id':5, 'codigoDeRegistro': 'QAT500', 'modelo': 'BOEING333', 'iata': 'BN', 'icao': 'OP6'}
-            ]
-
-
+            const tableData = []
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
-                    {
-                        field: 'id',
-                        label: 'ID',
-                        width: '40',
-                        numeric: true
-                    },                   
-                    {
-                        field: 'codigoDeRegistro',
-                        label: 'Codigo de registro',
-                    },
-                    {
-                        field: 'modelo',
-                        label: 'Modelo',
-                    },
-                    {
-                        field: 'iata',
-                        label: 'Código IATA',
-                    },
-                    {
-                        field: 'icao',
-                        label: 'Código ICAO',
-                    }
+                {
+                    field: 'idAvion',
+                    label: 'ID',
+                    width: '40',
+                    numeric: true
+                },                   
+                {
+                    field: 'regNro',
+                    label: 'Codigo de registro',
+                },
+                {
+                    field: 'iata',
+                    label: 'Código IATA',
+                },
+                {
+                    field: 'icao',
+                    label: 'Código ICAO',
+                }
                 ]
             }
         },
         methods: {
             confirmar: function(){
-                        
-                //this.$router.push({name:'modificarAviones2', params: {codigoDeRegistro: this.selected.codigoDeRegistro, modelo: this.selected.modelo, iata: this.selected.iata, icao: this.selected.icao}})
+                let aux = this;
+                if(this.selected == null){
+                    swal.fire({
+                        type: 'warning',
+                        title: 'Alerta de validación',
+                        text: 'No hay usuario seleccionado'
+                    });
+                } else {
+                    let avion = {
+                        idAvion: this.selected.idAvion,
+                        regNro: this.selected.regNro,
+                        iata: this.selected.iata,
+                        icao: this.selected.icao,
+                        taerolineaIdAerolinea: this.selected.taerolineaIdAerolinea,
+                        ttipoAvionIdTipoAvion: this.selected.ttipoAvionIdTipoAvion,
+                        esEliminado: true
+                    }                    
+                    axios.put("http://localhost:8000/scv/api/avion/actualizar", avion)
+                    .then((response) =>
+                        aux.salida = response.data
+                    )                        
+                }
+                       
             }
-        }
+        },
+        mounted(){            
+            axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
+            .then((response) => {
+                this.selected = null
+                this.tableData = response.data.filter(item => !item.esEliminado);
+                
+            })     
+        },        
     }
 </script>
 

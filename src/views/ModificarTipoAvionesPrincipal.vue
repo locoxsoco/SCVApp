@@ -89,8 +89,8 @@
             axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
             .then((response) => {
                 
-                this.tableData = response.data;
-                
+                this.selected = null
+                this.tableData = response.data.filter(item => !item.esEliminado);
             })     
         },
         methods: {

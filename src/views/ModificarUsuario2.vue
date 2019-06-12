@@ -30,7 +30,7 @@
                                 <div class="col-md-5" >
                                     <!-- <base-input alternative="" :placeholder="nombreDelUsuario" input-classes="form-control-alternative">
                                     </base-input> -->
-                                    <input :value="nombreDelUsuario" type="text" class="form-control" placeholder="">                                   
+                                    <input v-model="nombreDelUsuario" type="text" class="form-control" placeholder="">                                   
                                 </div>
                             </div>
 
@@ -42,7 +42,7 @@
                                 </div> 
                                 <div class="col-md-5" >                                 
                                     <div class="form-group">
-                                        <select class="form-control" id="sel1">
+                                        <select v-model="rol" class="form-control" id="sel1">
                                             <option>Administrador</option>
                                             <option>Operador técnico</option>
                                         </select>
@@ -56,7 +56,7 @@
                                     <base-button size = "lg" type="default" @click="atras">Atras</base-button>
                                 </div>
                                 <div class="col-md-4">
-                                    <base-button  size = "lg" type="default">Confirmar cambios</base-button>
+                                    <base-button  size = "lg" type="default" @click="confirmar">Confirmar cambios</base-button>
                                 </div>
                             </div>  
                         </template>
@@ -99,9 +99,10 @@
 
 <script>
 
+import axios from "axios"
 
 export default {
-    props: ['idDelUsuario', 'nombreDelUsuario', 'rol'],
+    props: ['idDelUsuario', 'nombreDelUsuario', 'rol', 'contrasena'],
 
     data() {
       return {
@@ -109,8 +110,24 @@ export default {
       }
     },
     methods: {
-        confirmar: function(){                    
+        atras: function(){                    
             this.$router.push({name:'modificarUsuario'})
+        },
+        confirmar: function(){
+            let aux = this;
+            let usuario = {
+                idUsuario: this.idDelUsuario,
+                usuario: this.nombreDelUsuario,
+                contrasena: this.contrasena,
+                rol: this.rol,
+                esEliminado: false
+            }
+
+            axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
+            .then((response) =>
+                aux.salida = response.data
+            )            
+
         }
     }
 

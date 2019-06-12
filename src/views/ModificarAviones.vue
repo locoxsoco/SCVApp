@@ -60,7 +60,7 @@ import swal from'sweetalert2';
 import axios from "axios";
 export default {
     data() {
-            const tableData = []
+        const tableData = []
 
 
         return {
@@ -92,7 +92,7 @@ export default {
         axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
         .then((response) => {
             this.selected = null
-            this.tableData = response.data;
+            this.tableData = response.data.filter(item => !item.esEliminado);
             
         })     
     },
