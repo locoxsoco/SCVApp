@@ -26,14 +26,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarTipoAviones" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="tableData"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,12 +56,8 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import swal from'sweetalert2';
-=======
 import axios from "axios";    
 import swal from'sweetalert2';    
->>>>>>> cd727391cf8631d078796a023bb707a08ea63704
     export default {
         data() {
             const tableData = []
@@ -87,7 +83,8 @@ import swal from'sweetalert2';
                         field: 'tamano',
                         label: 'Tamaño',
                     }
-                ]
+                ],
+                buscarTipoAviones: ''
             }
         },
         mounted(){            
@@ -123,7 +120,20 @@ import swal from'sweetalert2';
                 }                        
 
             }
-        }
+        },
+        computed: {
+            filter: function(){
+                var name_re1 = new RegExp(this.buscarTipoAviones, 'i');
+                var tableData = [];
+                var i = this.tableData.length;
+                for (i in this.tableData) {
+                if (this.tableData[i].modelo.match(name_re1)) {
+                    tableData.push(this.tableData[i])
+                }
+                }
+                return tableData;
+            }
+            }
     }
 </script>
 
