@@ -154,7 +154,8 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import swal from'sweetalert2';
+import axios from 'axios';
 export default {
     
     props: ['idTipoAvion', 'modelo', 'codigoIATA', 'tamaño'],
@@ -169,20 +170,61 @@ export default {
             this.$router.push({name:'modificarTipoAvionesPrincipal'})
         },
         confirmar: function(){
-            let aux = this;
-            let tipoAvion = {
-                idTipoAvion: this.idTipoAvion,
-                modelo: this.modelo,
-                iata: this.codigoIATA,
-                tamano: this.tamaño,
-                esEliminado: false
+            if(this.modelo.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre del modelo está vacío'
+                });
             }
-
-            axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
-            .then((response) =>
-                aux.salida = response.data
-            )
-
+            else if(this.modelo.length>100){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre del modelo debe ser de máximo 100 caracteres'
+                });
+            }
+            else if(this.codigoIATA.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código IATA está vacío'
+                });
+            }
+            else if(this.codigoIATA.length!=3){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La código IATA debe ser de 3 caracteres'
+                });
+            }
+            else if(this.tamaño.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'Elegir un tamaño'
+                });
+            }
+            else {
+                let aux = this;
+                let tipoAvion = {
+                    idTipoAvion: this.idTipoAvion,
+                    modelo: this.modelo,
+                    iata: this.codigoIATA,
+                    tamano: this.tamaño,
+                    esEliminado: false
+                }
+                axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
+                .then((response) =>{
+                    aux.salida = response.data;
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de tipo de avión confirmada!'
+                    });
+                }
+                )
+            }
         }
     }
 };

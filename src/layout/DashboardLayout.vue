@@ -15,7 +15,7 @@
           }"
         />
         <!-- Menu -->
-        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
           :link="{
             name: 'SCV',
             icon: 'fas fa-plane-arrival text-primary',
@@ -87,7 +87,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Ingresar aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Ingresar Aviones',
             icon: 'fas fa-plus text-primary',
@@ -95,7 +95,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Ingresar Tipo aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Ingresar Tipo de Aviones',
             icon: 'fas fa-plus text-primary',
@@ -103,7 +103,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Modificar aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Aviones',
             icon: 'fas fa-edit text-primary',
@@ -111,7 +111,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Modificar Tipo aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Modificar Tipo de Aviones',
             icon: 'fas fa-edit text-primary',
@@ -119,7 +119,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Eliminar aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Aviones',
             icon: 'fas fa-eraser text-primary',
@@ -127,7 +127,7 @@
           }"
         />
         <!-- Administrar aviones y tipos de aviones - Eliminar Tipo aviones -->
-        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar Tipo de Aviones',
             icon: 'fas fa-eraser text-primary',
@@ -135,13 +135,13 @@
           }"
         />
         <!-- Administrar zonas y puertas -->
-        <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
+        <!--<sidebar-item v-if="['menu'].indexOf($route.name) > -1"
           :link="{
             name: 'Administración de zonas y puertas',
             icon: 'fas fa-parking text-primary',
             path: '/admin/puertasYZonas'
           }"
-        />
+        />-->
         <!-- Visualizar el mapa -->
         <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
           :link="{

@@ -26,14 +26,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarAviones" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="tableData"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -85,15 +85,15 @@ export default {
                     field: 'icao',
                     label: 'Código ICAO',
                 }
-            ]
+            ],
+            buscarAviones: ''
         }
     },
     mounted(){            
         axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
         .then((response) => {
-            this.selected = null
-            this.tableData = response.data;
-            
+            this.selected = null;
+            this.tableData = response.data;            
         })     
     },
     methods: {
@@ -107,7 +107,20 @@ export default {
             }                
             this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
         }
-    }
+    },
+    computed: {
+          filter: function(){
+            var name_re1 = new RegExp(this.buscarAviones, 'i');
+            var tableData = [];
+            var i = this.tableData.length;
+            for (i in this.tableData) {
+              if (this.tableData[i].regNro.match(name_re1)) {
+                tableData.push(this.tableData[i])
+              }
+            }
+            return tableData;
+          }
+        }
 }
 </script>
 

@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar nombre de usuario" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarUsuario" placeholder="Ingresar nombre de usuario" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="tableData"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -85,7 +85,8 @@ export default {
                     field: 'rol',
                     label: 'Rol'
                 }
-            ]
+            ],
+            buscarUsuario: ''
         }
     },
     mounted(){            
@@ -110,7 +111,20 @@ export default {
                 this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.id, nombreDelUsuario: this.selected.nombre}});   
             }            
         }
-    }
+    },
+    computed: {
+          filter: function(){
+            var name_re1 = new RegExp(this.buscarUsuario, 'i');
+            var tableData = [];
+            var i = this.tableData.length;
+            for (i in this.tableData) {
+              if (this.tableData[i].usuario.match(name_re1)) {
+                tableData.push(this.tableData[i])
+              }
+            }
+            return tableData;
+          }
+        }
 }
 </script>
 

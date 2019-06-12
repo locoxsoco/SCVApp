@@ -14,7 +14,7 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Modificar usuarios</h3>
+                                    <h3 class="mb-0">Eliminar usuarios</h3>
                                 </div>
                             </div>
                         </div>
@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar nombre de usuario" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarUsuario" placeholder="Ingresar nombre de usuario" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -58,18 +58,18 @@
     
     export default {
         data() {
-             const data = [
-                { 'id': 1, 'nombre': 'Jesse', 'rol': 'Administrador'},
-                { 'id': 2, 'nombre': 'John', 'rol': 'Operador técnico'},
-                { 'id': 3, 'nombre': 'Tina', 'rol': 'Administrador'},
-                { 'id': 4, 'nombre': 'Clarence', 'rol': 'Operador técnico'},
-                { 'id': 5, 'nombre': 'Anne', 'rol': 'Operador técnico'}
+             const tableData = [
+                { 'id': 1, 'usuario': 'Jesse', 'rol': 'Administrador'},
+                { 'id': 2, 'usuario': 'John', 'rol': 'Operador técnico'},
+                { 'id': 3, 'usuario': 'Tina', 'rol': 'Administrador'},
+                { 'id': 4, 'usuario': 'Clarence', 'rol': 'Operador técnico'},
+                { 'id': 5, 'usuario': 'Anne', 'rol': 'Operador técnico'}
             ]
 
 
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
                     {
                         field: 'id',
@@ -78,20 +78,34 @@
                         numeric: true
                     },
                     {
-                        field: 'nombre',
+                        field: 'usuario',
                         label: 'Nombre de usuario',
                     },
                     {
                         field: 'rol',
                         label: 'Rol',
                     }
-                ]
+                ],
+                buscarUsuario: ''
             }
         },
         methods: {
             confirmar: function(){
                         
             }
+        },
+    computed: {
+          filter: function(){
+            var name_re1 = new RegExp(this.buscarUsuario, 'i');
+            var tableData = [];
+            var i = this.tableData.length;
+            for (i in this.tableData) {
+              if (this.tableData[i].usuario.match(name_re1)) {
+                tableData.push(this.tableData[i])
+              }
+            }
+            return tableData;
+          }
         }
     }
 </script>

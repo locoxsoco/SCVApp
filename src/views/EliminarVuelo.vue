@@ -19,86 +19,40 @@
                             </div>
                         </div>
                         <template>
-                            <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <base-input alternative=""
-                                                    placeholder="Aerolínea"
-                                                    input-classes="form-control-alternative"
-                                        />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <base-input alternative=""
-                                                    placeholder="# de vuelo"
-                                                    input-classes="form-control-alternative"
-                                        />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <button type="button" class="btn btn-primary">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>   
-                            <div class="table-responsive">   
-                            <base-table class="table align-items-center table-flush"
-                                        :class="type === 'dark' ? 'table-dark': ''"
-                                        :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
-                                        tbody-classes="list"
-                                        :data="tableData">
+                          <div class="form-group row">
+                              <div class="col-md-2"/>
+                              <div class="col-md-4">
+                                  <form>
+                                      <base-input alternative="" type="text" v-model="buscarAerolinea" placeholder="Aerolínea" input-classes="form-control-alternative">
+                                      </base-input>
+                                  </form>
+                              </div>
+                              <div class="col-md-4">
+                                  <form>
+                                      <base-input alternative="" type="text" v-model="buscarNroVuelo" placeholder="# de vuelo" input-classes="form-control-alternative">
+                                      </base-input>
+                                  </form>
+                              </div>
+                              <div class="col-md-2"/>
+                          </div>
 
-                                <template slot="columns">
-                                <th>Aerolinea</th>
-                                <th>Vuelo</th>
-                                <th>Procedencia</th>
-                                <th>Hora Programada</th>
-                                <th>Hora Real</th>
-                                <th>Estado</th>
-                                <th>Puerta</th>
-                                <th></th>
-                                </template>
+                          <b-table
+                                  :data="filter"
+                                  :columns="columns"
+                                  :selected.sync="selected"
+                                  :filter="buscarAerolinea"
+                                  focusable>
+                                  
+                          </b-table>
 
-                                <template slot-scope="{row}">
-                                <th scope="row">
-                                    <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{row.aerolinea}}</span>
-                                    </div>
-                                    </div>
-                                </th>
-                                <td class="budget">
-                                    {{row.vuelo}}
-                                </td>
-                                <td>
-                                    <badge class="badge-dot mr-4">
-                                    <span class="status">{{row.procedencia}}</span>
-                                    </badge>
-                                </td>
-                                <td class="budget">
-                                    {{row.horaProgramada}}
-                                </td>
-                                <td class="budget">
-                                    {{row.horaReal}}
-                                </td>
-                                <td class="budget">
-                                    {{row.estado}}
-                                </td>                              
-                                <td class="budget">
-                                    {{row.puerta}}
-                                </td>
-
-
-                                </template>
-
-                            </base-table>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-5">
-                                </div>
-                                <div class="col-md-3">
-                                    <b-button @click="confirmar">Confirmar eliminación</b-button>                              
-                                </div>
-                            </div>                           
-                        </template>
+                          <div class="form-group row">
+                              <div class="col-md-5">
+                              </div>
+                              <div class="col-md-3">
+                                  <b-button @click="confirmar">Confirmar</b-button>                              
+                              </div>
+                          </div>                           
+                      </template>
                     </card>
 
                 </div>
@@ -108,43 +62,116 @@
 </template>
 
 <script>
-    
+    import axios from "axios";
     export default {
         data() {
-             const data = [
-                { 'id': 1, 'nombre': 'Jesse', 'rol': 'Administrador'},
-                { 'id': 2, 'nombre': 'John', 'rol': 'Operador técnico'},
-                { 'id': 3, 'nombre': 'Tina', 'rol': 'Administrador'},
-                { 'id': 4, 'nombre': 'Clarence', 'rol': 'Operador técnico'},
-                { 'id': 5, 'nombre': 'Anne', 'rol': 'Operador técnico'}
-            ]
-
-
+            const tableData = []
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
                     {
-                        field: 'id',
-                        label: 'Código de usuario',
-                        width: '40',
-                        numeric: true
+                        field: 'aerolinea',
+                        label: 'Aerolinea',
+                        sortable: true
+                    },                   
+                    {
+                        field: 'vuelo',
+                        label: 'Vuelo',
+                        sortable: true
                     },
                     {
-                        field: 'nombre',
-                        label: 'Nombre de usuario',
+                        field: 'procedencia',
+                        label: 'Procedencia',
+                        sortable: true
                     },
                     {
-                        field: 'rol',
-                        label: 'Rol',
+                        field: 'horaProgramada',
+                        label: 'Hora Programada',
+                        sortable: true
+                    },
+                    {
+                        field: 'horaEstimada',
+                        label: 'Hora Estimada',
+                        sortable: true
+                    },
+                    {
+                        field: 'estado',
+                        label: 'Estado',
+                        sortable: true
+                    },
+                    {
+                        field: 'puerta',
+                        label: 'Puerta',
+                        sortable: true
                     }
-                ]
+                ],
+                buscarAerolinea: '',
+                buscarNroVuelo: ''
             }
+        },
+        mounted(){            
+            axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+            .then((response) => {
+                this.selected = null;
+                //this.tableData = response.data;
+                this.tableData = [
+                  {
+                    aerolinea:"American Airlines",
+                    vuelo:"RAN001",
+                    procedencia:"Santiago de Chile",
+                    horaProgramada:"14:00",
+                    horaEstimada:"14:00",
+                    estado:"Aterrizado",
+                    puerta:"5P",
+                  },
+                  {
+                    aerolinea:"Federal Express",
+                    vuelo:"MIR100",
+                    procedencia:"Rio",
+                    horaProgramada:"18:00",
+                    horaEstimada:"18:00",
+                    estado:"Aterrizado",
+                    puerta:"16Z",
+                  },
+                  {
+                    aerolinea:"Emirates",
+                    vuelo:"VUE333",
+                    procedencia:"Guadalajara",
+                    horaProgramada:"16:00",
+                    horaEstimada:"16:30",
+                    estado:"Aterrizado",
+                    puerta:"7P",
+                  },
+                  {
+                    aerolinea:"Air Canada",
+                    vuelo:"AIR250",
+                    procedencia:"Ontario",
+                    horaProgramada:"15:00",
+                    horaEstimada:"15:00",
+                    estado:"Aterrizado",
+                    puerta:"4P",
+                  }
+                ]
+            })     
         },
         methods: {
             confirmar: function(){
-                        
             }
+        },
+        computed: {
+          filter: function(){
+            var name_re1 = new RegExp(this.buscarAerolinea, 'i');
+            var name_re2 = new RegExp(this.buscarNroVuelo, 'i');
+            var tableData = [];
+            var i = this.tableData.length;
+            for (i in this.tableData) {
+              if (this.tableData[i].aerolinea.match(name_re1) && this.tableData[i].vuelo.match(name_re2)) {
+                tableData.push(this.tableData[i])
+              }
+            }
+            return tableData;
+          }
         }
     }
 </script>

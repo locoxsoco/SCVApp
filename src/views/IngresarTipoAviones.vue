@@ -204,7 +204,7 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'Elegir un rol'
+                    text: 'Elegir un tamaño'
                 });
             }
             else {

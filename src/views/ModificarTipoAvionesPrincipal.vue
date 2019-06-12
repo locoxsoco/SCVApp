@@ -22,18 +22,18 @@
                         <template>
                             <div class="form-group row">
                                 <div class="col-md-5">
-                                    <h3>Buscar por código de registro:</h3>
+                                    <h3>Buscar por modelo:</h3>
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarTipoAviones" placeholder="Ingresar modelo" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="tableData"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+    import swal from'sweetalert2';
     import axios from "axios";
     export default {
         data() {
@@ -82,22 +83,41 @@
                         field: 'tamano',
                         label: 'Tamaño',
                     }
-                ]
+                ],
+                buscarTipoAviones: ''
             }
         },
         mounted(){            
             axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
             .then((response) => {
-                
-                this.tableData = response.data;
-                
+                this.selected = null;
+                this.tableData = response.data;                
             })     
         },
         methods: {
             confirmar: function(){
-                        
+                if(this.selected == null){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No hay tipo de avion seleccionado'
+                });
+                }                          
                 this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})
             }
+        },
+    computed: {
+          filter: function(){
+            var name_re1 = new RegExp(this.buscarTipoAviones, 'i');
+            var tableData = [];
+            var i = this.tableData.length;
+            for (i in this.tableData) {
+              if (this.tableData[i].modelo.match(name_re1)) {
+                tableData.push(this.tableData[i])
+              }
+            }
+            return tableData;
+          }
         }
     }
 </script>

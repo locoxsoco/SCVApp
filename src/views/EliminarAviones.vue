@@ -26,14 +26,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarAviones" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
                             </div>
 
                             <b-table
-                                    :data="data"
+                                    :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
                                     focusable>
@@ -56,21 +56,22 @@
 </template>
 
 <script>
+import swal from'sweetalert2';
     
     export default {
         data() {
-             const data = [
-                { 'id':1, 'codigoDeRegistro': 'AIR200', 'modelo': 'BOEING707', 'iata': 'AI', 'icao': 'OEI'},
-                { 'id':2, 'codigoDeRegistro': 'QAT100', 'modelo': 'BOEING100', 'iata': 'OE', 'icao': 'A3I'},
-                { 'id':3, 'codigoDeRegistro': 'RET150', 'modelo': 'BOEING101', 'iata': 'PL', 'icao': 'OP2'},
-                { 'id':4, 'codigoDeRegistro': 'POR200', 'modelo': 'BOEING100', 'iata': 'IT', 'icao': 'IN1'},
-                { 'id':5, 'codigoDeRegistro': 'QAT500', 'modelo': 'BOEING333', 'iata': 'BN', 'icao': 'OP6'}
+             const tableData = [
+                { 'id':1, 'regNro': 'AIR200', 'modelo': 'BOEING707', 'iata': 'AI', 'icao': 'OEI'},
+                { 'id':2, 'regNro': 'QAT100', 'modelo': 'BOEING100', 'iata': 'OE', 'icao': 'A3I'},
+                { 'id':3, 'regNro': 'RET150', 'modelo': 'BOEING101', 'iata': 'PL', 'icao': 'OP2'},
+                { 'id':4, 'regNro': 'POR200', 'modelo': 'BOEING100', 'iata': 'IT', 'icao': 'IN1'},
+                { 'id':5, 'regNro': 'QAT500', 'modelo': 'BOEING333', 'iata': 'BN', 'icao': 'OP6'}
             ]
 
 
             return {
-                selected: data[1],
-                data,
+                selected: tableData[0],
+                tableData,
                 columns: [
                     {
                         field: 'id',
@@ -79,7 +80,7 @@
                         numeric: true
                     },                   
                     {
-                        field: 'codigoDeRegistro',
+                        field: 'regNro',
                         label: 'Codigo de registro',
                     },
                     {
@@ -94,7 +95,8 @@
                         field: 'icao',
                         label: 'Código ICAO',
                     }
-                ]
+                ],
+                buscarAviones:''
             }
         },
         methods: {
@@ -102,7 +104,20 @@
                         
                 //this.$router.push({name:'modificarAviones2', params: {codigoDeRegistro: this.selected.codigoDeRegistro, modelo: this.selected.modelo, iata: this.selected.iata, icao: this.selected.icao}})
             }
-        }
+        },
+        computed: {
+            filter: function(){
+                var name_re1 = new RegExp(this.buscarAviones, 'i');
+                var tableData = [];
+                var i = this.tableData.length;
+                for (i in this.tableData) {
+                if (this.tableData[i].regNro.match(name_re1)) {
+                    tableData.push(this.tableData[i])
+                }
+                }
+                return tableData;
+            }
+            }
     }
 </script>
 
