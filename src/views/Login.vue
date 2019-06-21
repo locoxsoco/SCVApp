@@ -2,67 +2,112 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-                        <div class="btn-wrapper text-center">
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                                <span class="btn-inner--text">Github</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">Google</span>
-                            </a>
-                        </div>
-                    </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
-                            <small>Or sign in with credentials</small>
-                        </div>
                         <form role="form">
                             <base-input class="input-group-alternative mb-3"
-                                        placeholder="Email"
-                                        addon-left-icon="ni ni-email-83"
-                                        v-model="model.email">
+                                        placeholder="Nombre de usuario"
+                                        addon-left-icon="ni ni-single-02"
+                                        v-model="model.usuario">
                             </base-input>
 
                             <base-input class="input-group-alternative"
-                                        placeholder="Password"
+                                        placeholder="Contraseña"
                                         type="password"
                                         addon-left-icon="ni ni-lock-circle-open"
-                                        v-model="model.password">
+                                        v-model="model.contrasena">
                             </base-input>
-
-                            <base-checkbox class="custom-control-alternative">
-                                <span class="text-muted">Remember me</span>
-                            </base-checkbox>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4">Sign in</base-button>
+                                <base-button type="primary" class="my-4" @click="ingresar">Ingresar</base-button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
-                        <a href="#" class="text-light"><small>Forgot password?</small></a>
-                    </div>
-                    <div class="col-6 text-right">
-                        <router-link to="/register" class="text-light"><small>Create new account</small></router-link>
+                    <div class="col-12">
+                        <small style="color:#f4f4f4">Olvidó su contraseña? Contacte al administrador</small>
                     </div>
                 </div>
             </div>
         </div>
 </template>
 <script>
+import swal from 'sweetalert2';
+import axios from 'axios'
   export default {
     name: 'login',
     data() {
       return {
         model: {
-          email: '',
-          password: ''
+          usuario: '',
+          contrasena: ''
         }
       }
+    },
+    
+    methods: {
+        ingresar: function(){
+            if(this.model.usuario==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario está vacío'
+                });
+            }
+            else if(this.model.usuario.length<=8){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres'
+                });
+            }
+            else if(this.model.usuario.length>80){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El nombre de usuario debe ser de máximo 80 caracteres'
+                });
+            }
+            else if(this.model.contrasena.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La constraseña está vacía'
+                });
+            }
+            else if(this.model.contrasena.length<8){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La contraseña debe ser de mínimo 8 caracteres'
+                });
+            }
+            else if(this.model.contrasena.length>80){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La contraseña debe ser de máximo 80 caracteres'
+                });
+            }
+            else {
+                let aux = this;
+                let cuentaUsuario = {
+                    usuario: this.model.usuario,
+                    contrasena: this.model.contrasena
+                };
+                axios.post('http://localhost:8000/scv/api/usuario/login', cuentaUsuario)
+                .then(function (response) {
+                    aux.salida = response.data;
+                    this.$router.push({name:'menu'});
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Acceso de usuario fallido!',
+                        text: 'El nombre de usuario y/o contraseña son incorrectos'
+                    });
+                })
+            }
+        }
     }
   }
 </script>

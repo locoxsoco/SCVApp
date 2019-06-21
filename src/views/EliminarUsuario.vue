@@ -104,7 +104,8 @@ import swal from'sweetalert2';
                         title: 'Alerta de validación',
                         text: 'No hay usuario seleccionado'
                     });
-                } else {
+                }
+                else{
                     let usuario = {
                         idUsuario: this.selected.idUsuario,
                         usuario: this.selected.usuario,
@@ -113,25 +114,38 @@ import swal from'sweetalert2';
                         esEliminado: true
                     }                    
                     axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
-                    .then((response) =>
-                        aux.salida = response.data
-                    )                        
-                }
-                       
+                    .then(function (response) {
+                        aux.salida = response.data;
+                        swal.fire({
+                            type: 'success',
+                            title: 'Éxito!',
+                            text: 'Eliminación de usuario confirmada!'
+                        }).then(() => {
+                            location.reload(false);
+                        })
+                        .catch(function () {
+                            swal.fire({
+                                type: 'error',
+                                title: 'Eliminación de usuario fallida!',
+                                text: 'Reintenta más tarde'
+                            });
+                        })
+                    })                     
+                }       
             }
         },
-    computed: {
-          filter: function(){
-            var name_re1 = new RegExp(this.buscarUsuario, 'i');
-            var tableData = [];
-            var i = this.tableData.length;
-            for (i in this.tableData) {
-              if (this.tableData[i].usuario.match(name_re1)) {
-                tableData.push(this.tableData[i])
-              }
+        computed: {
+            filter: function(){
+                var name_re1 = new RegExp(this.buscarUsuario, 'i');
+                var tableData = [];
+                var i = this.tableData.length;
+                for (i in this.tableData) {
+                if (this.tableData[i].usuario.match(name_re1)) {
+                    tableData.push(this.tableData[i])
+                }
+                }
+                return tableData;
             }
-            return tableData;
-          }
         }
     }
 </script>

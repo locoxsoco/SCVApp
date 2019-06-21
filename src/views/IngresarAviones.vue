@@ -62,7 +62,17 @@
                                     <h3>Modelo de avion:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar :items="tiposDeAvion" filterBy="modelo" v-on:hijoEnvia="onChildClick"/>
+                                    <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-1">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Aerolínea:</h3>
+                                </div> 
+                                <div class="col-md-5" >                                 
+                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setAerolinea"/>
                                 </div>
                             </div>
                             <div class="form-group row" >
@@ -81,77 +91,22 @@
         </div> 
 
     </div>
-
-    <!-- <div>
-        <base-header type="gradient-success" class="pb-1 pb-2 pt-2 pt-md-1">
-            <div class="row">
-                <h2> Agregar aviones </h2>
-            </div>
-        </base-header>
-
-        <div class="table-responsive">
-            <div class="row pb-4 pb-4 pt-4 pt-md-4" >
-            <div class="col-lg-4" > 
-                <h3> Id del avión </h3> 
-            </div>
-            </div>
-            <div class="row ">
-                <div class="col-lg-3">
-                    <h3> Código de registro </h3>
-                </div> 
-                <div class="col-lg-3">
-                    <form>
-                          <base-input v-model="idCodAvion" alternative="" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
-                          </base-input>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <h3> Tipo de avión </h3>
-                </div> 
-                <div class="col-lg-3">
-                    <form>
-                      <b-select placeholder="Select a name" v-model="tipoAvion">
-                            <option
-                              v-for="option in data"
-                              :value="option.id"
-                              :key="option.id">
-                              {{ option.tipo }}
-                            </option>
-                      </b-select>
-                    </form>
-                </div>
-                <div class="col-lg-3">
-                    <base-button type="primary" @click="agregarTipoAvion()"> + </base-button>
-                </div>   
-            </div>
-            <div class="row pb-4 pb-4 pt-4 pt-md-4" >
-                <div class=" col-lg-4"> </div>
-                <div class=" col-lg-1">
-                    <base-button size = "lg" type="default">  Borrar  </base-button>
-                </div>     
-                <div class="col-lg-1 ">
-                    <base-button  size = "lg" type="default" v-on:click="guardarAvion">Guardar</base-button>
-                </div>
-            </div>   
-
-        </div>
-
-    </div> -->
 </template>
 <script>
 
-import axios from 'axios'
-import autocompletar from './Autocompletar.vue'
+import axios from 'axios';
+import swal from 'sweetalert2';
+import autocompletar from './Autocompletar.vue';
   export default {
     data() {
       return {
         codigoRegistro: '',
-        tipoAvion: '',
+        tipoAvion: {idTipoAvion:'',modelo:'',iata:''},
         codigoICAO: '',
         codigoIATA: '',
-        tiposDeAvion: []
+        tiposDeAvion: [],
+        aerolineas: [],
+        aerolinea: {idAerolinea:'',nombre:''},
       }
     },
     components: {
@@ -162,39 +117,113 @@ import autocompletar from './Autocompletar.vue'
         axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
         .then((response) => {
             this.tiposDeAvion = response.data;
-        })     
+        }),
+        axios.get("http://localhost:8000/scv/api/aerolinea/obtenerTodos")
+        .then((response) => {
+            this.aerolineas = response.data;
+        })
     },
     
     methods: {
+        setTipoAvion(value) {
+            this.tipoAvion = value;
+        },
+        setAerolinea(value) {
+            this.aerolinea = value;
+        },
+        borrar: function(){
+            this.codigoRegistro = '';
+            this.tipoAvion = '';
+            this.codigoICAO = '';
+            this.codigoIATA = '';
+            this.aerolinea = '';
+        },
 
-    borrar: function(){
-        this.codigoRegistro = ''
-        this.tipoAvion = ''
-        this.codigoICAO = ''
-        this.codigoIATA = ''
-    },
-
-    guardar: function(){
-        console.log(this.tipoAvion)
-        let aux = this;
-        let avion = {
-            regNro: this.codigoRegistro,
-            iata: this.codigoIATA,
-            icao: this.codigoICAO,
-            taerolineaIdAerolinea: 1,
-            ttipoAvionIdTipoAvion: 1,
-            esEliminado: false
+        guardar: function(){
+            console.log(this.tipoAvion);
+            if(this.codigoRegistro.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código de registro está vacío'
+                });
+            }
+            else if(this.codigoRegistro.length!=6){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código de registro debe tener 6 caracteres'
+                });
+            }
+            else if(this.codigoIATA.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código IATA está vacío'
+                });
+            }
+            else if(this.codigoIATA.length!=2){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código IATA debe tener 2 caracteres'
+                });
+            }
+            else if(this.codigoICAO.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código ICAO está vacío'
+                });
+            }
+            else if(this.codigoICAO.length!=3){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El código ICAO debe tener 3 caracteres'
+                });
+            }
+            else if(this.tipoAvion.modelo.length<=5){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'El modelo de avión está vacío'
+                });
+            }else if(this.aerolinea.nombre.length<3){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'La aerolínea está vacía'
+                });
+            }
+            else {
+                let aux = this;
+                let avion = {
+                    regNro: this.codigoRegistro,
+                    iata: this.codigoIATA,
+                    icao: this.codigoICAO,
+                    taerolineaIdAerolinea: this.tipoAvion.idTipoAvion,
+                    ttipoAvionIdTipoAvion: this.aerolinea.idAerolinea,
+                    esEliminado: false
+                }
+                axios.post('http://127.0.0.1:8000/scv/api/avion/crear', avion)
+                .then(function (response) {
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de avión confirmada!'
+                    });
+                    aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Creación de avión fallida!',
+                        text: 'Has pensado en cambiar el código IATA?'
+                    });
+                })
+            }
         }
-        axios.post('http://127.0.0.1:8000/scv/api/avion/crear', avion)
-        .then(function (response) {
-            aux.salida = response.data;
-            //console.log(this.salida);
-        })
-        }
-    },
-    onChildClick(value) {
-        this.tipoAvion = value;
-        console.log(this.tipoAvion);
     }
   };
 </script>

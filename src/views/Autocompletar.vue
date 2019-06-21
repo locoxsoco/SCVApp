@@ -11,7 +11,7 @@
     <div class="autocompletar">
         <input type="text" class="form-control" v-model="query" @input="onChange"/>
         <ul class="autocomplete-results" v-show="visible">
-            <li v-for="result in results" :key="result[filterBy]" @click="setResult(result)" v-text="result[filterBy]" class="autocomplete-result"> {{result}} </li>
+            <li v-for="result in results" :key="result[filterByID]" @click="setResult(result)" v-text="result[filterBy]" class="autocomplete-result"> </li>
         </ul>
     </div>
 </template>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    props: ['items', 'filterBy'],
+    props: ['items','filterByID', 'filterBy', 'filterBy2'],
     data(){
         return{
             query: '',
@@ -28,27 +28,33 @@ export default {
     },
     methods: {
         onChange(){
-            this.visible = true; 
-            this.filterResults();
-            this.$emit('hijoEnvia', this.query);
-        },
-        filterResults(){
-            //this.results = this.items.filter((item) => item[this.filterBy].toLowerCase().includes(this.query.toLowerCase()));
+            if(this.query.length==0){
+                this.visible = false;
+            }
+            else{
+                this.visible = true;
+            }
         },
         setResult(result){
-            this.query = result[this.filterBy] + ' - ' + result['iata'];
+            if(this.filterBy2!=""){
+                this.query = result[this.filterBy] + ' - ' + result[this.filterBy2];
+            }
+            else{
+                this.query = result[this.filterBy];
+            }
+            
+            this.resultSelected = result;
             this.visible = false;
-            this.$emit('hijoEnvia', this.query);
+            this.$emit('hijoEnvia',this.resultSelected);
         },
 
     },
     computed: {
-        results(){
+        results(){        
             if (this.query == ''){
                 return [];
             }
-
-            return this.items.filter((item) => item[this.filterBy].includes(this.query))
+            return this.items.filter((item) => item[this.filterBy].toLowerCase().includes(this.query.toLowerCase()));
         }
     }
     

@@ -220,10 +220,17 @@ export default {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de tipo de avión confirmada!'
+                        text: 'Modificación de tipo de avión confirmada!'
                     });
                 }
                 )
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Modifiación de tipo de avión fallida!',
+                        text: 'Has pensado en cambiar el código IATA?'
+                    });
+                })
             }
         }
     }

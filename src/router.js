@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import DashboardLayoutInicio from '@/layout/DashboardLayoutInicio'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
 
@@ -29,8 +30,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/admin/menu',
-      component: DashboardLayout,
+      redirect: '/inicio',
+      component: DashboardLayoutInicio,
       children: [
         {
           path: '/inicio',

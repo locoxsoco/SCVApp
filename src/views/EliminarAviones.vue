@@ -107,9 +107,23 @@ import swal from'sweetalert2';
                         esEliminado: true
                     }                    
                     axios.put("http://localhost:8000/scv/api/avion/actualizar", avion)
-                    .then((response) =>
-                        aux.salida = response.data
-                    )                        
+                    .then(function (response) {
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Eliminación de avión confirmada!'
+                    }).then(() => {
+                            location.reload(false);
+                        });
+                    aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Eliminación de avión fallida!',
+                        text: 'Intentelo más tarde'
+                    });
+                })                       
                 }
                        
             }
