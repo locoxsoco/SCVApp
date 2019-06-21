@@ -153,7 +153,7 @@
 </template>
 <script>
 import swal from'sweetalert2';
-import axios from 'axios'
+import axios from 'axios';
 
 
 export default {
@@ -226,6 +226,13 @@ export default {
                         text: 'Creación de tipo de avión confirmada!'
                     });
                     aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Creación de tipo de avión fallida!',
+                        text: 'Has pensado en cambiar el código IATA?'
+                    });
                 })
             }            
         }
