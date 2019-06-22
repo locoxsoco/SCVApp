@@ -106,7 +106,7 @@ import swal from'sweetalert2';
                         ttipoAvionIdTipoAvion: this.selected.ttipoAvionIdTipoAvion,
                         esEliminado: true
                     }                    
-                    axios.put("http://localhost:8000/scv/api/avion/actualizar", avion)
+                    axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
                     .then(function (response) {
                     swal.fire({
                         type: 'success',
@@ -129,7 +129,7 @@ import swal from'sweetalert2';
             }
         },
         mounted(){            
-            axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
+            axios.get(this.$connectionString+"/scv/api/avion/obtenerTodos")
             .then((response) => {
                 this.selected = null
                 this.tableData = response.data.filter(item => !item.esEliminado);

@@ -57,12 +57,6 @@
 <script>
 import axios from "axios";
 import swal from'sweetalert2';
-//     export default axios.create({
-//   baseURL: "http://localhost:8080/api",
-//   headers: {
-//     "Content-type": "application/json",
-//   }
-// });
 export default {
     data() {
         const tableData =[]
@@ -90,7 +84,7 @@ export default {
         }
     },
     mounted(){            
-        axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/usuario/obtenerTodos")
         .then((response) => {
             
             this.tableData = response.data.filter(item => !item.esEliminado);

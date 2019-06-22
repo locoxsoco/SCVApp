@@ -118,7 +118,7 @@ export default {
                     esEliminado: false
                 }
 
-                axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
+                axios.put(this.$connectionString+"/scv/api/usuario/actualizar", usuario)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',

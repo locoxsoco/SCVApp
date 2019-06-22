@@ -111,7 +111,7 @@
             }
         },
         mounted(){            
-            axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+            axios.get(this.$connectionString+"/scv/api/tipoAvion/obtenerTodos")
             .then((response) => {
                 this.selected = null;
                 //this.tableData = response.data;

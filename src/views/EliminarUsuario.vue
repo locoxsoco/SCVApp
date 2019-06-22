@@ -85,7 +85,7 @@ import swal from'sweetalert2';
             }
         },
         mounted(){            
-            axios.get("http://localhost:8000/scv/api/usuario/obtenerTodos")
+            axios.get(this.$connectionString+"/scv/api/usuario/obtenerTodos")
             .then((response) => {
                 
                 this.tableData = response.data.filter(item => !item.esEliminado);
@@ -113,7 +113,7 @@ import swal from'sweetalert2';
                         rol: this.selected.rol,
                         esEliminado: true
                     }                    
-                    axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
+                    axios.put(this.$connectionString+"/scv/api/usuario/actualizar", usuario)
                     .then(function (response) {
                         aux.salida = response.data;
                         swal.fire({

@@ -144,11 +144,11 @@ export default {
     },
 
     mounted(){            
-        axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/tipoAvion/obtenerTodos")
         .then((response) => {
             this.tiposDeAvion = response.data;
         }),
-        axios.get("http://localhost:8000/scv/api/aerolinea/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
         .then((response) => {
             this.aerolineas = response.data;
         })
@@ -233,7 +233,7 @@ export default {
                     esEliminado: false
                 }
 
-                axios.put("http://localhost:8000/scv/api/avion/actualizar", avion)
+                axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
                 .then(function (response) {
                         swal.fire({
                             type: 'success',

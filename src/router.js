@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import DashboardLayoutMapa from '@/layout/DashboardLayoutMapa'
 import DashboardLayoutInicio from '@/layout/DashboardLayoutInicio'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
@@ -145,14 +146,22 @@ export default new Router({
           component: EliminarTipoAviones
         },
         {
-          path: '/admin/visualizarMapa',
-          name: 'visualizarMapa',
-          component: VisualizarMapa
-        },
-        {
           path: '/admin/puertasYZonas',
           name: 'puertasYZonas',
           component: PuertasYZonas
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      name: 'adminMapa',
+      redirect: '/admin/visualizarMapa',
+      component: DashboardLayoutMapa,
+      children: [
+        {
+          path: '/admin/visualizarMapa',
+          name: 'visualizarMapa',
+          component: VisualizarMapa
         }
       ]
     },

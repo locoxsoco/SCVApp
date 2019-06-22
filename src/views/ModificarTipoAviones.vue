@@ -214,7 +214,7 @@ export default {
                     tamano: this.tamaño,
                     esEliminado: false
                 }
-                axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
+                axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
                 .then((response) =>{
                     aux.salida = response.data;
                     swal.fire({
