@@ -90,7 +90,7 @@ export default {
         }
     },
     mounted(){            
-        axios.get("http://localhost:8000/scv/api/avion/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/avion/obtenerTodos")
         .then((response) => {
             this.selected = null
             this.tableData = response.data.filter(item => !item.esEliminado);

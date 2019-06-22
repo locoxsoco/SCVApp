@@ -200,7 +200,7 @@ export default {
                     rol: this.rol,
                     esEliminado: false,
                 };
-                axios.post('http://localhost:8000/scv/api/usuario/crear', usuario)
+                axios.post(this.$connectionString+'/scv/api/usuario/crear', usuario)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',

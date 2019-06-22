@@ -114,11 +114,11 @@ import autocompletar from './Autocompletar.vue';
     },
 
     mounted(){            
-        axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/tipoAvion/obtenerTodos")
         .then((response) => {
             this.tiposDeAvion = response.data;
         }),
-        axios.get("http://localhost:8000/scv/api/aerolinea/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
         .then((response) => {
             this.aerolineas = response.data;
         })

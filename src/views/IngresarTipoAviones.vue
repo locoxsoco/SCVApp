@@ -218,7 +218,7 @@ export default {
                     tamano: this.tipoAvion,
                     esEliminado: false
                 };
-                axios.post('http://localhost:8000/scv/api/tipoAvion/crear', tipoAvion)
+                axios.post(this.$connectionString+'/scv/api/tipoAvion/crear', tipoAvion)
                 .then(function (response){
                     swal.fire({
                         type: 'success',

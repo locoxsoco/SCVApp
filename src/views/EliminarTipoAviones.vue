@@ -88,7 +88,7 @@ import swal from'sweetalert2';
             }
         },
         mounted(){            
-            axios.get("http://localhost:8000/scv/api/tipoAvion/obtenerTodos")
+            axios.get(this.$connectionString+"/scv/api/tipoAvion/obtenerTodos")
             .then((response) => {
                 
                 this.selected = null
@@ -113,7 +113,7 @@ import swal from'sweetalert2';
                         tamano: this.selected.tamano,
                         esEliminado: true
                     }                    
-                    axios.put("http://localhost:8000/scv/api/tipoAvion/actualizar", tipoAvion)
+                    axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
                     .then(function (response){
                     swal.fire({
                         type: 'success',
