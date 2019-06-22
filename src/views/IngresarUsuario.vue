@@ -121,7 +121,7 @@
 </template>
 
 <script>
-import swal from'sweetalert2';
+import swal from 'sweetalert2';
 import axios from 'axios'
 
 export default {
@@ -200,16 +200,21 @@ export default {
                     rol: this.rol,
                     esEliminado: false,
                 };
-
                 axios.post('http://localhost:8000/scv/api/usuario/crear', usuario)
                 .then(function (response) {
-                    //console.log(response);
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de usuario confirmada!'
+                        text: 'Creación de avión confirmada!'
                     });
                     aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Creación de usuario fallida!',
+                        text: 'Has pensado en cambiar nombre de usuario?'
+                    });
                 })
             }
         }

@@ -20,20 +20,6 @@
                             </div>
                         </div>
                         <template>
-
-                            <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <h3>Nombre del usuario: </h3>
-                                </div>                                
-                                <div class="col-md-5" >
-                                    <!-- <base-input alternative="" :placeholder="nombreDelUsuario" input-classes="form-control-alternative">
-                                    </base-input> -->
-                                    <input v-model="nombreDelUsuario" type="text" class="form-control" placeholder="">                                   
-                                </div>
-                            </div>
-
                             <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>                                
@@ -99,7 +85,8 @@
 
 <script>
 
-import axios from "axios"
+import axios from "axios";
+import swal from'sweetalert2';
 
 export default {
     props: ['idDelUsuario', 'nombreDelUsuario', 'rol', 'contrasena'],
@@ -114,20 +101,40 @@ export default {
             this.$router.push({name:'modificarUsuario'})
         },
         confirmar: function(){
-            let aux = this;
-            let usuario = {
-                idUsuario: this.idDelUsuario,
-                usuario: this.nombreDelUsuario,
-                contrasena: this.contrasena,
-                rol: this.rol,
-                esEliminado: false
+            if(this.rol.length==0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'Elegir un rol'
+                });
             }
+            else {
+                let aux = this;
+                let usuario = {
+                    idUsuario: this.idDelUsuario,
+                    usuario: this.nombreDelUsuario,
+                    contrasena: this.contrasena,
+                    rol: this.rol,
+                    esEliminado: false
+                }
 
-            axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
-            .then((response) =>
-                aux.salida = response.data
-            )            
-
+                axios.put("http://localhost:8000/scv/api/usuario/actualizar", usuario)
+                .then(function (response) {
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Modificación de usuario confirmada!'
+                    });
+                    aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Modificación de usuario fallida!',
+                        text: 'Escogiste correctamente el rol?'
+                    });
+                })            
+            }
         }
     }
 
