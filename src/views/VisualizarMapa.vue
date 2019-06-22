@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-bind:style="{ height: '100vh', width: '100vw'}" ref="container">
+    <div v-bind:style="{ height: '50vh', width: '100vw'}" ref="container">
       <v-stage ref="stage" :config="stageSize">
         <v-layer>
           <v-shape :config="{
