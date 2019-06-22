@@ -94,7 +94,7 @@ import axios from 'axios'
                     usuario: this.model.usuario,
                     contrasena: this.model.contrasena
                 };
-                axios.post('http://localhost:8000/scv/api/usuario/login', cuentaUsuario)
+                axios.post(this.$connectionString+'/scv/api/usuario/login/'+cuentaUsuario.usuario+'?contrasena='+cuentaUsuario.contrasena)
                 .then(function (response) {
                     aux.salida = response.data;
                     this.$router.push({name:'menu'});
