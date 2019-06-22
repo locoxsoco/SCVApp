@@ -32,40 +32,40 @@ self.__precacheManifest = [
     "url": "img/theme/team-4-800x800.jpg"
   },
   {
-    "revision": "735ab4f94fbcd57074377afca324c813",
-    "url": "robots.txt"
-  },
-  {
     "revision": "c532f6f0176968caa6265864ee1abb35",
     "url": "img/theme/vue.jpg"
   },
   {
-    "revision": "08919baa4280a4d284dbe240c47016cd",
+    "revision": "735ab4f94fbcd57074377afca324c813",
+    "url": "robots.txt"
+  },
+  {
+    "revision": "1d42892f12490a339136959eacbc9a3c",
     "url": "index.html"
-  },
-  {
-    "revision": "3b8c576082e5ca27bae21a839f1290f6",
-    "url": "img/theme/sketch.jpg"
-  },
-  {
-    "revision": "83210162e55b8313c832",
-    "url": "js/app.bacc8f5e.js"
   },
   {
     "revision": "50dd5fdc839dfc16739b15370650485c",
     "url": "img/theme/react.jpg"
   },
   {
+    "revision": "10af92583d233eae256e",
+    "url": "js/app.435189e6.js"
+  },
+  {
+    "revision": "3b8c576082e5ca27bae21a839f1290f6",
+    "url": "img/theme/sketch.jpg"
+  },
+  {
     "revision": "f82ec6ba2dc4181db2af35c499462840",
     "url": "fonts/nucleo-icons.f82ec6ba.ttf"
   },
   {
-    "revision": "1f533d2fdc40493ee834dd8e4288220c",
-    "url": "img/theme/angular.jpg"
-  },
-  {
     "revision": "d136a071cf09ba5ab8dc2ada1ab04015",
     "url": "img/theme/bootstrap.jpg"
+  },
+  {
+    "revision": "1f533d2fdc40493ee834dd8e4288220c",
+    "url": "img/theme/angular.jpg"
   },
   {
     "revision": "46abbc4a676739dbd61f8a305cb63fd8",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "css/chunk-vendors.cdb08176.css"
   },
   {
-    "revision": "83210162e55b8313c832",
+    "revision": "10af92583d233eae256e",
     "url": "css/app.32623f06.css"
   }
 ];
