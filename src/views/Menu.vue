@@ -38,7 +38,6 @@
                                   :data="filter"
                                   :columns="columns"
                                   :selected.sync="selected"
-                                  :filter="buscarAerolinea"
                                   focusable>
                                   
                           </b-table>
@@ -65,29 +64,28 @@
             return {
                 selected: tableData[0],
                 tableData,
-                columns: [
+                columns: [         
                     {
-                        field: 'aerolinea',
-                        label: 'Aerolinea',
-                        sortable: true
-                    },                   
-                    {
-                        field: 'vuelo',
+                        field: 'numeroVuelo',
                         label: 'Vuelo',
+                        sortable: true
+                    },{
+                        field: 'nombreAerolinea',
+                        label: 'Aerolinea',
                         sortable: true
                     },
                     {
-                        field: 'procedencia',
+                        field: 'iataProcedencia',
                         label: 'Procedencia',
                         sortable: true
                     },
                     {
-                        field: 'horaProgramada',
+                        field: 'tiempoProgramado',
                         label: 'Hora Programada',
                         sortable: true
                     },
                     {
-                        field: 'horaEstimada',
+                        field: 'tiempoLlegada',
                         label: 'Hora Estimada',
                         sortable: true
                     },
@@ -97,8 +95,13 @@
                         sortable: true
                     },
                     {
-                        field: 'puerta',
+                        field: 'idArea',
                         label: 'Puerta',
+                        sortable: true
+                    },
+                    {
+                        field: 'tipoArea',
+                        label: 'Tipo Area',
                         sortable: true
                     }
                 ],
@@ -107,48 +110,49 @@
             }
         },
         mounted(){            
-            axios.get(this.$connectionString+"/scv/api/tipoAvion/obtenerTodos")
+            axios.get("http://200.16.7.177:8080/scv/api/resultado/getResultado")
             .then((response) => {
                 this.selected = null;
-                //this.tableData = response.data;
-                this.tableData = [
-                  {
-                    aerolinea:"American Airlines",
-                    vuelo:"RAN001",
-                    procedencia:"Santiago de Chile",
-                    horaProgramada:"14:00",
-                    horaEstimada:"14:00",
-                    estado:"Aterrizado",
-                    puerta:"5P",
-                  },
-                  {
-                    aerolinea:"Federal Express",
-                    vuelo:"MIR100",
-                    procedencia:"Rio",
-                    horaProgramada:"18:00",
-                    horaEstimada:"18:00",
-                    estado:"Aterrizado",
-                    puerta:"16Z",
-                  },
-                  {
-                    aerolinea:"Emirates",
-                    vuelo:"VUE333",
-                    procedencia:"Guadalajara",
-                    horaProgramada:"16:00",
-                    horaEstimada:"16:30",
-                    estado:"Aterrizado",
-                    puerta:"7P",
-                  },
-                  {
-                    aerolinea:"Air Canada",
-                    vuelo:"AIR250",
-                    procedencia:"Ontario",
-                    horaProgramada:"15:00",
-                    horaEstimada:"15:00",
-                    estado:"Aterrizado",
-                    puerta:"4P",
-                  }
-                ]
+                this.tableData = response.data[0];
+                console.log(this.tableData);
+                // this.tableData = [
+                //   {
+                //     aerolinea:"American Airlines",
+                //     vuelo:"RAN001",
+                //     procedencia:"Santiago de Chile",
+                //     horaProgramada:"14:00",
+                //     horaEstimada:"14:00",
+                //     estado:"Aterrizado",
+                //     puerta:"5P",
+                //   },
+                //   {
+                //     aerolinea:"Federal Express",
+                //     vuelo:"MIR100",
+                //     procedencia:"Rio",
+                //     horaProgramada:"18:00",
+                //     horaEstimada:"18:00",
+                //     estado:"Aterrizado",
+                //     puerta:"16Z",
+                //   },
+                //   {
+                //     aerolinea:"Emirates",
+                //     vuelo:"VUE333",
+                //     procedencia:"Guadalajara",
+                //     horaProgramada:"16:00",
+                //     horaEstimada:"16:30",
+                //     estado:"Aterrizado",
+                //     puerta:"7P",
+                //   },
+                //   {
+                //     aerolinea:"Air Canada",
+                //     vuelo:"AIR250",
+                //     procedencia:"Ontario",
+                //     horaProgramada:"15:00",
+                //     horaEstimada:"15:00",
+                //     estado:"Aterrizado",
+                //     puerta:"4P",
+                //   }
+                // ]
             })     
         },
         methods: {
@@ -170,7 +174,7 @@
             var tableData = [];
             var i = this.tableData.length;
             for (i in this.tableData) {
-              if (this.tableData[i].aerolinea.match(name_re1) && this.tableData[i].vuelo.match(name_re2)) {
+              if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].numeroVuelo.match(name_re2)) {
                 tableData.push(this.tableData[i])
               }
             }
