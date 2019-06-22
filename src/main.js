@@ -10,7 +10,7 @@ import VueKonva from 'vue-konva'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
-Vue.prototype.$connectionString = 'http://192.168.214.177:8080'
+Vue.prototype.$connectionString = 'http://localhost:8080'
 Vue.use(ArgonDashboard)
 Vue.use(Buefy)
 Vue.use(VueKonva)
