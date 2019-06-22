@@ -113,7 +113,7 @@ import swal from'sweetalert2';
                         rol: this.selected.rol,
                         esEliminado: true
                     }                    
-                    axios.put(this.$connectionString+"/scv/api/usuario/actualizar", usuario)
+                    axios.put(this.$connectionString+"/scv/api/usuario/actualizar?flagContra=0", usuario)
                     .then(function (response) {
                         aux.salida = response.data;
                         swal.fire({
