@@ -110,7 +110,7 @@
             }
         },
         mounted(){            
-            axios.get("http://200.16.7.177:8080/scv/api/resultado/getResultado")
+            axios.get(this.$connectionString+"/scv/api/resultado/getResultado")
             .then((response) => {
                 this.selected = null;
                 this.tableData = response.data[0];
