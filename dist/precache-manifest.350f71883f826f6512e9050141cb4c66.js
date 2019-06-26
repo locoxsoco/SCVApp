@@ -32,15 +32,15 @@ self.__precacheManifest = [
     "url": "img/theme/team-4-800x800.jpg"
   },
   {
-    "revision": "735ab4f94fbcd57074377afca324c813",
-    "url": "robots.txt"
-  },
-  {
     "revision": "c532f6f0176968caa6265864ee1abb35",
     "url": "img/theme/vue.jpg"
   },
   {
-    "revision": "6c436af414055b41886fdd9dfb141cd9",
+    "revision": "735ab4f94fbcd57074377afca324c813",
+    "url": "robots.txt"
+  },
+  {
+    "revision": "c1ea8db304595c6027e8f97d47bcb2cb",
     "url": "index.html"
   },
   {
@@ -48,16 +48,16 @@ self.__precacheManifest = [
     "url": "img/theme/sketch.jpg"
   },
   {
-    "revision": "01654e844f9ebd1057a0",
-    "url": "js/app.cc814388.js"
+    "revision": "8f90237c1d57bf120f0d",
+    "url": "js/app.70f0ebef.js"
   },
   {
     "revision": "50dd5fdc839dfc16739b15370650485c",
     "url": "img/theme/react.jpg"
   },
   {
-    "revision": "f82ec6ba2dc4181db2af35c499462840",
-    "url": "fonts/nucleo-icons.f82ec6ba.ttf"
+    "revision": "59d7c2b119ab46fc7b5f853f04324c89",
+    "url": "img/brand/green.png"
   },
   {
     "revision": "d136a071cf09ba5ab8dc2ada1ab04015",
@@ -76,8 +76,8 @@ self.__precacheManifest = [
     "url": "img/brand/white.png"
   },
   {
-    "revision": "59d7c2b119ab46fc7b5f853f04324c89",
-    "url": "img/brand/green.png"
+    "revision": "f82ec6ba2dc4181db2af35c499462840",
+    "url": "fonts/nucleo-icons.f82ec6ba.ttf"
   },
   {
     "revision": "c1733565b32b585676302d4233c39da8",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "css/chunk-vendors.cdb08176.css"
   },
   {
-    "revision": "01654e844f9ebd1057a0",
+    "revision": "8f90237c1d57bf120f0d",
     "url": "css/app.32623f06.css"
   }
 ];
