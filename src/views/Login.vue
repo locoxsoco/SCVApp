@@ -102,7 +102,7 @@ import axios from 'axios'
                 }).then(() => {
                             this.$router.push({name:'menu'});
                         })
-                .catch(function (err) {
+                .catch(function () {
                     swal.fire({
                         type: 'error',
                         title: 'Acceso de usuario fallido!',

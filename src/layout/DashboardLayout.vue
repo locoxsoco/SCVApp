@@ -178,7 +178,6 @@
   import DashboardNavbar from './DashboardNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
-  import axios from 'axios';
 
   export default {
     components: {
