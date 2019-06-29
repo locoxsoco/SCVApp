@@ -205,7 +205,7 @@ export default {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de avión confirmada!'
+                        text: 'Creación de usuario confirmada!'
                     });
                     aux.salida = response.data;
                 })

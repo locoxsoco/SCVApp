@@ -5,11 +5,11 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link">
-              Bienvenido, NombreDeUsuario
+              Bienvenido, {{this.usuarioNombre}}
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a @click="cerrarSesion" class="nav-link">
               Cerrar sesión
             </a>
           </li>
@@ -19,26 +19,32 @@
   </nav>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        activeNotifications: false,
-        showMenu: false,
-        searchQuery: ''
-      };
+export default {
+  data() {
+    return {
+      activeNotifications: false,
+      showMenu: false,
+      searchQuery: '',
+      usuarioNombre: localStorage.usuarioNombre
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
-    methods: {
-      toggleSidebar() {
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      },
-      hideSidebar() {
-        this.$sidebar.displaySidebar(false);
-      },
-      toggleMenu() {
-        this.showMenu = !this.showMenu;
-      }
+    hideSidebar() {
+      this.$sidebar.displaySidebar(false);
+    },
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    cerrarSesion: function(){
+      localStorage.usuarioNombre = '';
+      localStorage.usuarioRol = '';            
+      this.$router.push({name:'login'});
     }
-  };
+  }
+};
 </script>
 
 <style>

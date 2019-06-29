@@ -94,12 +94,15 @@ import axios from 'axios'
                     usuario: this.model.usuario,
                     contrasena: this.model.contrasena
                 };
-                axios.post(this.$connectionString+'/scv/api/usuario/login/'+cuentaUsuario.usuario+'?contrasena='+cuentaUsuario.contrasena)
+                axios.post(this.$connectionString+'/scv/api/usuario/login',cuentaUsuario)
                 .then(function (response) {
                     aux.salida = response.data;
-                    this.$router.push({name:'menu'});
-                })
-                .catch(function () {
+                    localStorage.usuarioNombre = aux.salida.usuario;
+                    localStorage.usuarioRol = aux.salida.rol;
+                }).then(() => {
+                            this.$router.push({name:'menu'});
+                        })
+                .catch(function (err) {
                     swal.fire({
                         type: 'error',
                         title: 'Acceso de usuario fallido!',

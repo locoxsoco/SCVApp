@@ -47,7 +47,7 @@
           }"
         />
         <!-- Administrar usuarios -->
-        <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu'].indexOf($route.name) > -1 && usuarioRol == 'Administrador'"
           :link="{
             name: 'Administración de usuario',
             icon: 'fa fa-users text-primary',
@@ -55,7 +55,7 @@
           }"
         />
         <!-- Administrar usuarios - Ingresar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1 && usuarioRol == 'Administrador'"
           :link="{
             name: 'Ingresar Usuarios',
             icon: 'fa fa-user-plus text-primary',
@@ -63,7 +63,7 @@
           }"
         />
         <!-- Administrar usuarios - Modificar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1 && usuarioRol == 'Administrador'"
           :link="{
             name: 'Modificar Usuarios',
             icon: 'fa fa-user text-primary',
@@ -71,7 +71,7 @@
           }"
         />
         <!-- Administrar usuarios - Eliminar usuarios -->
-        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario'].indexOf($route.name) > -1 && usuarioRol == 'Administrador'"
           :link="{
             name: 'Eliminar Usuarios',
             icon: 'fa fa-user-times text-primary',
@@ -178,6 +178,7 @@
   import DashboardNavbar from './DashboardNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
+  import axios from 'axios';
 
   export default {
     components: {
@@ -187,8 +188,16 @@
     },
     data() {
       return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
+        usuarioRol: localStorage.usuarioRol
       };
+    },
+    mounted(){
+      if (this.usuarioRol != 'Administrador' && this.usuarioRol != 'Operador técnico') {
+        localStorage.usuarioNombre = '';
+        localStorage.usuarioRol = '';
+        this.$router.push({name:'login'});
+      }
     },
     methods: {
       toggleSidebar() {

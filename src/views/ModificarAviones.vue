@@ -105,8 +105,7 @@ export default {
                     title: 'Alerta de validación',
                     text: 'No hay avion seleccionado'
                 });
-            }
-            console.log(this.selected);                
+            }              
             this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})
         }
     },

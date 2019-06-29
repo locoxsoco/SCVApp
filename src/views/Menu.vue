@@ -33,22 +33,12 @@
                               </div>
                               <div class="col-md-2"/>
                           </div>
-
                           <b-table
                                   :data="filter"
                                   :columns="columns"
                                   :selected.sync="selected"
-                                  focusable>
-                                  
-                          </b-table>
-
-                          <div class="form-group row">
-                              <div class="col-md-5">
-                              </div>
-                              <div class="col-md-3">
-                                  <b-button @click="confirmar">Confirmar</b-button>                              
-                              </div>
-                          </div>                           
+                                  focusable>  
+                          </b-table>                        
                       </template>
                   </card>
               </div>
@@ -57,130 +47,92 @@
     </div>
 </template>
 <script>
-  import axios from "axios";
-  export default {
-        data() {
-            const tableData = []
-            return {
-                selected: tableData[0],
-                tableData,
-                columns: [         
-                    {
-                        field: 'numeroVuelo',
-                        label: 'Vuelo',
-                        sortable: true
-                    },{
-                        field: 'nombreAerolinea',
-                        label: 'Aerolinea',
-                        sortable: true
-                    },
-                    {
-                        field: 'iataProcedencia',
-                        label: 'Procedencia',
-                        sortable: true
-                    },
-                    {
-                        field: 'tiempoProgramado',
-                        label: 'Hora Programada',
-                        sortable: true
-                    },
-                    {
-                        field: 'tiempoLlegada',
-                        label: 'Hora Estimada',
-                        sortable: true
-                    },
-                    {
-                        field: 'estado',
-                        label: 'Estado',
-                        sortable: true
-                    },
-                    {
-                        field: 'idArea',
-                        label: 'Puerta',
-                        sortable: true
-                    },
-                    {
-                        field: 'tipoArea',
-                        label: 'Tipo Area',
-                        sortable: true
-                    }
-                ],
-                buscarAerolinea: '',
-                buscarNroVuelo: ''
-            }
-        },
-        mounted(){            
-            axios.get("http://200.16.7.177:8080/scv/api/resultado/getResultado")
-            .then((response) => {
-                this.selected = null;
-                this.tableData = response.data[0];
-                console.log(this.tableData);
-                // this.tableData = [
-                //   {
-                //     aerolinea:"American Airlines",
-                //     vuelo:"RAN001",
-                //     procedencia:"Santiago de Chile",
-                //     horaProgramada:"14:00",
-                //     horaEstimada:"14:00",
-                //     estado:"Aterrizado",
-                //     puerta:"5P",
-                //   },
-                //   {
-                //     aerolinea:"Federal Express",
-                //     vuelo:"MIR100",
-                //     procedencia:"Rio",
-                //     horaProgramada:"18:00",
-                //     horaEstimada:"18:00",
-                //     estado:"Aterrizado",
-                //     puerta:"16Z",
-                //   },
-                //   {
-                //     aerolinea:"Emirates",
-                //     vuelo:"VUE333",
-                //     procedencia:"Guadalajara",
-                //     horaProgramada:"16:00",
-                //     horaEstimada:"16:30",
-                //     estado:"Aterrizado",
-                //     puerta:"7P",
-                //   },
-                //   {
-                //     aerolinea:"Air Canada",
-                //     vuelo:"AIR250",
-                //     procedencia:"Ontario",
-                //     horaProgramada:"15:00",
-                //     horaEstimada:"15:00",
-                //     estado:"Aterrizado",
-                //     puerta:"4P",
-                //   }
-                // ]
-            })     
-        },
-        methods: {
-            confirmar: function(){
-                if(this.selected == null){
-                swal.fire({
-                    type: 'warning',
-                    title: 'Alerta de validación',
-                    text: 'No hay tipo de avion seleccionado'
-                });
-                }                          
-                this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})
-            }
-        },
-        computed: {
-          filter: function(){
-            var name_re1 = new RegExp(this.buscarAerolinea, 'i');
-            var name_re2 = new RegExp(this.buscarNroVuelo, 'i');
-            var tableData = [];
-            var i = this.tableData.length;
-            for (i in this.tableData) {
-              if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].numeroVuelo.match(name_re2)) {
-                tableData.push(this.tableData[i])
-              }
-            }
-            return tableData;
-          }
+import axios from "axios";
+export default {
+    data() {
+        const tableData = []
+        return {
+            usuarioRol: localStorage.usuarioRol,
+            selected: tableData[0],
+            tableData,
+            columns: [         
+                {
+                    field: 'numeroVuelo',
+                    label: 'Vuelo',
+                    sortable: true
+                },{
+                    field: 'nombreAerolinea',
+                    label: 'Aerolinea',
+                    sortable: true
+                },
+                {
+                    field: 'iataProcedencia',
+                    label: 'Procedencia',
+                    sortable: true
+                },
+                {
+                    field: 'tiempoProgramado',
+                    label: 'Hora Programada',
+                    sortable: true
+                },
+                {
+                    field: 'tiempoLlegada',
+                    label: 'Hora Estimada',
+                    sortable: true
+                },
+                {
+                    field: 'estado',
+                    label: 'Estado',
+                    sortable: true
+                },
+                {
+                    field: 'idArea',
+                    label: 'Puerta',
+                    sortable: true
+                },
+                {
+                    field: 'tipoArea',
+                    label: 'Tipo Area',
+                    sortable: true
+                }
+            ],
+            buscarAerolinea: '',
+            buscarNroVuelo: '',
         }
-    };
+    },
+    mounted(){            
+        axios.get(this.$connectionString+"/scv/api/resultado/getResultado")
+        .then((response) => {
+            this.selected = null;
+            this.tableData = response.data[0];
+        });    
+    },
+    methods: {
+        confirmar: function(){
+            if(this.selected == null){
+            swal.fire({
+                type: 'warning',
+                title: 'Alerta de validación',
+                text: 'No hay tipo de avion seleccionado'
+            });
+            }                          
+            this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})
+        }
+    },
+    computed: {
+        filter: function(){
+        var name_re1 = new RegExp(this.buscarAerolinea, 'i');
+        var name_re2 = new RegExp(this.buscarNroVuelo, 'i');
+        var tableData = [];
+        var i = this.tableData.length;
+        for (i in this.tableData) {
+            if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].numeroVuelo.match(name_re2)) {
+            tableData.push(this.tableData[i])
+            }
+        }
+        return tableData;
+        }
+    }
+};
 </script>
 <style></style>
