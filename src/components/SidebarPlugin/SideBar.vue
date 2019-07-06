@@ -8,7 +8,7 @@
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
                 <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
-                <h1>LAB 7</h1>
+                <h1>SCV</h1>
             </router-link>
             <slot></slot>
             <slot></slot>

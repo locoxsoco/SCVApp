@@ -1,6 +1,9 @@
 <template>
     <div>
-        <v-circle :config="{
+        <v-circle 
+            @mouseenter="manejarEntrar"
+            @mouseleave="manejarSalida"
+            :config="{
             x: x,
             y: y, 
             radius: (ancho + largo)/275,
@@ -38,6 +41,14 @@ export default {
             this.sumaX = -this.ancho/200
         } else {
             this.sumaX = -this.ancho/300
+        }
+    },
+    methods:{
+        manejarEntrar(event){
+
+        },
+        manejarSalida(event){
+            
         }
     }
 }
