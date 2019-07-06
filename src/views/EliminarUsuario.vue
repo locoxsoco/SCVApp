@@ -106,31 +106,46 @@ import swal from'sweetalert2';
                     });
                 }
                 else{
-                    let usuario = {
-                        idUsuario: this.selected.idUsuario,
-                        usuario: this.selected.usuario,
-                        contrasena: this.selected.contrasena,
-                        rol: this.selected.rol,
-                        esEliminado: true
-                    }                    
-                    axios.put(this.$connectionString+"/scv/api/usuario/actualizar?flagContra=0", usuario)
-                    .then(function (response) {
-                        aux.salida = response.data;
-                        swal.fire({
-                            type: 'success',
-                            title: 'Éxito!',
-                            text: 'Eliminación de usuario confirmada!'
-                        }).then(() => {
-                            location.reload(false);
-                        })
-                        .catch(function () {
-                            swal.fire({
-                                type: 'error',
-                                title: 'Eliminación de usuario fallida!',
-                                text: 'Reintenta más tarde'
-                            });
-                        })
-                    })                     
+
+                    swal.fire({
+                        title: 'Estas seguro?',
+                        text: "No se podrá deshacer la acción",
+                        type: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si'
+                    }).then((result) => {
+                        if (result.value){
+                            let usuario = {
+                                idUsuario: this.selected.idUsuario,
+                                usuario: this.selected.usuario,
+                                contrasena: this.selected.contrasena,
+                                rol: this.selected.rol,
+                                esEliminado: true
+                            }                    
+                            axios.put(this.$connectionString+"/scv/api/usuario/actualizar?flagContra=0", usuario)
+                            .then(function (response) {
+                                aux.salida = response.data;
+                                swal.fire({
+                                    type: 'success',
+                                    title: 'Éxito!',
+                                    text: 'Eliminación de usuario confirmada!'
+                                }).then(() => {
+                                    location.reload(false);
+                                })
+                                .catch(function () {
+                                    swal.fire({
+                                        type: 'error',
+                                        title: 'Eliminación de usuario fallida!',
+                                        text: 'Reintenta más tarde'
+                                    });
+                                })
+                            })                            
+                        }
+                    })    
+                     
                 }       
             }
         },

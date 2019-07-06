@@ -12,14 +12,7 @@
           }"
         />
           </li>
-          <li class="nav-item">
-            <a href="#/login" class="nav-link nav-link-icon active router-link-active">
-              <i class="ni ni-key-25"></i>
-              <span class="nav-link-inner--text">
-                Iniciar Sesión
-              </span>
-            </a>
-          </li>
+         
         </ul>
       </div>
     </div>

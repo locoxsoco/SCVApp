@@ -21,12 +21,12 @@
                         </div>
                         <template>
                             <div class="form-group row">
-                                <div class="col-md-5">
-                                    <h3>Buscar por código de registro:</h3>
+                                <div class="col-md-3">
+                                    <h3>Buscar por modelo:</h3>
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" type="text" v-model="buscarTipoAviones" placeholder="Ingresar código de registro" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarTipoAviones" placeholder="Ingresar modelo" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
@@ -106,24 +106,38 @@ import swal from'sweetalert2';
                         text: 'No hay un tipo de avión seleccionado'
                     });
                 } else {
-                    let tipoAvion = {
-                        idTipoAvion: this.selected.idTipoAvion,
-                        modelo: this.selected.modelo,
-                        iata: this.selected.iata,
-                        tamano: this.selected.tamano,
-                        esEliminado: true
-                    }                    
-                    axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
-                    .then(function (response){
                     swal.fire({
-                        type: 'success',
-                        title: 'Éxito!',
-                        text: 'Eliminación de tipo de avión confirmada!'
-                    }).then(() => {
-                            location.reload(false);
-                        });
-                    aux.salida = response.data;
-                })
+                        title: 'Estas seguro?',
+                        text: "No se podrá deshacer la acción",
+                        type: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si'
+                    }).then((result) => {
+                        if (result.value) {
+                            let tipoAvion = {
+                                idTipoAvion: this.selected.idTipoAvion,
+                                modelo: this.selected.modelo,
+                                iata: this.selected.iata,
+                                tamano: this.selected.tamano,
+                                esEliminado: true
+                            }                    
+                            axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
+                            .then(function (response){
+                            swal.fire({
+                                type: 'success',
+                                title: 'Éxito!',
+                                text: 'Eliminación de tipo de avión confirmada!'
+                            }).then(() => {
+                                    location.reload(false);
+                                });
+                            aux.salida = response.data;
+                            })
+                        }
+                    })
+
                 .catch(function () {
                     swal.fire({
                         type: 'error',

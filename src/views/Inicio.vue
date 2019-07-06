@@ -103,7 +103,7 @@ export default {
         }
     },
     mounted(){            
-        axios.get(this.$connectionString+"/scv/api/resultado/getResultado")
+        axios.get(this.$connectionString+"/scv/api/resultado/obtenerResultado")
         .then((response) => {
             this.selected = null;
             this.tableData = response.data[0];

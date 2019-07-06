@@ -97,26 +97,40 @@ import swal from'sweetalert2';
                         text: 'No hay usuario seleccionado'
                     });
                 } else {
-                    let avion = {
-                        idAvion: this.selected.idAvion,
-                        regNro: this.selected.regNro,
-                        iata: this.selected.iata,
-                        icao: this.selected.icao,
-                        taerolineaIdAerolinea: this.selected.taerolineaIdAerolinea,
-                        ttipoAvionIdTipoAvion: this.selected.ttipoAvionIdTipoAvion,
-                        esEliminado: true
-                    }                    
-                    axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
-                    .then(function (response) {
                     swal.fire({
-                        type: 'success',
-                        title: 'Éxito!',
-                        text: 'Eliminación de avión confirmada!'
-                    }).then(() => {
-                            location.reload(false);
-                        });
-                    aux.salida = response.data;
-                })
+                        title: 'Estas seguro?',
+                        text: "No se podrá deshacer la acción",
+                        type: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si'
+                    }).then((result) => {
+                        if (result.value){
+                            let avion = {
+                                idAvion: this.selected.idAvion,
+                                regNro: this.selected.regNro,
+                                iata: this.selected.iata,
+                                icao: this.selected.icao,
+                                taerolineaIdAerolinea: this.selected.taerolineaIdAerolinea,
+                                ttipoAvionIdTipoAvion: this.selected.ttipoAvionIdTipoAvion,
+                                esEliminado: true
+                            }                    
+                            axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
+                            .then(function (response) {
+                            swal.fire({
+                                type: 'success',
+                                title: 'Éxito!',
+                                text: 'Eliminación de avión confirmada!'
+                            }).then(() => {
+                                    location.reload(false);
+                                });
+                            aux.salida = response.data;
+                            })
+                        }
+                    })                    
+
                 .catch(function () {
                     swal.fire({
                         type: 'error',

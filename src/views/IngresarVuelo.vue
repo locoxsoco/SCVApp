@@ -53,21 +53,14 @@
                                     <h3>Estado de Vuelo: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar vuelo">
-                                </div>
-                            </div>
-                            <div class="form-group row">         
-                                <div class="col-md-2" >
-                                    <h3>Latitud: </h3>
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar aerolínea">
-                                </div>
-                                <div class="col-md-2" >
-                                    <h3>Longitud: </h3>
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar vuelo">
+                                    <div class="form-group">
+                                        <select v-model="inputVuelo" class="form-control">
+                                            <option>Programado</option>
+                                            <option>Cancelado</option>
+                                            <option>En vuelo</option>
+                                            <option>Aterrizado</option>                                            
+                                        </select>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="form-group row">         
