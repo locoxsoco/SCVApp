@@ -6,7 +6,11 @@
             <navbar-toggle-button @click.native="showSidebar">
                 <span class="navbar-toggler-icon"></span>
             </navbar-toggle-button>
-            <router-link class="navbar-brand" to="/">
+            <router-link class="navbar-brand" to="/"  v-if="sinAcceso">
+                <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
+                <h1>SCV</h1>
+            </router-link>
+            <router-link class="navbar-brand" to="/admin/menu"  v-if="!sinAcceso">
                 <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
                 <h1>SCV</h1>
             </router-link>
@@ -70,6 +74,11 @@
     name: 'sidebar',
     components: {
       NavbarToggleButton
+    },
+    data() {
+      return {
+        sinAcceso: localStorage.usuarioRol==''
+      };
     },
     props: {
       logo: {

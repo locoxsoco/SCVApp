@@ -5,6 +5,7 @@
       short-title="SCV"
       title="SCV"
     >
+    
       <template slot="links">
         <!-- Inicio -->
         <sidebar-item v-if="['inicio'].indexOf($route.name) > -1"

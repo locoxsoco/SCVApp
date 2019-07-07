@@ -68,13 +68,13 @@
                                     <h3>Hora Programada: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar aerolínea">
+                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar hora programada">
                                 </div>
                                 <div class="col-md-2" >
-                                    <h3>Hora Real: </h3>
+                                    <h3>Hora Estimada: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar vuelo">
+                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar hora estimada">
                                 </div>
                             </div>
                             <div class="form-group row" >

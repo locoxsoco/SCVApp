@@ -184,6 +184,21 @@
           <v-shape :config="{
           sceneFunc: function(context, shape) {
             context.beginPath();
+            context.moveTo(stageSize.width*0.05, stageSize.height*0.42);
+            context.lineTo(stageSize.width*0.95, stageSize.height*0.42);
+            context.closePath();
+            context.fillStrokeShape(shape);    
+          },
+          fill: '#00D2FF',
+          stroke: 'black',
+          strokeWidth: 1
+          }"/>      
+        </v-layer>          
+
+        <v-layer>
+          <v-shape :config="{
+          sceneFunc: function(context, shape) {
+            context.beginPath();
             context.moveTo(stageSize.width*0.05, stageSize.height*0.5);
             context.lineTo(stageSize.width*0.05, stageSize.height*0.65);
             context.lineTo(stageSize.width*0.1, stageSize.height*0.65);

@@ -44,11 +44,11 @@ export default {
         }
     },
     methods:{
-        manejarEntrar(event){
-
+        manejarEntrar(){
+            document.body.style.cursor = "pointer"
         },
-        manejarSalida(event){
-            
+        manejarSalida(){
+            document.body.style.cursor = "default"
         }
     }
 }
