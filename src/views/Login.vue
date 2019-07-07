@@ -17,7 +17,7 @@
                                         v-model="model.contrasena">
                             </base-input>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4" @click="ingresar">Ingresarxd</base-button>
+                                <base-button type="primary" class="my-4" @click="ingresar">Ingresar</base-button>
                             </div>
                         </form>
                     </div>
