@@ -15,7 +15,7 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Modificar aviones</h3>
+                                    <h3 class="mb-0">Eliminar aviones</h3>
                                 </div>
                             </div>
                         </div>
