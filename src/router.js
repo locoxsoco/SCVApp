@@ -40,11 +40,6 @@ export default new Router({
           component: Inicio
         },
         {
-          path: '/error',
-          name: 'error',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Error.vue')
-        },
-        {
           path: '/icons',
           name: 'icons',
           component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')

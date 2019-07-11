@@ -4,7 +4,7 @@
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
-                    <stats-card title="Esta applicación solo está disponible dentro de Lima"
+                    <stats-card title="Esta aplicación solo está disponible dentro de Lima"
                                 class="mb-4 mb-xl-0"
                     >
                     </stats-card>
