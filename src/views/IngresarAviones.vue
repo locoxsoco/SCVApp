@@ -162,11 +162,11 @@ import autocompletar from './Autocompletar.vue';
                     text: 'El código IATA está vacío'
                 });
             }
-            else if(this.codigoIATA.length!=2){
+            else if(this.codigoIATA.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 2 caracteres'
+                    text: 'El código IATA debe tener 8 caracteres o menos'
                 });
             }
             else if(this.codigoICAO.length==0){

@@ -36,7 +36,7 @@
                                     <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea"/>
                                 </div>
                                 <div class="col-md-2" >
-                                    <h3>Avion:</h3>
+                                    <h3>Avion - IATA:</h3>
                                 </div>                                
                                 <div class="col-md-4" >
                                     <autocompletar v-model="avion.regNro" :items="aviones" filterByID="idAvion" filterBy="regNro" filterBy2="iata" v-on:hijoEnvia="setAvion"/>
@@ -44,10 +44,10 @@
                             </div>
                             <div class="form-group row">         
                                 <div class="col-md-2" >
-                                    <h3>Ciudad de Procedencia: </h3>
+                                    <h3>Ciudad de Procedencia:</h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar aerolínea">
+                                    <autocompletar v-model="ciudad.nombre" :items="ciudades" filterByID="idCiudad" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setCiudad"/>
                                 </div>
                                 <div class="col-md-2" >
                                     <h3>Estado de Vuelo: </h3>
@@ -68,7 +68,7 @@
                                     <h3>Hora Programada: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar hora programada">
+                                    <date-picker v-model="date" :config="options"></date-picker>
                                 </div>
                                 <div class="col-md-2" >
                                     <h3>Hora Estimada: </h3>
@@ -127,11 +127,29 @@
 
 <script>
 
-import axios from 'axios'
+import axios from 'axios';
 import autocompletar from './Autocompletar.vue';
+import datePicker from 'vue-bootstrap-datetimepicker';
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 export default {
     data() {
       return {
+        date: new Date(),
+        options: {
+            format: 'DD/MM/YYYY HH:mm',
+            useCurrent: false,
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'fas fa-calendar-check',
+                clear: 'far fa-trash-alt',
+                close: 'far fa-times-circle'
+            }
+        },
         idDelUsuario: '',
         salida: '',
         inputNombre: '',
@@ -140,10 +158,13 @@ export default {
         aerolineas: [],
         avion: {idAvion:'', regNro:'', iata:''},
         aviones: [],
+        ciudad: {idCiudad:'', iata:'', nombre:''},
+        ciudades: []
       }
     },
     components: {
-        autocompletar
+        autocompletar,
+        datePicker
     },
 
     mounted(){
@@ -155,6 +176,11 @@ export default {
         .then((response) => {
             this.aviones = response.data;
         })
+        axios.get(this.$connectionString+"/scv/api/ciudadAeropuerto/obtenerTodos")
+        .then((response) => {
+            this.ciudades = response.data;
+        })
+        
     },
 
     methods: {
@@ -181,6 +207,9 @@ export default {
         },
         setAvion(value){
             this.avion = value;
+        },
+        setCiudad(value){
+            this.ciudad = value;
         }
     }
 }
