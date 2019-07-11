@@ -20,6 +20,18 @@
                             </div>
                         </div>
                         <template>
+
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <h3>Nombre de usuario:</h3>
+                                </div> 
+                                <div class="col-md-5" >                                 
+                                    <h3> </h3>                  
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>                                

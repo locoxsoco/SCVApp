@@ -59,7 +59,7 @@
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Modelo de avion:</h3>
+                                    <h3>Modelo de avion - IATA:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
                                     <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion"/>
@@ -69,10 +69,10 @@
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Aerolínea:</h3>
+                                    <h3>Aerolínea - IATA:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setAerolinea"/>
+                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea"/>
                                 </div>
                             </div>
                             <div class="form-group row" >
@@ -106,7 +106,7 @@ import autocompletar from './Autocompletar.vue';
         codigoIATA: '',
         tiposDeAvion: [],
         aerolineas: [],
-        aerolinea: {idAerolinea:'',nombre:''},
+        aerolinea: {idAerolinea:'',nombre:'',iata:''},
       }
     },
     components: {
@@ -165,11 +165,11 @@ import autocompletar from './Autocompletar.vue';
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.codigoIATA.length!=2){
+            else if(this.codigoIATA.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 2 caracteres',
+                    text: 'El código IATA debe tener 8 caracteres o menos',
                     confirmButtonColor: '#fb6340'
                 });
             }
