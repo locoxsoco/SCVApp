@@ -15,7 +15,7 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Modificar aviones</h3>
+                                    <h3 class="mb-0">Eliminar aviones</h3>
                                 </div>
                             </div>
                         </div>
@@ -36,6 +36,11 @@
                                     :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
+                                    :paginated="isPaginated"
+                                    :per-page="perPage"
+                                    :current-page.sync="currentPage"
+                                    :pagination-simple="isPaginationSimple"
+                                    :pagination-position="paginationPosition"
                                     focusable>
                             </b-table>
 
@@ -64,24 +69,34 @@ import swal from'sweetalert2';
             return {
                 selected: tableData[0],
                 tableData,
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: 'asc',
+                currentPage: 1,
+                perPage: 10,
                 columns: [
                 {
                     field: 'idAvion',
                     label: 'ID',
                     width: '40',
-                    numeric: true
+                    numeric: true,
+                    sortable: true
                 },                   
                 {
                     field: 'regNro',
                     label: 'Codigo de registro',
+                    sortable: true
                 },
                 {
                     field: 'iata',
                     label: 'Código IATA',
+                    sortable: true
                 },
                 {
                     field: 'icao',
                     label: 'Código ICAO',
+                    sortable: true
                 }
                 ],
                 buscarAviones:''
@@ -94,7 +109,8 @@ import swal from'sweetalert2';
                     swal.fire({
                         type: 'warning',
                         title: 'Alerta de validación',
-                        text: 'No hay usuario seleccionado'
+                        text: 'No hay usuario seleccionado',
+                        confirmButtonColor: '#fb6340'
                     });
                 } else {
                     swal.fire({
@@ -103,8 +119,8 @@ import swal from'sweetalert2';
                         type: 'warning',
                         showCancelButton: true,
                         cancelButtonText: 'Cancelar',
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#2dce89',
+                        cancelButtonColor: '#f5365c',
                         confirmButtonText: 'Si'
                     }).then((result) => {
                         if (result.value){
@@ -122,7 +138,8 @@ import swal from'sweetalert2';
                             swal.fire({
                                 type: 'success',
                                 title: 'Éxito!',
-                                text: 'Eliminación de avión confirmada!'
+                                text: 'Eliminación de avión confirmada!',
+                                confirmButtonColor: '#2dce89'
                             }).then(() => {
                                     location.reload(false);
                                 });
@@ -135,7 +152,8 @@ import swal from'sweetalert2';
                     swal.fire({
                         type: 'error',
                         title: 'Eliminación de avión fallida!',
-                        text: 'Intentelo más tarde'
+                        text: 'Intentelo más tarde',
+                        confirmButtonColor: '#f5365c'
                     });
                 })                       
                 }

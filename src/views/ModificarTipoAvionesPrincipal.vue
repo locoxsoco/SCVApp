@@ -36,6 +36,11 @@
                                     :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
+                                    :paginated="isPaginated"
+                                    :per-page="perPage"
+                                    :current-page.sync="currentPage"
+                                    :pagination-simple="isPaginationSimple"
+                                    :pagination-position="paginationPosition"
                                     focusable>
                             </b-table>
 
@@ -63,25 +68,35 @@
             const tableData = []
             return {
                 selected: tableData[0],
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: 'asc',
+                currentPage: 1,
+                perPage: 10,
                 tableData,
                 columns: [
                     {
                         field: 'idTipoAvion',
                         label: 'ID',
                         width: '40',
-                        numeric: true
+                        numeric: true,
+                        sortable: true
                     },                   
                     {
                         field: 'modelo',
                         label: 'Modelo',
+                        sortable: true
                     },
                     {
                         field: 'iata',
                         label: 'Código IATA',
+                        sortable: true
                     },
                     {
                         field: 'tamano',
                         label: 'Tamaño',
+                        sortable: true
                     }
                 ],
                 buscarTipoAviones: ''
@@ -101,7 +116,8 @@
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'No hay tipo de avion seleccionado'
+                    text: 'No hay tipo de avion seleccionado',
+                    confirmButtonColor: '#fb6340'
                 });
                 }                          
                 this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})

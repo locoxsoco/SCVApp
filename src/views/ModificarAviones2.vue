@@ -170,55 +170,63 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro está vacío'
+                    text: 'El código de registro está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoDeRegistro.length!=6){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro debe tener 6 caracteres'
+                    text: 'El código de registro debe tener 6 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.iata.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA está vacío'
+                    text: 'El código IATA está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.iata.length!=2){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 2 caracteres'
+                    text: 'El código IATA debe tener 2 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.icao.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO está vacío'
+                    text: 'El código ICAO está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.icao.length!=3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO debe tener 3 caracteres'
+                    text: 'El código ICAO debe tener 3 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.tipoAvion.modelo.length<=5){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El modelo de avión está vacío'
+                    text: 'El modelo de avión está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }else if(this.aerolinea.nombre.length<3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La aerolínea está vacía'
+                    text: 'La aerolínea está vacía',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -238,7 +246,8 @@ export default {
                         swal.fire({
                             type: 'success',
                             title: 'Éxito!',
-                            text: 'Modificación de avión confirmada!'
+                            text: 'Modificación de avión confirmada!',
+                            confirmButtonColor: '#2dce89'
                         });
                         aux.salida = response.data;
                 })
@@ -246,7 +255,8 @@ export default {
                         swal.fire({
                             type: 'error',
                             title: 'Modificación de avión fallida!',
-                            text: 'Has pensado en cambiar el código IATA?'
+                            text: 'Has pensado en cambiar el código IATA?',
+                            confirmButtonColor: '#f5365c'
                         });
                 })
             }

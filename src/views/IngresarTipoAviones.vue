@@ -176,35 +176,40 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre del modelo está vacío'
+                    text: 'El nombre del modelo está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.modelo.length>100){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre del modelo debe ser de máximo 100 caracteres'
+                    text: 'El nombre del modelo debe ser de máximo 100 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoIATA.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA está vacío'
+                    text: 'El código IATA está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoIATA.length!=3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La código IATA debe ser de 3 caracteres'
+                    text: 'La código IATA debe ser de 3 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.tipoAvion.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'Elegir un tamaño'
+                    text: 'Elegir un tamaño',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -223,7 +228,8 @@ export default {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de tipo de avión confirmada!'
+                        text: 'Creación de tipo de avión confirmada!',
+                        confirmButtonColor: '#2dce89'
                     });
                     aux.salida = response.data;
                 })
@@ -231,7 +237,8 @@ export default {
                     swal.fire({
                         type: 'error',
                         title: 'Creación de tipo de avión fallida!',
-                        text: 'Has pensado en cambiar el código IATA?'
+                        text: 'Has pensado en cambiar el código IATA?',
+                        confirmButtonColor: '#f5365c'
                     });
                 })
             }            

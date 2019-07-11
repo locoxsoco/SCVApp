@@ -37,6 +37,11 @@
                                   :data="filter"
                                   :columns="columns"
                                   :selected.sync="selected"
+                                  :paginated="isPaginated"
+                                  :per-page="perPage"
+                                  :current-page.sync="currentPage"
+                                  :pagination-simple="isPaginationSimple"
+                                  :pagination-position="paginationPosition"
                                   focusable>  
                           </b-table>                        
                       </template>
@@ -55,6 +60,12 @@ export default {
         return {
             usuarioRol: localStorage.usuarioRol,
             selected: tableData[0],
+            isPaginated: true,
+            isPaginationSimple: false,
+            paginationPosition: 'bottom',
+            defaultSortDirection: 'asc',
+            currentPage: 1,
+            perPage: 10,
             tableData,
             columns: [         
                 {
@@ -102,7 +113,7 @@ export default {
         }
     },
     mounted(){            
-        axios.get(this.$connectionString+"/scv/api/resultado/getResultado")
+        axios.get(this.$connectionString+"/scv/api/resultado/obtenerDatosTablero")
         .then((response) => {
             this.selected = null;
             this.tableData = response.data[0];
@@ -114,7 +125,8 @@ export default {
             swal.fire({
                 type: 'warning',
                 title: 'Alerta de validación',
-                text: 'No hay tipo de avion seleccionado'
+                text: 'No hay tipo de avion seleccionado',
+                confirmButtonColor: '#fb6340'
             });
             }                          
             this.$router.push({name:'modificarTipoAviones', params: {idTipoAvion: this.selected.idTipoAvion, modelo: this.selected.modelo, codigoIATA: this.selected.iata, tamaño: this.selected.tamano}})

@@ -50,42 +50,48 @@ import axios from 'axios'
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario está vacío'
+                    text: 'El nombre de usuario está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.model.usuario.length<=8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres'
+                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.model.usuario.length>80){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de máximo 80 caracteres'
+                    text: 'El nombre de usuario debe ser de máximo 80 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.model.contrasena.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La constraseña está vacía'
+                    text: 'La constraseña está vacía',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.model.contrasena.length<8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de mínimo 8 caracteres'
+                    text: 'La contraseña debe ser de mínimo 8 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.model.contrasena.length>80){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de máximo 80 caracteres'
+                    text: 'La contraseña debe ser de máximo 80 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -106,7 +112,8 @@ import axios from 'axios'
                     swal.fire({
                         type: 'error',
                         title: 'Acceso de usuario fallido!',
-                        text: 'El nombre de usuario y/o contraseña son incorrectos'
+                        text: 'El nombre de usuario y/o contraseña son incorrectos',
+                        confirmButtonColor: '#f5365c'
                     });
                 })
             }

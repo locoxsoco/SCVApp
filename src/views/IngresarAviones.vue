@@ -145,55 +145,63 @@ import autocompletar from './Autocompletar.vue';
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro está vacío'
+                    text: 'El código de registro está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoRegistro.length!=6){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro debe tener 6 caracteres'
+                    text: 'El código de registro debe tener 6 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoIATA.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA está vacío'
+                    text: 'El código IATA está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoIATA.length!=2){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 2 caracteres'
+                    text: 'El código IATA debe tener 2 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoICAO.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO está vacío'
+                    text: 'El código ICAO está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.codigoICAO.length!=3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO debe tener 3 caracteres'
+                    text: 'El código ICAO debe tener 3 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.tipoAvion.modelo.length<=5){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El modelo de avión está vacío'
+                    text: 'El modelo de avión está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }else if(this.aerolinea.nombre.length<3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La aerolínea está vacía'
+                    text: 'La aerolínea está vacía',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -206,12 +214,13 @@ import autocompletar from './Autocompletar.vue';
                     ttipoAvionIdTipoAvion: this.aerolinea.idAerolinea,
                     esEliminado: false
                 }
-                axios.post('http://127.0.0.1:8000/scv/api/avion/crear', avion)
+                axios.post(this.$connectionString+'/scv/api/avion/crear', avion)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de avión confirmada!'
+                        text: 'Creación de avión confirmada!',
+                        confirmButtonColor: '#2dce89'
                     });
                     aux.salida = response.data;
                 })
@@ -219,7 +228,8 @@ import autocompletar from './Autocompletar.vue';
                     swal.fire({
                         type: 'error',
                         title: 'Creación de avión fallida!',
-                        text: 'Has pensado en cambiar el código IATA?'
+                        text: 'Has pensado en cambiar el código IATA?',
+                        confirmButtonColor: '#f5365c'
                     });
                 })
             }

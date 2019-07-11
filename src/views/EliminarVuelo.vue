@@ -41,6 +41,11 @@
                                   :columns="columns"
                                   :selected.sync="selected"
                                   :filter="buscarAerolinea"
+                                  :paginated="isPaginated"
+                                  :per-page="perPage"
+                                  :current-page.sync="currentPage"
+                                  :pagination-simple="isPaginationSimple"
+                                  :pagination-position="paginationPosition"
                                   focusable>
                                   
                           </b-table>
@@ -68,6 +73,12 @@
             const tableData = []
             return {
                 selected: tableData[0],
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: 'asc',
+                currentPage: 1,
+                perPage: 10,
                 tableData,
                 columns: [
                     {

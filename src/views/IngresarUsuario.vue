@@ -147,49 +147,56 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario está vacío'
+                    text: 'El nombre de usuario está vacío',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.usuario.length<=8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres'
+                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.usuario.length>80){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de máximo 80 caracteres'
+                    text: 'El nombre de usuario debe ser de máximo 80 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.contrasena.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La constraseña está vacía'
+                    text: 'La constraseña está vacía',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.contrasena.length<8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de mínimo 8 caracteres'
+                    text: 'La contraseña debe ser de mínimo 8 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.contrasena.length>80){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de máximo 80 caracteres'
+                    text: 'La contraseña debe ser de máximo 80 caracteres',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else if(this.rol.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'Elegir un rol'
+                    text: 'Elegir un rol',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -205,7 +212,8 @@ export default {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de usuario confirmada!'
+                        text: 'Creación de usuario confirmada!',
+                        confirmButtonColor: '#2dce89'
                     });
                     aux.salida = response.data;
                 })
@@ -213,7 +221,8 @@ export default {
                     swal.fire({
                         type: 'error',
                         title: 'Creación de usuario fallida!',
-                        text: 'Has pensado en cambiar nombre de usuario?'
+                        text: 'Has pensado en cambiar nombre de usuario?',
+                        confirmButtonColor: '#f5365c'
                     });
                 })
             }

@@ -35,6 +35,11 @@
                                     :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
+                                    :paginated="isPaginated"
+                                    :per-page="perPage"
+                                    :current-page.sync="currentPage"
+                                    :pagination-simple="isPaginationSimple"
+                                    :pagination-position="paginationPosition"
                                     focusable>
                             </b-table>
 
@@ -64,21 +69,30 @@ import swal from'sweetalert2';
 
             return {
                 selected: tableData[0],
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: 'asc',
+                currentPage: 1,
+                perPage: 10,
                 tableData,
                 columns: [
                 {
                     field: 'idUsuario',
                     label: 'Código de usuario',
                     width: '40',
-                    numeric: true
+                    numeric: true,
+                    sortable: true
                 },
                 {
                     field: 'usuario',
-                    label: 'Nombre de usuario'
+                    label: 'Nombre de usuario',
+                    sortable: true
                 },
                 {
                     field: 'rol',
-                    label: 'Rol'
+                    label: 'Rol',
+                    sortable: true
                 }
                 ],
                 buscarUsuario: ''
@@ -102,7 +116,8 @@ import swal from'sweetalert2';
                     swal.fire({
                         type: 'warning',
                         title: 'Alerta de validación',
-                        text: 'No hay usuario seleccionado'
+                        text: 'No hay usuario seleccionado',
+                        confirmButtonColor: '#fb6340'
                     });
                 }
                 else{
@@ -113,8 +128,8 @@ import swal from'sweetalert2';
                         type: 'warning',
                         showCancelButton: true,
                         cancelButtonText: 'Cancelar',
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#2dce89',
+                        cancelButtonColor: '#f5365c',
                         confirmButtonText: 'Si'
                     }).then((result) => {
                         if (result.value){
@@ -131,18 +146,20 @@ import swal from'sweetalert2';
                                 swal.fire({
                                     type: 'success',
                                     title: 'Éxito!',
-                                    text: 'Eliminación de usuario confirmada!'
+                                    text: 'Eliminación de usuario confirmada!',
+                                    confirmButtonColor: '#2dce89'
                                 }).then(() => {
                                     location.reload(false);
                                 })
-                                .catch(function () {
+                            })
+                            .catch(function () {
                                     swal.fire({
                                         type: 'error',
                                         title: 'Eliminación de usuario fallida!',
-                                        text: 'Reintenta más tarde'
+                                        text: 'Reintenta más tarde',
+                                        confirmButtonColor: '#f5365c'
                                     });
-                                })
-                            })                            
+                                })                            
                         }
                     })    
                      

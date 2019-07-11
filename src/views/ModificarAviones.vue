@@ -36,6 +36,11 @@
                                     :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
+                                    :paginated="isPaginated"
+                                    :per-page="perPage"
+                                    :current-page.sync="currentPage"
+                                    :pagination-simple="isPaginationSimple"
+                                    :pagination-position="paginationPosition"
                                     focusable>
                             </b-table>
 
@@ -65,25 +70,35 @@ export default {
 
         return {
             selected: tableData[0],
+            isPaginated: true,
+            isPaginationSimple: false,
+            paginationPosition: 'bottom',
+            defaultSortDirection: 'asc',
+            currentPage: 1,
+            perPage: 10,
             tableData,
             columns: [
                 {
                     field: 'idAvion',
                     label: 'ID',
                     width: '40',
-                    numeric: true
+                    numeric: true,
+                    sortable: true
                 },                   
                 {
                     field: 'regNro',
                     label: 'Codigo de registro',
+                    sortable: true
                 },
                 {
                     field: 'iata',
                     label: 'Código IATA',
+                    sortable: true
                 },
                 {
                     field: 'icao',
                     label: 'Código ICAO',
+                    sortable: true
                 }
             ],
             buscarAviones: ''
@@ -103,7 +118,8 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'No hay avion seleccionado'
+                    text: 'No hay avion seleccionado',
+                    confirmButtonColor: '#fb6340'
                 });
             }              
             this.$router.push({name:'modificarAviones2', params: {idAvion: this.selected.idAvion, codigoDeRegistro: this.selected.regNro, iata: this.selected.iata, icao: this.selected.icao}})

@@ -105,7 +105,8 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'Elegir un rol'
+                    text: 'Elegir un rol',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else {
@@ -123,7 +124,8 @@ export default {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Modificación de usuario confirmada!'
+                        text: 'Modificación de usuario confirmada!',
+                        confirmButtonColor: '#2dce89'
                     });
                     aux.salida = response.data;
                 })
@@ -131,7 +133,8 @@ export default {
                     swal.fire({
                         type: 'error',
                         title: 'Modificación de usuario fallida!',
-                        text: 'Escogiste correctamente el rol?'
+                        text: 'Escogiste correctamente el rol?',
+                        confirmButtonColor: '#f5365c'
                     });
                 })            
             }

@@ -35,6 +35,11 @@
                                     :data="filter"
                                     :columns="columns"
                                     :selected.sync="selected"
+                                    :paginated="isPaginated"
+                                    :per-page="perPage"
+                                    :current-page.sync="currentPage"
+                                    :pagination-simple="isPaginationSimple"
+                                    :pagination-position="paginationPosition"
                                     focusable>
                             </b-table>
 
@@ -62,6 +67,12 @@ export default {
         const tableData =[]
         return {
             tableData,
+            isPaginated: true,
+            isPaginationSimple: false,
+            paginationPosition: 'bottom',
+            defaultSortDirection: 'asc',
+            currentPage: 1,
+            perPage: 10,
             selected:tableData[0],
             // data,
             columns: [
@@ -69,15 +80,18 @@ export default {
                     field: 'idUsuario',
                     label: 'Código de usuario',
                     width: '40',
-                    numeric: true
+                    numeric: true,
+                    sortable: true
                 },
                 {
                     field: 'usuario',
-                    label: 'Nombre de usuario'
+                    label: 'Nombre de usuario',
+                    sortable: true
                 },
                 {
                     field: 'rol',
-                    label: 'Rol'
+                    label: 'Rol',
+                    sortable: true
                 }
             ],
             buscarUsuario: ''
@@ -98,7 +112,8 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'No hay usuario seleccionado'
+                    text: 'No hay usuario seleccionado',
+                    confirmButtonColor: '#fb6340'
                 });
             }
             else{
