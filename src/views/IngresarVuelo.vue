@@ -30,16 +30,16 @@
                             </div> -->
                             <div class="form-group row">         
                                 <div class="col-md-2" >
-                                    <h3>Aerolínea: </h3>
+                                    <h3>Aerolínea - IATA: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputAerolinea" type="text" class="form-control" placeholder="Ingresar aerolínea">
+                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea"/>
                                 </div>
                                 <div class="col-md-2" >
-                                    <h3>Vuelo: </h3>
+                                    <h3>Avion:</h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar vuelo">
+                                    <autocompletar v-model="avion.regNro" :items="aviones" filterByID="idAvion" filterBy="regNro" filterBy2="iata" v-on:hijoEnvia="setAvion"/>
                                 </div>
                             </div>
                             <div class="form-group row">         
@@ -128,15 +128,33 @@
 <script>
 
 import axios from 'axios'
-
+import autocompletar from './Autocompletar.vue';
 export default {
     data() {
       return {
         idDelUsuario: '',
         salida: '',
         inputNombre: '',
-        inputContraseña: ''
+        inputContraseña: '',
+        aerolinea: {idAerolinea:'',nombre:'',iata:''},
+        aerolineas: [],
+        avion: {idAvion:'', regNro:'', iata:''},
+        aviones: [],
       }
+    },
+    components: {
+        autocompletar
+    },
+
+    mounted(){
+        axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
+        .then((response) => {
+            this.aerolineas = response.data;
+        }),
+        axios.get(this.$connectionString+"/scv/api/avion/obtenerTodos")
+        .then((response) => {
+            this.aviones = response.data;
+        })
     },
 
     methods: {
@@ -157,6 +175,12 @@ export default {
                 aux.salida = response.data;
                 //console.log(this.salida);
             })
+        },
+        setAerolinea(value) {
+            this.aerolinea = value;
+        },
+        setAvion(value){
+            this.avion = value;
         }
     }
 }
