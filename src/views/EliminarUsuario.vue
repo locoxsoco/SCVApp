@@ -103,6 +103,7 @@ import swal from'sweetalert2';
             .then((response) => {
                 
                 this.tableData = response.data.filter(item => !item.esEliminado);
+                this.tableData = this.tableData.filter(item => item.idUsuario != localStorage.usuarioId);
                 this.selected = null;
 
                 
