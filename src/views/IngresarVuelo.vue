@@ -190,7 +190,7 @@ export default {
         },
         guardar: function(){
             let aux = this;
-            axios.post('http://127.0.0.1:8000/scv/api/usuario/crear', {
+            axios.post(this.$connectionString+'/scv/api/usuario/crear', {
                 usuario: this.inputNombre,
                 contrasena: this.inputContraseña,
                 rol: 1,

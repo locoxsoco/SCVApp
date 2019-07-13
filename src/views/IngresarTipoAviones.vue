@@ -223,7 +223,7 @@ export default {
                     tamano: this.tipoAvion,
                     esEliminado: false
                 };
-                axios.post(this.$connectionString+'/scv/api/tipoAvion/crear', tipoAvion)
+                axios.post(this.$connectionString+'/scv/api/tipoAvion/crear/'+localStorage.usuarioId, tipoAvion)
                 .then(function (response){
                     swal.fire({
                         type: 'success',

@@ -133,7 +133,7 @@ import swal from'sweetalert2';
                                 ttipoAvionIdTipoAvion: this.selected.ttipoAvionIdTipoAvion,
                                 esEliminado: true
                             }                    
-                            axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
+                            axios.put(this.$connectionString+"/scv/api/avion/eliminar/"+localStorage.usuarioId+"?idAvion="+avion.idAvion)
                             .then(function (response) {
                             swal.fire({
                                 type: 'success',
@@ -165,7 +165,6 @@ import swal from'sweetalert2';
             .then((response) => {
                 this.selected = null
                 this.tableData = response.data.filter(item => !item.esEliminado);
-                
             })     
         },
         computed: {
@@ -174,9 +173,9 @@ import swal from'sweetalert2';
                 var tableData = [];
                 var i = this.tableData.length;
                 for (i in this.tableData) {
-                if (this.tableData[i].regNro.match(name_re1)) {
-                    tableData.push(this.tableData[i])
-                }
+                    if (this.tableData[i].regNro.match(name_re1)) {
+                        tableData.push(this.tableData[i])
+                    }
                 }
                 return tableData;
             }

@@ -104,6 +104,7 @@ import axios from 'axios'
                 .then(function (response) {
                     aux.salida = response.data;
                     localStorage.usuarioNombre = aux.salida.usuario;
+                    localStorage.usuarioId = aux.salida.idUsuario;
                     localStorage.usuarioRol = aux.salida.rol;
                 }).then(() => {
                             this.$router.push({name:'menu'});

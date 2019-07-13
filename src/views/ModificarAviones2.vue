@@ -190,11 +190,11 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.iata.length!=2){
+            else if(this.iata.length!=3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 2 caracteres',
+                    text: 'El código IATA debe tener 3 caracteres',
                     confirmButtonColor: '#fb6340'
                 });
             }
@@ -241,7 +241,7 @@ export default {
                     esEliminado: false
                 }
 
-                axios.put(this.$connectionString+"/scv/api/avion/actualizar", avion)
+                axios.put(this.$connectionString+"/scv/api/avion/actualizar/"+localStorage.usuarioId, avion)
                 .then(function (response) {
                         swal.fire({
                             type: 'success',

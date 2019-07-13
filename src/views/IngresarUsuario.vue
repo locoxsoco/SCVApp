@@ -207,7 +207,7 @@ export default {
                     rol: this.rol,
                     esEliminado: false,
                 };
-                axios.post(this.$connectionString+'/scv/api/usuario/crear', usuario)
+                axios.post(this.$connectionString+'/scv/api/usuario/crear/'+localStorage.usuarioId, usuario)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',

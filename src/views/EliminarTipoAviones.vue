@@ -140,7 +140,7 @@ import swal from'sweetalert2';
                                 tamano: this.selected.tamano,
                                 esEliminado: true
                             }                    
-                            axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
+                            axios.put(this.$connectionString+"/scv/api/tipoAvion/eliminar/"+localStorage.usuarioId+"?idTipoAvion="+ tipoAvion.idTipoAvion)
                             .then(function (response){
                             swal.fire({
                                 type: 'success',

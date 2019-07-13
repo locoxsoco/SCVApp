@@ -214,7 +214,7 @@ import autocompletar from './Autocompletar.vue';
                     ttipoAvionIdTipoAvion: this.aerolinea.idAerolinea,
                     esEliminado: false
                 }
-                axios.post(this.$connectionString+'/scv/api/avion/crear', avion)
+                axios.post(this.$connectionString+'/scv/api/avion/crear/' + localStorage.usuarioId, avion)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',

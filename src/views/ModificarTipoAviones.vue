@@ -219,7 +219,7 @@ export default {
                     tamano: this.tamaño,
                     esEliminado: false
                 }
-                axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar", tipoAvion)
+                axios.put(this.$connectionString+"/scv/api/tipoAvion/actualizar/"+localStorage.usuarioId, tipoAvion)
                 .then((response) =>{
                     aux.salida = response.data;
                     swal.fire({
