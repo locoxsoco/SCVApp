@@ -11,6 +11,7 @@ import IngresarVuelo from '@/views/IngresarVuelo.vue'
 import EliminarVuelo from '@/views/EliminarVuelo.vue'
 import IngresarUsuario from '@/views/IngresarUsuario.vue'
 import ModificarUsuario from '@/views/ModificarUsuario.vue'
+import ModificarUsuario2 from '@/views/ModificarUsuario2.vue'
 import EliminarUsuario from '@/views/EliminarUsuario.vue'
 import IngresarAviones from '@/views/IngresarAviones.vue'
 import IngresarTipoAviones from '@/views/IngresarTipoAviones.vue'
@@ -21,8 +22,10 @@ import ModificarTipoAvionesPrincipal from '@/views/ModificarTipoAvionesPrincipal
 import EliminarAviones from '@/views/EliminarAviones.vue'
 import EliminarTipoAviones from '@/views/EliminarTipoAviones.vue'
 import VisualizarMapa from '@/views/VisualizarMapa.vue'
-import PuertasYZonas from '@/views/PuertasYZonas.vue'
-import ModificarUsuario2 from '@/views/ModificarUsuario2.vue'
+import IngresarAerolinea from '@/views/IngresarAerolinea.vue'
+import ModificarAerolinea from '@/views/ModificarAerolinea.vue'
+import ModificarAerolinea2 from '@/views/ModificarAerolinea2.vue'
+import EliminarAerolinea from '@/views/EliminarAerolinea.vue'
 
 Vue.use(Router)
 
@@ -146,9 +149,25 @@ export default new Router({
           component: EliminarTipoAviones
         },
         {
-          path: '/admin/puertasYZonas',
-          name: 'puertasYZonas',
-          component: PuertasYZonas
+          path: '/admin/aerolinea/ingresar',
+          name: 'ingresarAerolinea',
+          component: IngresarAerolinea
+        },     
+        {
+          path: '/admin/aerolinea/modificar',
+          name: 'modificarAerolinea',
+          component: ModificarAerolinea
+        },
+        {
+          path: '/admin/aerolinea/modificar2',
+          name: 'modificarAerolinea2',
+          component: ModificarAerolinea2,
+          props: true
+        },
+        {
+          path: '/admin/aerolinea/eliminar',
+          name: 'eliminarAerolinea',
+          component: EliminarAerolinea
         }
       ]
     },

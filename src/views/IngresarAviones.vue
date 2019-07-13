@@ -140,7 +140,6 @@ import autocompletar from './Autocompletar.vue';
         },
 
         guardar: function(){
-            console.log(this.tipoAvion);
             if(this.codigoRegistro.length==0){
                 swal.fire({
                     type: 'warning',

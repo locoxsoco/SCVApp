@@ -16,7 +16,7 @@
           }"
         />
         <!-- Menu -->
-        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','visualizarMapa','puertasYZonas'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea','visualizarMapa'].indexOf($route.name) > -1"
           :link="{
             name: 'SCV',
             icon: 'fas fa-plane-arrival text-primary',
@@ -135,14 +135,38 @@
             path: '/admin/aviones/eliminarTipo'
           }"
         />
-        <!-- Administrar zonas y puertas -->
-        <!--<sidebar-item v-if="['menu'].indexOf($route.name) > -1"
+        <!-- Administrar usuarios -->
+        <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
           :link="{
-            name: 'Administración de zonas y puertas',
-            icon: 'fas fa-parking text-primary',
-            path: '/admin/puertasYZonas'
+            name: 'Administración de aerolíneas',
+            icon: 'fas fa-warehouse text-primary',
+            path: '/admin/aerolinea/ingresar'
           }"
-        />-->
+        />
+        <!-- Administrar usuarios - Ingresar usuarios -->
+        <sidebar-item v-if="['ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea'].indexOf($route.name) > -1"
+          :link="{
+            name: 'Ingresar Aerolíneas',
+            icon: 'fas fa-plus text-primary',
+            path: '/admin/aerolinea/ingresar'
+          }"
+        />
+        <!-- Administrar usuarios - Modificar usuarios -->
+        <sidebar-item v-if="['ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea'].indexOf($route.name) > -1"
+          :link="{
+            name: 'Modificar Aerolíneas',
+            icon: 'fas fa-edit text-primary',
+            path: '/admin/aerolinea/modificar'
+          }"
+        />
+        <!-- Administrar usuarios - Eliminar usuarios -->
+        <sidebar-item v-if="['ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea'].indexOf($route.name) > -1"
+          :link="{
+            name: 'Eliminar Aerolíneas',
+            icon: 'fas fa-eraser text-primary',
+            path: '/admin/aerolinea/eliminar'
+          }"
+        />
         <!-- Visualizar el mapa -->
         <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
           :link="{
