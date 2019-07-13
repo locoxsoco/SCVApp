@@ -14,18 +14,18 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Modificar usuarios</h3>
+                                    <h3 class="mb-0">Modificar Aerolíneas</h3>
                                 </div>
                             </div>
                         </div>
                         <template>
                             <div class="form-group row">
                                 <div class="col-md-5">
-                                    <h3>Buscar por nombre de usuario:</h3>
+                                    <h3>Buscar por nombre de aerolínea:</h3>
                                 </div>
                                 <div class="col-md-4">
                                     <form>
-                                        <base-input alternative="" type="text" v-model="buscarUsuario" placeholder="Ingresar nombre de usuario" input-classes="form-control-alternative">
+                                        <base-input alternative="" type="text" v-model="buscarAerolinea" placeholder="Ingresar nombre de aerolínea" input-classes="form-control-alternative">
                                         </base-input>
                                     </form>
                                 </div>
@@ -77,28 +77,33 @@ export default {
             // data,
             columns: [
                 {
-                    field: 'idUsuario',
-                    label: 'Código de usuario',
+                    field: 'idAerolinea',
+                    label: 'Código de aerolínea',
                     width: '40',
                     numeric: true,
                     sortable: true
                 },
                 {
-                    field: 'usuario',
-                    label: 'Nombre de usuario',
+                    field: 'nombre',
+                    label: 'Nombre de aerolínea',
                     sortable: true
                 },
                 {
-                    field: 'rol',
-                    label: 'Rol',
+                    field: 'iata',
+                    label: 'IATA',
+                    sortable: true
+                },
+                {
+                    field: 'icao',
+                    label: 'ICAO',
                     sortable: true
                 }
             ],
-            buscarUsuario: ''
+            buscarAerolinea: ''
         }
     },
     mounted(){            
-        axios.get(this.$connectionString+"/scv/api/usuario/obtenerTodos")
+        axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
         .then((response) => {
             
             this.tableData = response.data.filter(item => !item.esEliminado);
@@ -112,22 +117,22 @@ export default {
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'No hay usuario seleccionado',
+                    text: 'No hay aerolínea seleccionada',
                     confirmButtonColor: '#fb6340'
                 });
             }
             else{
-                this.$router.push({name:'modificarUsuario2', params: {idDelUsuario: this.selected.idUsuario, nombreDelUsuario: this.selected.usuario, rol: this.selected.rol, contrasena: this.selected.contrasena}});   
+                this.$router.push({name:'modificarAerolinea2', params: {idAerolinea: this.selected.idAerolinea, nombre: this.selected.nombre, iata: this.selected.iata, icao: this.selected.icao}});   
             }            
         }
     },
     computed: {
           filter: function(){
-            var name_re1 = new RegExp(this.buscarUsuario, 'i');
+            var name_re1 = new RegExp(this.buscarAerolinea, 'i');
             var tableData = [];
             var i = this.tableData.length;
             for (i in this.tableData) {
-              if (this.tableData[i].usuario.match(name_re1)) {
+              if (this.tableData[i].nombre.match(name_re1)) {
                 tableData.push(this.tableData[i])
               }
             }

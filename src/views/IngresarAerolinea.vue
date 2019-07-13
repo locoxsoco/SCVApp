@@ -15,63 +15,43 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-12">
-                                    <h3 class="mb-0">Ingresar usuarios</h3>
+                                    <h3 class="mb-0">Ingresar Aerolíneas</h3>
                                 </div>
                             </div>
                         </div>
                         <template>
-                            <!-- <div class="form-group row">
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-4" >
-                                    <h3>Codigo del usuario:</h3>
-                                </div>
-                                <div class="col-md-4" > 
-                                    <h3> {{idDelUsuario}} </h3>
-                                </div>
-                            </div> -->
-
                             <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Nombre del usuario: </h3>
+                                    <h3>Nombre de aerolínea: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input v-model="usuario" type="text" class="form-control" placeholder="Ingresar el usuario">                                   
+                                    <input v-model="aerolinea" type="text" class="form-control" placeholder="Ingresar el nombre de aerolínea">                                   
                                     <!-- <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative"> -->
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Contraseña: </h3>
+                                    <h3>Código IATA: </h3>
                                 </div>                                
                                 <div class="col-md-5" >
-                                    <input v-model="contrasena" type="password" class="form-control" placeholder="Ingresar la contraseña">                                                                       
-                                    <!-- <input v-model="inputContraseña" alternative="" placeholder="Ingresar la contraseña" input-classes="form-control-alternative"> -->
+                                    <input v-model="iata" type="text" class="form-control" placeholder="Ingresar el código IATA">                                   
+                                    <!-- <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative"> -->
                                 </div>
                             </div>
-
                             <div class="form-group row">
-
-
                                 <div class="col-md-2">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Rol: </h3>
-                                </div> 
-                                <div class="col-md-5" >                                 
-                                    <div class="form-group">
-                                        <select v-model="rol" class="form-control" id="formRol">
-                                            <option>Administrador</option>
-                                            <option>Operador técnico</option>
-                                        </select>
-                                    </div>                       
+                                    <h3>Código ICAO: </h3>
+                                </div>                                
+                                <div class="col-md-5" >
+                                    <input v-model="icao" type="text" class="form-control" placeholder="Ingresar el código ICAO">                                   
+                                    <!-- <input v-model="inputNombre" alternative="" placeholder="Ingresar nombre del usuario" input-classes="form-control-alternative"> -->
                                 </div>
-
                             </div>
                             <div class="form-group row" >
                                 <div class="col-md-3"> </div>
@@ -87,36 +67,6 @@
                 </div>
             </div>
         </div> 
-
-          <!-- <card class="strpied-tabled-with-hover"
-                body-classes="table-full-width table-responsive"
-          >
-            <template slot="header">
-              <h4 class="card-title">Llegadas del aeropuerto</h4>
-            </template>         
-               
-            <div class="form-group row"> 
-
-              <div class="col-md-4" >
-                <input type="text" class="form-control form-control-lg" id="exampleInputName2" placeholder="Aerolinea">
-              </div>
-
-              <div class="col-md-4" > 
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail2" placeholder="# de vuelo">
-              </div>
-
-              <div class="col-md-4">
-                <button type="submit" class="btn btn-default">Buscar</button>
-              </div>
-            </div>         
-
-            <l-table class="table-hover table-striped"
-                     :columns="table1.columns"
-                     :data="table1.data"
-                     style="margin-left:0px !important">
-            </l-table>
-          </card> -->
-
     </div>
 </template>
 
@@ -127,92 +77,84 @@ import axios from 'axios'
 export default {
     data() {
       return {
-        objeto:{usuario:"",contrasena:"",rol:"",esEliminado:false},
+        objeto:{aerolinea:"",iata:"",icao:"",esEliminado:false},
         idDelUsuario: '',
         salida: '',
-        usuario: '',
-        contrasena: '',
-        rol: ''
+        aerolinea: '',
+        iata: '',
+        icao: ''
       }
     },
     
     methods: {
         borrar: function(){
-            this.usuario = '' 
-            this.contrasena = ''
-            this.rol = ''
+            this.aerolinea = '' 
+            this.iata = ''
+            this.icao = ''
         },
         guardar: function(){
-            if(this.usuario.length==0){
+            if(this.aerolinea.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario está vacío',
+                    text: 'El nombre de aerolínea está vacío',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.usuario.length<=8){
+            else if(this.aerolinea.length>120){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de mínimo 8 caracteres',
+                    text: 'El nombre de la aerolínea debe ser de máximo 120 caracteres',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.usuario.length>80){
+            else if(this.iata.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El nombre de usuario debe ser de máximo 80 caracteres',
+                    text: 'El código IATA está vacío',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.contrasena.length==0){
+            else if(this.iata.length!=2){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La constraseña está vacía',
+                    text: 'El código IATA debe ser de 2 caracteres',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.contrasena.length<8){
+            else if(this.icao.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de mínimo 8 caracteres',
+                    text: 'El código ICAO está vacío',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.contrasena.length>80){
+            else if(this.icao.length!=3){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'La contraseña debe ser de máximo 80 caracteres',
-                    confirmButtonColor: '#fb6340'
-                });
-            }
-            else if(this.rol.length==0){
-                swal.fire({
-                    type: 'warning',
-                    title: 'Alerta de validación',
-                    text: 'Elegir un rol',
+                    text: 'El código ICAO debe ser de 3 caracteres',
                     confirmButtonColor: '#fb6340'
                 });
             }
             else {
                 let aux = this;
-                let usuario = {
-                    usuario: this.usuario,
-                    contrasena: this.contrasena,
-                    rol: this.rol,
-                    esEliminado: false,
+                let aerolinea = {
+                    nombre: this.aerolinea,
+                    iata: this.iata,
+                    icao: this.icao,
+                    esEliminado:0
                 };
-                axios.post(this.$connectionString+'/scv/api/usuario/crear/'+localStorage.usuarioId, usuario)
+                axios.post(this.$connectionString+'/scv/api/aerolinea/crear/'+localStorage.usuarioId, aerolinea)
                 .then(function (response) {
                     swal.fire({
                         type: 'success',
                         title: 'Éxito!',
-                        text: 'Creación de usuario confirmada!',
+                        text: 'Creación de aerolínea confirmada!',
                         confirmButtonColor: '#2dce89'
                     });
                     aux.salida = response.data;
@@ -220,8 +162,8 @@ export default {
                 .catch(function () {
                     swal.fire({
                         type: 'error',
-                        title: 'Creación de usuario fallida!',
-                        text: 'Has pensado en cambiar nombre de usuario?',
+                        title: 'Creación de aerolínea fallida!',
+                        text: 'Has pensado en cambiar el código IATA?',
                         confirmButtonColor: '#f5365c'
                     });
                 })
