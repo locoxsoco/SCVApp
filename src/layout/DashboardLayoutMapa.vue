@@ -16,13 +16,11 @@
 </template>
 <script>
   import DashboardNavbarMapa from './DashboardNavbarMapa.vue';
-  import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
 
   export default {
     components: {
       DashboardNavbarMapa,
-      ContentFooter,
       FadeTransition
     },
     data() {

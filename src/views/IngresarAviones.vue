@@ -140,7 +140,6 @@ import autocompletar from './Autocompletar.vue';
         },
 
         guardar: function(){
-            console.log(this.tipoAvion);
             if(this.codigoRegistro.length==0){
                 swal.fire({
                     type: 'warning',
@@ -189,14 +188,14 @@ import autocompletar from './Autocompletar.vue';
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.tipoAvion.modelo.length<=5){
+            else if(this.tipoAvion.modelo.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
                     text: 'El modelo de avión está vacío',
                     confirmButtonColor: '#fb6340'
                 });
-            }else if(this.aerolinea.nombre.length<3){
+            }else if(this.aerolinea.nombre.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',

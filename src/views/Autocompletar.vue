@@ -19,10 +19,9 @@
 
 <script>
 export default {
-    props: ['items','filterByID', 'filterBy', 'filterBy2'],
+    props: ['items','filterByID', 'filterBy', 'filterBy2', 'query'],
     data(){
         return{
-            query: '',
             visible: false
         };
     },

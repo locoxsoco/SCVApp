@@ -61,7 +61,7 @@
                                     <h3>Modelo de avion:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion"/>
+                                    <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion" :query="tipoAvion.modelo"/>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,7 +71,7 @@
                                     <h3>Aerolínea:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setAerolinea"/>
+                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setAerolinea" :query="aerolinea.nombre"/>
                                 </div>
                             </div>                            
 
@@ -136,7 +136,8 @@ export default {
         tiposDeAvion: [],
         tipoAvion: {idTipoAvion:'',modelo:'',iata:''},
         aerolinea: {idAerolinea:'',nombre:''},
-        aerolineas: []
+        aerolineas: [],
+        avion: {}
       }
     },
     components: {
@@ -151,6 +152,12 @@ export default {
         axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
         .then((response) => {
             this.aerolineas = response.data;
+        }),
+        axios.get(this.$connectionString+"/scv/api/avion/obtenerPor/"+this.idAvion)
+        .then((response) => {
+            this.avion = response.data;
+            this.aerolinea = this.avion.taerolineaIdAerolinea;
+            this.tipoAvion = this.avion.ttipoAvionIdTipoAvion;
         })
     },
 
