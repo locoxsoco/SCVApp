@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "a794a15f6e45b941d8a521e7965221a8",
-    "url": "img/brand/favicon.png"
+    "revision": "e0ea3f1916671872498288dc2bd40f06",
+    "url": "img/brand/white.png"
   },
   {
     "revision": "cee60cfd101f9b3d2aae0e819ec8b267",
     "url": "img/theme/profile-cover.jpg"
   },
   {
-    "revision": "66618a418175ddf2ac8c47a241d327a8",
-    "url": "img/theme/team-4-800x800.jpg"
+    "revision": "be997d5226b992ffad34816870c6b7aa",
+    "url": "img/theme/team-2-800x800.jpg"
   },
   {
     "revision": "e4869534ee6cab30705a",
@@ -24,20 +24,20 @@ self.__precacheManifest = [
     "url": "img/theme/team-3-800x800.jpg"
   },
   {
-    "revision": "be997d5226b992ffad34816870c6b7aa",
-    "url": "img/theme/team-2-800x800.jpg"
-  },
-  {
     "revision": "edc7106b21ec12e57022b2ebd534cd2d",
     "url": "img/theme/team-1-800x800.jpg"
   },
   {
-    "revision": "c532f6f0176968caa6265864ee1abb35",
-    "url": "img/theme/vue.jpg"
+    "revision": "66618a418175ddf2ac8c47a241d327a8",
+    "url": "img/theme/team-4-800x800.jpg"
   },
   {
     "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "robots.txt"
+  },
+  {
+    "revision": "c532f6f0176968caa6265864ee1abb35",
+    "url": "img/theme/vue.jpg"
   },
   {
     "revision": "c32ed3ee3e879d61d79e0a41acb12cee",
@@ -72,12 +72,12 @@ self.__precacheManifest = [
     "url": "img/nucleo-icons.46abbc4a.svg"
   },
   {
-    "revision": "e0ea3f1916671872498288dc2bd40f06",
-    "url": "img/brand/white.png"
-  },
-  {
     "revision": "59d7c2b119ab46fc7b5f853f04324c89",
     "url": "img/brand/green.png"
+  },
+  {
+    "revision": "a794a15f6e45b941d8a521e7965221a8",
+    "url": "img/brand/favicon.png"
   },
   {
     "revision": "c1733565b32b585676302d4233c39da8",
