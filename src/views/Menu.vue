@@ -101,11 +101,6 @@ export default {
                     field: 'puerta',
                     label: 'Puerta',
                     sortable: true
-                },
-                {
-                    field: 'tipoArea',
-                    label: 'Tipo Area',
-                    sortable: true
                 }
             ],
             buscarAerolinea: '',

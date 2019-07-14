@@ -16,7 +16,7 @@
           }"
         />
         <!-- Menu -->
-        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea','visualizarMapa'].indexOf($route.name) > -1"
+        <sidebar-item v-if="['menu','ingresarVuelo','eliminarVuelo','ingresarUsuario','modificarUsuario','modificarUsuario2','eliminarUsuario','ingresarAviones','ingresarTipoAviones','modificarAviones','modificarAviones2','modificarTipoAvionesPrincipal','modificarTipoAviones','eliminarAviones','eliminarTipoAviones','ingresarAerolinea','modificarAerolinea','modificarAerolinea2','eliminarAerolinea','simulacion','visualizarMapa'].indexOf($route.name) > -1"
           :link="{
             name: 'SCV',
             icon: 'fas fa-plane-arrival text-primary',
@@ -165,6 +165,13 @@
             name: 'Eliminar Aerolíneas',
             icon: 'fas fa-eraser text-primary',
             path: '/admin/aerolinea/eliminar'
+          }"
+        />
+        <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
+          :link="{
+            name: 'Simulación de vuelos',
+            icon: 'fas fa-vial text-primary',
+            path: '/admin/simulacion'
           }"
         />
         <!-- Visualizar el mapa -->

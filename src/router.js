@@ -26,6 +26,7 @@ import IngresarAerolinea from '@/views/IngresarAerolinea.vue'
 import ModificarAerolinea from '@/views/ModificarAerolinea.vue'
 import ModificarAerolinea2 from '@/views/ModificarAerolinea2.vue'
 import EliminarAerolinea from '@/views/EliminarAerolinea.vue'
+import Simulacion from '@/views/Simulacion.vue'
 
 Vue.use(Router)
 
@@ -168,6 +169,12 @@ export default new Router({
           path: '/admin/aerolinea/eliminar',
           name: 'eliminarAerolinea',
           component: EliminarAerolinea
+        },
+        ,
+        {
+          path: '/admin/simulacion',
+          name: 'simulacion',
+          component: Simulacion
         }
       ]
     },
