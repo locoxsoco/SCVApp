@@ -71,7 +71,7 @@ export default {
             tableData,
             columns: [         
                 {
-                    field: 'numeroVuelo',
+                    field: 'nroVuelo',
                     label: 'Vuelo',
                     sortable: true
                 },{
@@ -80,17 +80,17 @@ export default {
                     sortable: true
                 },
                 {
-                    field: 'iataProcedencia',
+                    field: 'procedencia',
                     label: 'Procedencia',
                     sortable: true
                 },
                 {
-                    field: 'tiempoProgramado',
+                    field: 'horaProgramada',
                     label: 'Hora Programada',
                     sortable: true
                 },
                 {
-                    field: 'tiempoLlegada',
+                    field: 'horaEstimada',
                     label: 'Hora Estimada',
                     sortable: true
                 },
@@ -100,7 +100,7 @@ export default {
                     sortable: true
                 },
                 {
-                    field: 'idArea',
+                    field: 'puerta',
                     label: 'Puerta',
                     sortable: true
                 },
@@ -117,9 +117,12 @@ export default {
     mounted(){            
         axios.get(this.$connectionString+"/scv/api/resultado/obtenerDatosTablero")
         .then((response) => {
-            this.selected = null;
-            this.tableData = response.data[0];
-        });    
+            this.tableData = response.data;
+        });
+        setInterval(function(){axios.get("http://200.16.7.177/scv/api/resultado/obtenerDatosTablero")
+            .then((response) => {
+                this.tableData = response.data;
+            });  }, 600000);
     },
     methods: {
         confirmar: function(){
@@ -141,7 +144,7 @@ export default {
         var tableData = [];
         var i = this.tableData.length;
         for (i in this.tableData) {
-            if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].numeroVuelo.match(name_re2)) {
+            if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].nroVuelo.match(name_re2)) {
             tableData.push(this.tableData[i])
             }
         }
