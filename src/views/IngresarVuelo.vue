@@ -30,31 +30,25 @@
                             </div> -->
                             <div class="form-group row">         
                                 <div class="col-md-2" >
-                                    <h3>Aerolínea - IATA: </h3>
+                                    <h3>Avion:</h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea"/>
-                                </div>
-                                <div class="col-md-2" >
-                                    <h3>Avion - IATA:</h3>
-                                </div>                                
-                                <div class="col-md-4" >
-                                    <autocompletar v-model="avion.regNro" :items="aviones" filterByID="idAvion" filterBy="regNro" filterBy2="iata" v-on:hijoEnvia="setAvion"/>
+                                    <autocompletar v-model="avion.regNro" :items="aviones" filterByID="idAvion" filterBy="regNro" filterBy2="iata" v-on:hijoEnvia="setAvion" :query="avion.regNro"/>
                                 </div>
                             </div>
                             <div class="form-group row">         
                                 <div class="col-md-2" >
-                                    <h3>Ciudad de Procedencia:</h3>
+                                    <h3>Aeropuerto de Procedencia:</h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <autocompletar v-model="ciudad.nombre" :items="ciudades" filterByID="idCiudad" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setCiudad"/>
+                                    <autocompletar v-model="aeropuerto.nombre" :items="aeropuertos" filterByID="idAeropuerto" filterBy="nombre" filterBy2="" v-on:hijoEnvia="setAeropuerto" :query="aeropuerto.nombre"/>
                                 </div>
                                 <div class="col-md-2" >
                                     <h3>Estado de Vuelo: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
                                     <div class="form-group">
-                                        <select v-model="inputVuelo" class="form-control">
+                                        <select v-model="inputEstadoVuelo" class="form-control">
                                             <option>Programado</option>
                                             <option>Cancelado</option>
                                             <option>En vuelo</option>
@@ -65,16 +59,30 @@
                             </div>
                             <div class="form-group row">         
                                 <div class="col-md-2" >
+                                    <h3>IATA: </h3>
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <input v-model="codigoIATA" type="text" class="form-control" placeholder="Ingresar el código IATA">                                   
+                                </div>
+                                <div class="col-md-2" >
+                                    <h3>ICAO:</h3>
+                                </div>                                
+                                <div class="col-md-4" >
+                                    <input v-model="codigoICAO" type="text" class="form-control" placeholder="Ingresar el código ICAO">                                   
+                                </div>
+                            </div>
+                            <div class="form-group row">         
+                                <div class="col-md-2" >
                                     <h3>Hora Programada: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <date-picker v-model="date" :config="options"></date-picker>
+                                    <date-picker v-model="horaProg" :config="options"></date-picker>
                                 </div>
                                 <div class="col-md-2" >
                                     <h3>Hora Estimada: </h3>
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <input v-model="inputVuelo" type="text" class="form-control" placeholder="Ingresar hora estimada">
+                                    <date-picker v-model="horaReal" :config="options"></date-picker>
                                 </div>
                             </div>
                             <div class="form-group row" >
@@ -131,10 +139,12 @@ import axios from 'axios';
 import autocompletar from './Autocompletar.vue';
 import datePicker from 'vue-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import swal from 'sweetalert2';
 export default {
     data() {
       return {
-        date: new Date(),
+        horaProg: new Date(),
+        horaReal: new Date(),
         options: {
             format: 'DD/MM/YYYY HH:mm',
             useCurrent: false,
@@ -150,16 +160,14 @@ export default {
                 close: 'far fa-times-circle'
             }
         },
-        idDelUsuario: '',
-        salida: '',
-        inputNombre: '',
-        inputContraseña: '',
-        aerolinea: {idAerolinea:'',nombre:'',iata:''},
-        aerolineas: [],
+
         avion: {idAvion:'', regNro:'', iata:''},
         aviones: [],
-        ciudad: {idCiudad:'', iata:'', nombre:''},
-        ciudades: []
+        aeropuerto: {idAeropuerto:'', nombre:''},
+        aeropuertos: [],
+        inputEstadoVuelo: '',
+        codigoIATA: '',
+        codigoICAO: ''
       }
     },
     components: {
@@ -168,48 +176,72 @@ export default {
     },
 
     mounted(){
-        axios.get(this.$connectionString+"/scv/api/aerolinea/obtenerTodos")
+        axios.get(this.$connectionString+"scv/api/aeropuertoOrigen/obtenerTodos")
         .then((response) => {
-            this.aerolineas = response.data;
+            this.aeropuertos = response.data;
         }),
         axios.get(this.$connectionString+"/scv/api/avion/obtenerTodos")
         .then((response) => {
             this.aviones = response.data;
-        })
-        axios.get(this.$connectionString+"/scv/api/ciudadAeropuerto/obtenerTodos")
-        .then((response) => {
-            this.ciudades = response.data;
         })
         
     },
 
     methods: {
         borrar: function(){
-            document.getElementById('inputNombre').nodeValue = '';   
-            document.getElementById('inputContraseña').nodeValue = '';
+            this.horaProg = '';
+            this.horaReal = '';
+            this.avion.regNro = '';
+            this.ciudad.nombre = '';
+            this.inputEstadoVuelo = '';
         },
         guardar: function(){
-            let aux = this;
-            axios.post(this.$connectionString+'/scv/api/usuario/crear', {
-                usuario: this.inputNombre,
-                contrasena: this.inputContraseña,
-                rol: 1,
-                estado: 'ACTIVO',
-                taeropuertoIdAeropuerto: 1
-            })
-            .then(function (response) {
-                aux.salida = response.data;
-                //console.log(this.salida);
-            })
+            if (this.aeropuerto.nombre.length == 0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No se ha seleccionado una aerolínea',
+                    confirmButtonColor: '#fb6340'                    
+                });
+            } else if (this.avion.regNro.length == 0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No se ha seleccionado un avión',
+                    confirmButtonColor: '#fb6340'                    
+                });              
+            } else if (this.inputEstadoVuelo.length == 0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No se ha seleccionado el estado del vuelo',
+                    confirmButtonColor: '#fb6340'                    
+                });                  
+            } else if (this.horaProg.length == 0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No se ha seleccionado el estado del vuelo',
+                    confirmButtonColor: '#fb6340'    
+                });
+            } else if (this.horaReal.length == 0){
+                swal.fire({
+                    type: 'warning',
+                    title: 'Alerta de validación',
+                    text: 'No se ha seleccionado el estado del vuelo',
+                    confirmButtonColor: '#fb6340'  
+                });
+            } else {
+                let vuelo ={
+                    
+                }
+            }
         },
-        setAerolinea(value) {
-            this.aerolinea = value;
+        setAeroPuerto(value) {
+            this.aeropuerto = value;
         },
         setAvion(value){
             this.avion = value;
-        },
-        setCiudad(value){
-            this.ciudad = value;
         }
     }
 }
