@@ -181,11 +181,11 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.codigoDeRegistro.length!=6){
+            else if(this.codigoRegistro.length>=9){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro debe tener 6 caracteres',
+                    text: 'El código de registro no debe mayor a 9 caracteres',
                     confirmButtonColor: '#fb6340'
                 });
             }

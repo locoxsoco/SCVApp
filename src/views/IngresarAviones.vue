@@ -148,11 +148,11 @@ import autocompletar from './Autocompletar.vue';
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.codigoRegistro.length!=6){
+            else if(this.codigoRegistro.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código de registro debe tener 6 caracteres',
+                    text: 'El código de registro debe tener 8 caracteres o menos',
                     confirmButtonColor: '#fb6340'
                 });
             }
@@ -180,11 +180,11 @@ import autocompletar from './Autocompletar.vue';
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.codigoICAO.length!=3){
+            else if(this.codigoICAO.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO debe tener 3 caracteres',
+                    text: 'El código ICAO debe tener 8 caracteres o menos',
                     confirmButtonColor: '#fb6340'
                 });
             }
@@ -209,8 +209,8 @@ import autocompletar from './Autocompletar.vue';
                     regNro: this.codigoRegistro,
                     iata: this.codigoIATA,
                     icao: this.codigoICAO,
-                    taerolineaIdAerolinea: this.tipoAvion.idTipoAvion,
-                    ttipoAvionIdTipoAvion: this.aerolinea.idAerolinea,
+                    taerolineaIdAerolinea: this.aerolinea.idAerolinea,
+                    ttipoAvionIdTipoAvion: this.tipoAvion.idTipoAvion,
                     esEliminado: false
                 }
                 axios.post(this.$connectionString+'/scv/api/avion/crear/' + localStorage.usuarioId, avion)
@@ -227,7 +227,7 @@ import autocompletar from './Autocompletar.vue';
                     swal.fire({
                         type: 'error',
                         title: 'Creación de avión fallida!',
-                        text: 'Has pensado en cambiar el código IATA?',
+                        text: 'Has pensado en cambiar el código de registro?',
                         confirmButtonColor: '#f5365c'
                     });
                 })
