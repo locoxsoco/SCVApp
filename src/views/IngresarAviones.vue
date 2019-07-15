@@ -59,20 +59,20 @@
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Modelo de avion - IATA:</h3>
+                                    <h3>Modelo de avion:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion"/>
+                                    <autocompletar v-model="tipoAvion.modelo" :items="tiposDeAvion" filterByID="idTipoAvion" filterBy="modelo" filterBy2="iata" v-on:hijoEnvia="setTipoAvion" :query="tipoAvion.modelo"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-1">
                                 </div>                                
                                 <div class="col-md-4" >
-                                    <h3>Aerolínea - IATA:</h3>
+                                    <h3>Aerolínea:</h3>
                                 </div> 
                                 <div class="col-md-5" >                                 
-                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea"/>
+                                    <autocompletar v-model="aerolinea.nombre" :items="aerolineas" filterByID="idAerolinea" filterBy="nombre" filterBy2="iata" v-on:hijoEnvia="setAerolinea" :query="aerolinea.nombre"/>
                                 </div>
                             </div>
                             <div class="form-group row" >

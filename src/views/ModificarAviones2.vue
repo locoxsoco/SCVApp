@@ -197,7 +197,7 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.iata.length!=3){
+            else if(this.iata.length!=6){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
