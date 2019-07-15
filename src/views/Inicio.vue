@@ -44,7 +44,15 @@
                                   :pagination-simple="isPaginationSimple"
                                   :pagination-position="paginationPosition"
                                   focusable>  
-                          </b-table>                        
+                          </b-table>       
+                          <div class="form-group row">
+                              <div class="col-md-2">
+                                  Fecha de ultima actualización:
+                              </div>                                
+                              <div class="col-md-10">
+                                  {{ultimaActualizacion}}
+                              </div>
+                          </div>                 
                       </template>
                   </card>
               </div>
@@ -60,6 +68,7 @@ export default {
     data() {
         const tableData = []
         return {
+            ultimaActualizacion: "No brindada",
             usuarioRol: localStorage.usuarioRol,
             selected: tableData[0],
             isPaginated: true,
@@ -112,12 +121,14 @@ export default {
     mounted(){            
         axios.get(this.$connectionString+"/scv/api/resultado/obtenerDatosTablero")
         .then((response) => {
-            this.tableData = response.data;
+            this.tableData = response.data.listaObjTablero;
+            this.ultimaActualizacion = response.data.horaDeEnvio;
         });
         setInterval(function(){axios.get("http://200.16.7.177/scv/api/resultado/obtenerDatosTablero")
             .then((response) => {
-                this.tableData = response.data;
-            });  }, 600000);
+                this.tableData = response.data.listaObjTablero;
+                this.ultimaActualizacion = response.data.horaDeEnvio;
+            });  }, 180000);
     },
     methods: {
         confirmar: function(){

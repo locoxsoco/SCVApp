@@ -243,6 +243,20 @@ export default {
         setAvion(value){
             this.avion = value;
         }
+    },
+    computed: {
+        filter: function(){
+        var name_re1 = new RegExp(this.buscarAerolinea, 'i');
+        var name_re2 = new RegExp(this.buscarNroVuelo, 'i');
+        var tableData = [];
+        var i = this.tableData.length;
+        for (i in this.tableData) {
+            if (this.tableData[i].nombreAerolinea.match(name_re1) && this.tableData[i].nroVuelo.match(name_re2)) {
+            tableData.push(this.tableData[i])
+            }
+        }
+        return tableData;
+        }
     }
 }
 </script>

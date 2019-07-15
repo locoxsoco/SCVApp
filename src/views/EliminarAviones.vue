@@ -109,7 +109,7 @@ import swal from'sweetalert2';
                     swal.fire({
                         type: 'warning',
                         title: 'Alerta de validación',
-                        text: 'No hay usuario seleccionado',
+                        text: 'No hay avión seleccionado',
                         confirmButtonColor: '#fb6340'
                     });
                 } else {

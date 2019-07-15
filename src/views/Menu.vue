@@ -110,12 +110,14 @@ export default {
     mounted(){            
         axios.get(this.$connectionString+"/scv/api/resultado/obtenerDatosTablero")
         .then((response) => {
-            this.tableData = response.data;
+            this.tableData = response.data.listaObjTablero;
+            this.ultimaActualizacion = response.data.horaDeEnvio;
         });    
         setInterval(function(){axios.get("http://200.16.7.177/scv/api/resultado/obtenerDatosTablero")
             .then((response) => {
-                this.tableData = response.data;
-            });  }, 600000);
+                this.tableData = response.data.listaObjTablero;
+                this.ultimaActualizacion = response.data.horaDeEnvio;
+            });  }, 180000);
     },
     methods: {
         confirmar: function(){
