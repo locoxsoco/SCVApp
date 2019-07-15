@@ -47,7 +47,6 @@
 
 import axios from 'axios';
 import swal from 'sweetalert2';
-import autocompletar from './Autocompletar.vue';
   export default {
     data() {
       return {
@@ -61,7 +60,6 @@ import autocompletar from './Autocompletar.vue';
       }
     },
     components: {
-        autocompletar
     },
 
     mounted(){            
@@ -84,8 +82,7 @@ import autocompletar from './Autocompletar.vue';
                 });
                 aux.estadoSimulacion = 1;
             })
-            .catch(function (err) {
-                console.log(err);
+            .catch(function () {
                 swal.fire({
                     type: 'error',
                     title: 'Activación de simulación fallida!',
@@ -106,8 +103,7 @@ import autocompletar from './Autocompletar.vue';
                 });
                 aux2.estadoSimulacion = 0;
             })
-            .catch(function (err) {
-                console.log(err);
+            .catch(function () {
                 swal.fire({
                     type: 'error',
                     title: 'Desactivación de simulación fallida!',

@@ -122,11 +122,7 @@ export default {
             this.tableData = response.data.listaObjTablero;
             this.ultimaActualizacion = response.data.horaDeEnvio;
         });    
-        setInterval(function(){axios.get("http://200.16.7.177/scv/api/resultado/obtenerDatosTablero")
-            .then((response) => {
-                this.tableData = response.data.listaObjTablero;
-                this.ultimaActualizacion = response.data.horaDeEnvio;
-            });  }, 180000);
+        setInterval(function(){location.reload(false);  }, 180000);
     },
     methods: {
         confirmar: function(){
