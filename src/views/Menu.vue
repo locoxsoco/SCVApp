@@ -42,7 +42,15 @@
                                   :pagination-simple="isPaginationSimple"
                                   :pagination-position="paginationPosition"
                                   focusable>  
-                          </b-table>                        
+                          </b-table>  
+                          <div class="form-group row">
+                              <div class="col-md-2">
+                                  Fecha de ultima actualización:
+                              </div>                                
+                              <div class="col-md-10">
+                                  {{ultimaActualizacion}}
+                              </div>
+                          </div>                      
                       </template>
                   </card>
               </div>
@@ -57,6 +65,7 @@ export default {
     data() {
         const tableData = []
         return {
+            ultimaActualizacion: "No brindada",
             usuarioRol: localStorage.usuarioRol,
             selected: tableData[0],
             isPaginated: true,
