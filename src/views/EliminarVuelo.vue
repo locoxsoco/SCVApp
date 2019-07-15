@@ -22,16 +22,12 @@
                           <div class="form-group row">
                               <div class="col-md-2"/>
                               <div class="col-md-4">
-                                  <form>
                                       <base-input alternative="" type="text" v-model="buscarAerolinea" placeholder="Aerolínea" input-classes="form-control-alternative">
                                       </base-input>
-                                  </form>
                               </div>
                               <div class="col-md-4">
-                                  <form>
                                       <base-input alternative="" type="text" v-model="buscarNroVuelo" placeholder="# de vuelo" input-classes="form-control-alternative">
                                       </base-input>
-                                  </form>
                               </div>
                               <div class="col-md-2"/>
                           </div>
@@ -54,7 +50,7 @@
                               <div class="col-md-5">
                               </div>
                               <div class="col-md-3">
-                                  <b-button @click="confirmar">Confirmar</b-button>                              
+                                  <base-button @click="confirmar">Confirmar</base-button>                              
                               </div>
                           </div>                           
                       </template>
@@ -135,7 +131,52 @@ export default {
     },
     methods: {
         confirmar: function(){
-        }
+                let aux = this;
+                if(this.selected == null){
+                    swal.fire({
+                        type: 'warning',
+                        title: 'Alerta de validación',
+                        text: 'No hay vuelo seleccionado',
+                        confirmButtonColor: '#fb6340'
+                    });
+                } else {
+                    swal.fire({
+                        title: 'Estas seguro?',
+                        text: "No se podrá deshacer la acción",
+                        type: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#2dce89',
+                        cancelButtonColor: '#f5365c',
+                        confirmButtonText: 'Si'
+                    }).then((result) => {
+                        if (result.value){                   
+                            axios.put(this.$connectionString+"/scv/api/vuelo/eliminar/"+localStorage.usuarioId+"?idVuelo="+this.selected.idVuelo)
+                            .then(function (response) {
+                            swal.fire({
+                                type: 'success',
+                                title: 'Éxito!',
+                                text: 'Eliminación de avión confirmada!',
+                                confirmButtonColor: '#2dce89'
+                            }).then(() => {
+                                    location.reload(false);
+                                });
+                            aux.salida = response.data;
+                            })
+                        }
+                    })                    
+
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Eliminación de avión fallida!',
+                        text: 'Intentelo más tarde',
+                        confirmButtonColor: '#f5365c'
+                    });
+                })                       
+                }
+                       
+            }
     },
     computed: {
         filter: function(){

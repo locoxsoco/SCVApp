@@ -100,36 +100,6 @@
                 <div class="col-md-1"></div>
             </div>
         </div> 
-
-          <!-- <card class="strpied-tabled-with-hover"
-                body-classes="table-full-width table-responsive"
-          >
-            <template slot="header">
-              <h4 class="card-title">Llegadas del aeropuerto</h4>
-            </template>         
-               
-            <div class="form-group row"> 
-
-              <div class="col-md-4" >
-                <input type="text" class="form-control form-control-lg" id="exampleInputName2" placeholder="Aerolinea">
-              </div>
-
-              <div class="col-md-4" > 
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail2" placeholder="# de vuelo">
-              </div>
-
-              <div class="col-md-4">
-                <button type="submit" class="btn btn-default">Buscar</button>
-              </div>
-            </div>         
-
-            <l-table class="table-hover table-striped"
-                     :columns="table1.columns"
-                     :data="table1.data"
-                     style="margin-left:0px !important">
-            </l-table>
-          </card> -->
-
     </div>
 </template>
 
@@ -232,9 +202,33 @@ export default {
                     confirmButtonColor: '#fb6340'  
                 });
             } else {
-                let vuelo ={
-                    
+                let aux = this;
+                let avion = {
+                    regNro: this.codigoRegistro,
+                    iata: this.codigoIATA,
+                    icao: this.codigoICAO,
+                    taerolineaIdAerolinea: this.aerolinea.idAerolinea,
+                    ttipoAvionIdTipoAvion: this.tipoAvion.idTipoAvion,
+                    esEliminado: false
                 }
+                axios.post(this.$connectionString+'/scv/api/avion/crear/' + localStorage.usuarioId, avion)
+                .then(function (response) {
+                    swal.fire({
+                        type: 'success',
+                        title: 'Éxito!',
+                        text: 'Creación de avión confirmada!',
+                        confirmButtonColor: '#2dce89'
+                    });
+                    aux.salida = response.data;
+                })
+                .catch(function () {
+                    swal.fire({
+                        type: 'error',
+                        title: 'Creación de avión fallida!',
+                        text: 'Has pensado en cambiar el código de registro?',
+                        confirmButtonColor: '#f5365c'
+                    });
+                })
             }
         },
         setAeroPuerto(value) {

@@ -47,7 +47,7 @@
                                 <div class="col-md-5">
                                 </div>
                                 <div class="col-md-3">
-                                    <b-button @click="confirmar">Confirmar</b-button>                              
+                                    <base-button @click="confirmar">Confirmar</base-button>                              
                                 </div>
                             </div>                           
                         </template>
