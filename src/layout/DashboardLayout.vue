@@ -24,29 +24,29 @@
           }"
         />
         <!-- Administrar de vuelos -->
-        <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
+        <!-- <sidebar-item v-if="['menu'].indexOf($route.name) > -1"
           :link="{
             name: 'Administración de vuelos',
             icon: 'fas fa-calendar text-primary',
             path: '/admin/vuelo/ingresar'
           }"
-        />
+        /> -->
         <!-- Administrar de vuelos - Ingresar vuelos -->
-        <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
+        <!-- <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
           :link="{
             name: 'Ingresar vuelo',
             icon: 'fas fa-calendar-plus text-primary',
             path: '/admin/vuelo/ingresar'
           }"
-        />
+        /> -->
         <!-- Administrar de vuelos - Eliminar vuelos -->
-        <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
+        <!-- <sidebar-item v-if="['ingresarVuelo','eliminarVuelo'].indexOf($route.name) > -1"
           :link="{
             name: 'Eliminar vuelo',
             icon: 'fas fa-calendar-minus text-primary',
             path: '/admin/vuelo/eliminar'
           }"
-        />
+        /> -->
         <!-- Administrar usuarios -->
         <sidebar-item v-if="['menu'].indexOf($route.name) > -1 && usuarioRol == 'Administrador'"
           :link="{

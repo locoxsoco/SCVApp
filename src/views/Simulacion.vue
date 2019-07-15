@@ -73,18 +73,19 @@ import autocompletar from './Autocompletar.vue';
     
     methods: {
         activar: function(){
-            axios.post(this.$connectionString+'/scv/api/simulacion/activar/' + localStorage.usuarioId)
-            .then(function (response) {
+            let aux = this;
+            axios.get(this.$connectionString+'/scv/api/simulacion/activar/' + localStorage.usuarioId)
+            .then(function () {
                 swal.fire({
                     type: 'success',
                     title: 'Éxito!',
                     text: 'Activación de simulación confirmada!',
                     confirmButtonColor: '#2dce89'
                 });
-                aux.salida = response.data;
-                this.estadoSimulacion = 1;
+                aux.estadoSimulacion = 1;
             })
-            .catch(function () {
+            .catch(function (err) {
+                console.log(err);
                 swal.fire({
                     type: 'error',
                     title: 'Activación de simulación fallida!',
@@ -94,18 +95,19 @@ import autocompletar from './Autocompletar.vue';
             });
         },
         desactivar: function(){
-            axios.post(this.$connectionString+'/scv/api/simulacion/desactivar/' + localStorage.usuarioId)
-            .then(function (response) {
+            let aux2 = this;
+            axios.get(this.$connectionString+'/scv/api/simulacion/desactivar/' + localStorage.usuarioId)
+            .then(function () {
                 swal.fire({
                     type: 'success',
                     title: 'Éxito!',
                     text: 'Desactivación de simulación confirmada!',
                     confirmButtonColor: '#2dce89'
                 });
-                aux.salida = response.data;
-                this.estadoSimulacion = 0;
+                aux2.estadoSimulacion = 0;
             })
-            .catch(function () {
+            .catch(function (err) {
+                console.log(err);
                 swal.fire({
                     type: 'error',
                     title: 'Desactivación de simulación fallida!',

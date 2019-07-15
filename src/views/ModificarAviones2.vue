@@ -181,7 +181,7 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.codigoRegistro.length>=9){
+            else if(this.codigoDeRegistro.length>=9){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
@@ -197,11 +197,11 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.iata.length!=6){
+            else if(this.iata.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código IATA debe tener 3 caracteres',
+                    text: 'El código IATA debe tener 8 caracteres o menos',
                     confirmButtonColor: '#fb6340'
                 });
             }
@@ -213,22 +213,22 @@ export default {
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.icao.length!=3){
+            else if(this.icao.length>8){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
-                    text: 'El código ICAO debe tener 3 caracteres',
+                    text: 'El código ICAO debe tener 8 caracteres o menos',
                     confirmButtonColor: '#fb6340'
                 });
             }
-            else if(this.tipoAvion.modelo.length<=5){
+            else if(this.tipoAvion.modelo.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
                     text: 'El modelo de avión está vacío',
                     confirmButtonColor: '#fb6340'
                 });
-            }else if(this.aerolinea.nombre.length<3){
+            }else if(this.aerolinea.nombre.length==0){
                 swal.fire({
                     type: 'warning',
                     title: 'Alerta de validación',
